@@ -4,17 +4,16 @@ import firebase from 'firebase/app';
 import 'firebase/firestore';
 
 // Initalize Firebase.
-// These details will need to be replaced with the project specific env vars at the start of each new cohort.
-var config = {
-    apiKey: "{process.env.REACT_APP_TCL_2_API_KEY}",
-    authDomain: "{process.env.REACT_APP_TCL_2_AUTH_DOMAIN}",
-    databaseURL: "{process.env.REACT_APP_TCL_2_DATABASE_URL}",
-    projectId: "{process.env.REACT_APP_TCL_2_PROJECT_ID}",
-    storageBucket: "{process.env.REACT_APP_TCL_2_STORAGE_BUCKET}",
-    messagingSenderId: "{process.env.REACT_APP_TCL_2_SENDER_ID}",
-    appId: "{process.env.REACT_APP_TCL_2_APP_ID}",
+const firebaseConfig = {
+    apiKey: "AIzaSyAmNT8nRQb3trnjngkynqnQ1H6VCALX5qs",
+    authDomain: "tcl-2-smart-shopping-list.firebaseapp.com",
+    databaseURL: "https://tcl-2-smart-shopping-list.firebaseio.com",
+    projectId: "tcl-2-smart-shopping-list",
+    storageBucket: "tcl-2-smart-shopping-list.appspot.com",
+    messagingSenderId: "538706887514",
+    appId: "1:538706887514:web:30b4235c1e8aa5fa19a963"
 };
 
-let fb = firebase.initializeApp(config);
+const fb = firebase.initializeApp(firebaseConfig);
 
 export {fb};
