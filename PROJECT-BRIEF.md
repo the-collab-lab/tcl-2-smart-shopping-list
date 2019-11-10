@@ -64,6 +64,12 @@ Pairings will go as follows:
 1. Claudia & Ethan
 2. Mindy & Ernie
 
+### Weekly Sync
+
+Each week, we’ll get on a 45 minute Zoom call. The call will always start with a quick demo of the previous week’s work from each pair. This is a common practice on most software teams and also lets you practice talking about your work, which can come in handy in a job interview setting!
+
+On odd-numbered weeks, we’ll use the rest of the time to cover a learning topic. On even-numbered weeks, we’ll do a short retrospective of the previous 2 weeks. In the retros, we’ll share appreciations of our teammates as well as talk about what went well from a process perspective and what we could do to improve how we’re working together.
+
 ### How to know what to do
 
 The project is organized in GitHub as a set of [user stories](https://www.mountaingoatsoftware.com/agile/user-stories), each with a description of the desired functionality as well as [acceptance criteria](https://www.leadingagile.com/2014/09/acceptance-criteria/) (AC) that describe how you know whether the task or story is complete. You can find the stories on [the project board](https://github.com/orgs/the-collab-lab/projects/2) on GitHub.
@@ -77,6 +83,10 @@ A task or story is “done” when the following are all true:
 * The [Product Owner](https://www.agilealliance.org/glossary/product-owner/) (i.e. Andrew or 1 of the mentors) has accepted the work as satisfactorily meeting the requirements
 
 The “backlog” (the collection of stories) represents the work needed to complete the project. At the point when all of the stories are done, we should have a working app!
+
+### Coordination & communication
+
+At the start of each week, each pair will create a page on [the project wiki](https://github.com/the-collab-lab/tcl-2-smart-shopping-list/wiki) where you can coordinate your approach to solving your problem for the week, surface blockers and learnings, etc. One of the benefits of this is that the people reviewing your work can better understand your process for how you got to your solution.
 
 ### Development process
 
@@ -110,3 +120,4 @@ When you and your pair partner have working code that you believe is ready to be
 I’m around 💯% sure I’m forgetting or glossing over something important, so please be noisy on Slack as things come up. The mentors and I will do our best to get you unstuck. Also, lean on each other for help as well! Finally, work in the open so everyone can benefit from your questions.
 
 ![gif of a My Little Pony pulling on goggles, with a determined look on their face, saying, "Let's do this".](http://giphygifs.s3.amazonaws.com/media/PuWNMebKGIKNG/giphy.gif)
+
