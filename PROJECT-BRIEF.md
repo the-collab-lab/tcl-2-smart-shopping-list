@@ -27,42 +27,42 @@ Pairings will go as follows:
 #### Week 1, Nov 11 - 17
 
 1. Mindy & Ethan
-2. Ernie & Claudia
+2. Michelle & Claudia
 
 #### Week 2, Nov 18 - 24
 
 1. Claudia & Ethan
-2. Mindy & Ernie
+2. Mindy & Michelle
 
 #### Week 3, Nov 25 - Dec 1
 
 1. Claudia & Mindy
-2. Ernie & Ethan
+2. Michelle & Ethan
 
 #### Week 4, Dec 2 - Dec 8
 
 1. Ethan & Mindy
-2. Claudia & Ernie
+2. Claudia & Michelle
 
 #### Week 5, Dec 9 - 15
 
 1. Claudia & Ethan
-2. Ernie & Mindy
+2. Michelle & Mindy
 
 #### Week 6, Dec 16 - 22
 
 1. Claudia & Mindy
-2. Ernie & Ethan
+2. Michelle & Ethan
 
 #### Week 7, Dec 23 - 29
 
 1. Mindy & Ethan
-2. Ernie & Claudia
+2. Michelle & Claudia
 
 #### Week 8, Dec 30 - Jan 5
 
 1. Claudia & Ethan
-2. Mindy & Ernie
+2. Mindy & Michelle
 
 ### Weekly Sync
 
@@ -111,7 +111,7 @@ When you and your pair partner have working code that you believe is ready to be
 2. Notify the other pair team in Slack that you have a new PR for them to review.
 3. Incorporate feedback from the other pair team into your work until both you and they are satisfied the code is ready to be merged.
 4. Request that Andrew or one of the mentors review the PR for final approval.
-5. Once approved, merge the PR into `master`. (Your code will be built and deployed to production automatically thanks to [Netlify](https://www.netlify.com/).
+5. Once approved, merge the PR into `master`. (Your code will be built and deployed to production automatically thanks to [Netlify](https://www.netlify.com/).)
 6. Check your work on the [production site](https://tcl-2-smart-shopping-list.netlify.com/).
 7. Celebrate! 🥳
 
