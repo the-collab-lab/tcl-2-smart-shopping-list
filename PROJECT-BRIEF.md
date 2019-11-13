@@ -64,6 +64,14 @@ Pairings will go as follows:
 1. Claudia & Ethan
 2. Mindy & Michelle
 
+### Pair Programming
+
+A portion of your dedicated hours each week will be spent [pair programming](https://www.freecodecamp.org/news/how-remote-pair-programming-works-and-why-it-can-change-your-life-cd7b767dc60f/) with your partner — this is where the most magical collaboration happens.
+
+Pair programming offers some really exciting opportunities to teach/learn from your partner, get a different perspective and/or insight on the issues you’re facing, and drive forward progress on your goals.
+
+There is no one “right” way to pair program, but in general, you will meet with your partner on Zoom to work through the story or task you’ve chosen for that week. You’re encouraged to test out some different approaches to pair programming to see what works best for your and your partner’s collaboration styles.
+
 ### Weekly Sync
 
 Each week, we’ll get on a 45 minute Zoom call. The call will always start with a quick demo of the previous week’s work from each pair. This is a common practice on most software teams and also lets you practice talking about your work, which can come in handy in a job interview setting!
@@ -119,5 +127,5 @@ When you and your pair partner have working code that you believe is ready to be
 
 I’m around 💯% sure I’m forgetting or glossing over something important, so please be noisy on Slack as things come up. The mentors and I will do our best to get you unstuck. Also, lean on each other for help as well! Finally, work in the open so everyone can benefit from your questions.
 
-![gif of a My Little Pony pulling on goggles, with a determined look on their face, saying, "Let's do this".](http://giphygifs.s3.amazonaws.com/media/PuWNMebKGIKNG/giphy.gif)
+![gif of a My Little Pony pulling on goggles, with a determined look on their face, saying, “Let’s do this”.](http://giphygifs.s3.amazonaws.com/media/PuWNMebKGIKNG/giphy.gif)
 
