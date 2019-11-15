@@ -16,4 +16,10 @@ describe('Week 1 Tests', function() {
 		cy.visit('/add')
 		cy.contains('Add an item to your list here')
 	})
+
+	it('url is changes to represent current view when clicked', function() {
+		cy.visit('/')
+		cy.contains('List').click()
+		cy.url().should('include', '/list')
+	})
 })
