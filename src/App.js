@@ -7,9 +7,13 @@ function App() {
   return (
     <Router>
       <Link to="/">Home</Link>
+      <Link to="/list">List</Link>
       <Switch>
-        <Route path="/">
+        <Route exact path="/">
           <Home />
+        </Route>
+        <Route exact path="/list">
+          <List />
         </Route>
       </Switch>
     </Router>
@@ -19,6 +23,12 @@ function App() {
 function Home() {
   return (
     <h1>congrats this is the home page</h1>
+  )
+}
+
+function List() {
+  return (
+    <h1>This is the list page!</h1>
   )
 }
 
