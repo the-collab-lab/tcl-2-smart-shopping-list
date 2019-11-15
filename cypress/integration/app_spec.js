@@ -10,5 +10,10 @@ describe('Week 1 Tests', function() {
 	it('list page loads with content', function() {
 		cy.visit('/list')
 		cy.contains('This is the list page')
+  })
+  
+  it('add item page loads with content', function() {
+		cy.visit('/add')
+		cy.contains('Add an item to your list here')
 	})
 })
