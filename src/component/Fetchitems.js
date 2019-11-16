@@ -1,14 +1,16 @@
 import React from 'react';
 import { FirestoreCollection } from 'react-firestore';
 
+// ** NOTES **
 // if i put in the wrong path it still loads the 2nd option on my tereniary operator 
-
-const Collections = (props) => {
+// if someone adds a new collection, how do i get it to fetch that collection.
+// just need to make sure we know how we have DB set up (collection names, id's, documents), currently not dynamic.
+const Fetchitems = (props) => {
   return (
     //fetches specific collection, refreshes every time database chages
     <FirestoreCollection
     //name of collection you want to collect, with filter you can narrow this down to specific document
-          path="cities"
+          path="items"
           // optional more parameters (sort, limit, filter)
           render={({ isLoading, data }) => {
             // if data is taking too long you can redirect or alert user it's still loading (i think)
@@ -16,24 +18,20 @@ const Collections = (props) => {
               <div>still loading</div>
             ) : (
               <div>
-                <h1>Collections</h1>
-                <h2>Cities</h2>
+                <h2>Items</h2>
                 <ul>
-                  {data.map(city => (
-                    <li key={city.id}>
-                      {city.id}
-                      {city.pop}
+                  {data.map(item => (
+                    <li key={item.id}>
+                      {item.name}
                     </li>
                   ))}
                 </ul>
               </div>
             );
           }}
-/>
-
-          
+      />
   )
   
 }
 
-export default Collections;
+export default Fetchitems;
