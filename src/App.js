@@ -1,16 +1,17 @@
-import React, {Component} from 'react';
+import React, { Component } from "react";
 
-import Collections from './component/Collections';
+import Collections from "./component/Collections";
+import AddItem from "./component/AddItem";
 
 class App extends Component {
-  
-
-  render () {
+  render() {
     return (
-    <Collections />
-    )
+      <div>
+        <Collections />
+        <AddItem />
+      </div>
+    );
   }
 }
-
 
 export default App;
