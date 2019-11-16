@@ -18,7 +18,8 @@ const AddItem = ({ firestore }) => {
   const handleSubmit = event => {
     event.preventDefault();
     addItem(name);
-    console.log(name);
+    setName("");
+    // alert("item added to database!");
   };
 
   return (
@@ -26,9 +27,17 @@ const AddItem = ({ firestore }) => {
       <form onSubmit={handleSubmit}>
         <label>
           Add Item:
-          <input value={name} type="text" id="name" onChange={handleChange} />
+          <input
+            value={name}
+            type="text"
+            id="name"
+            onChange={handleChange}
+            data-test="input-field"
+          />
         </label>
-        <button onClick={handleSubmit}>Add Item</button>
+        <button onClick={handleSubmit} data-test="addItem-button">
+          Add Item
+        </button>
       </form>
     </div>
   );
