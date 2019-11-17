@@ -23,23 +23,21 @@ const AddItem = ({ firestore }) => {
   };
 
   return (
-    <div>
-      <form onSubmit={handleSubmit}>
-        <label>
-          Add Item:
-          <input
-            value={name}
-            type="text"
-            id="name"
-            onChange={handleChange}
-            className="inputField"
-          />
-        </label>
-        <button onClick={handleSubmit} className="addItemButton">
-          Add Item
-        </button>
-      </form>
-    </div>
+    <form onSubmit={handleSubmit}>
+      <label>
+        Add Item:
+        <input
+          value={name}
+          type="text"
+          id="name"
+          onChange={handleChange}
+          className="inputField"
+        />
+      </label>
+      <button onClick={handleSubmit} className="addItemButton">
+        Add Item
+      </button>
+    </form>
   );
 };
 

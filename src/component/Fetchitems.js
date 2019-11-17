@@ -4,7 +4,7 @@ import { FirestoreCollection } from "react-firestore";
 // ** NOTES **
 // need to update timestamp settings with DB
 
-const Fetchitems = props => {
+const FetchItems = props => {
   return (
     //fetches specific collection, refreshes every time database chages
     <FirestoreCollection
@@ -32,4 +32,4 @@ const Fetchitems = props => {
   );
 };
 
-export default Fetchitems;
+export default FetchItems;

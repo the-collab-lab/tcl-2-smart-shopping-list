@@ -1,14 +1,14 @@
 import React, { Component } from "react";
-import Fetchitems from "./component/Fetchitems"
+import FetchItems from "./component/FetchItems";
 import AddItem from "./component/AddItem";
 
 class App extends Component {
   render() {
     return (
-      <div>
-        <Fetchitems />
+      <React.Fragment>
+        <FetchItems />
         <AddItem />
-      </div>
+      </React.Fragment>
     );
   }
 }
