@@ -32,10 +32,10 @@ const AddItem = ({ firestore }) => {
             type="text"
             id="name"
             onChange={handleChange}
-            data-test="input-field"
+            className="inputField"
           />
         </label>
-        <button onClick={handleSubmit} data-test="addItem-button">
+        <button onClick={handleSubmit} className="addItemButton">
           Add Item
         </button>
       </form>
