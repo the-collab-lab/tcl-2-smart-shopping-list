@@ -1,9 +1,9 @@
 // This page uses the React Router library to make links to navigate from page to page
 import React from 'react';
 import './App.css';
-import Home from './Home';
-import List from './List';
-import Add from './Add';
+import Home from './component/Home';
+import FetchItems from './component/FetchItems';
+import AddItem from './component/AddItem';
 import { BrowserRouter as Router, Route, Link, Switch } from 'react-router-dom'
 
 function RouterComponent() {
@@ -19,10 +19,10 @@ function RouterComponent() {
                     <Home />
                 </Route>
                 <Route exact path="/list">
-                    <List />
+                    <FetchItems />
                 </Route>
                 <Route exact path="/add">
-                    <Add />
+                    <AddItem />
                 </Route>
             </Switch>
         </Router>

@@ -1,23 +1,23 @@
 describe('Week 1 Tests', function() {
-  it('confirms the testing suite is configured', function() {
+  it('Confirms the testing suite is configured', function() {
     expect(true).to.equal(true)
 	})
 	
-  it('home page loads', function() {
+  it('Loads home page', function() {
     cy.visit('/')
 	})
 	
-	it('list page loads with content', function() {
+	it('Loads list page with content', function() {
 		cy.visit('/list')
-		cy.contains('This is the list page')
+		cy.contains('Items')
   })
   
-  it('add item page loads with content', function() {
+  it('Loads add item page with content', function() {
 		cy.visit('/add')
-		cy.contains('Add an item to your list here')
+		cy.contains('Add Item')
 	})
 
-	it('url is changes to represent current view when clicked', function() {
+	it('Changes url to represent current view when clicked', function() {
 		cy.visit('/')
 		cy.contains('List').click()
 		cy.url().should('include', '/list')
