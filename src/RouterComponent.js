@@ -1,6 +1,9 @@
 // This page uses the React Router library to make links to navigate from page to page
 import React from 'react';
 import './App.css';
+import Home from './Home';
+import List from './List';
+import Add from './Add';
 import { BrowserRouter as Router, Route, Link, Switch } from 'react-router-dom'
 
 function RouterComponent() {
@@ -26,24 +29,4 @@ function RouterComponent() {
     )
 }
 
-// And these are our functions, which will eventually live in their own files
-
-function Home() {
-    return (
-        <h1>congrats this is the home page</h1>
-    )
-}
-
-function List() {
-    return (
-        <h1>This is the list page!</h1>
-    )
-}
-
-function Add() {
-    return (
-        <h1>Add an item to your list here</h1>
-    )
-}
-
-    export default RouterComponent
+export default RouterComponent
