@@ -3,9 +3,11 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "firebase": "^7.2.3",
+    "cypress": "^3.6.1",
+    "firebase": "^7.3.0",
     "react": "^16.11.0",
     "react-dom": "^16.11.0",
+    "react-firestore": "^1.0.1",
     "react-scripts": "3.2.0"
   },
   "scripts": {
@@ -28,5 +30,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "cypress": "^3.6.1"
   }
 }
