@@ -4,8 +4,8 @@ import { FirestoreCollection } from 'react-firestore';
 // ** NOTES **
 // if i put in the wrong path it still loads the 2nd option on my tereniary operator 
 // if someone adds a new collection, how do i get it to fetch that collection.
-// just need to make sure we know how we have DB set up (collection names, id's, documents), currently not dynamic.
 // need to update timestamp settings with DB
+
 const Fetchitems = (props) => {
   return (
     //fetches specific collection, refreshes every time database chages
@@ -23,7 +23,7 @@ const Fetchitems = (props) => {
                 <ul>
                   {data.map(item => (
                     <li key={item.id}>
-                      {item.name}
+                      <div className={item.name}>{item.name}</div>
                     </li>
                   ))}
                 </ul>
