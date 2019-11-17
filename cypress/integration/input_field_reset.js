@@ -1,6 +1,6 @@
 describe("Input Field Reset", function() {
   it("Resets input field after addItem button click", function() {
-    cy.visit("localhost:3000");
+    cy.visit("/add");
     cy.get(".inputField").type("marshmallows");
 
     cy.get(".addItemButton").click();

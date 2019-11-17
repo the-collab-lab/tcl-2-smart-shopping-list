@@ -1,16 +1,13 @@
-import React, { Component } from "react";
-import FetchItems from "./component/FetchItems";
-import AddItem from "./component/AddItem";
+import React from 'react';
+import './App.css';
+import RouterComponent from './RouterComponent'
 
-class App extends Component {
-  render() {
-    return (
-      <React.Fragment>
-        <FetchItems />
-        <AddItem />
-      </React.Fragment>
-    );
-  }
+// For now, the App simply returns our RouterComponent, which holds all the links
+// and all of the components for each of those links.
+function App() {
+  return (
+    <RouterComponent />
+  )
 }
 
 export default App;
