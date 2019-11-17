@@ -2,8 +2,6 @@ import React from "react";
 import { FirestoreCollection } from "react-firestore";
 
 // ** NOTES **
-// if i put in the wrong path it still loads the 2nd option on my tereniary operator
-// if someone adds a new collection, how do i get it to fetch that collection.
 // need to update timestamp settings with DB
 
 const Fetchitems = props => {
