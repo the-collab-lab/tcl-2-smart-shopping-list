@@ -44,7 +44,7 @@ function Home() {
 			<h1>congrats this is the home page</h1>
 			{/* button for the user to make their token, which we will probably
 			just call "start a shopping list" or something in the final app */}
-			<button onClick={generateToken}>Token</button>
+			{/* <button onClick={generateToken}>Token</button> */}
 
 		</div>
 	)

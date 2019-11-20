@@ -7,6 +7,7 @@ import AddItem from './component/AddItem';
 import { BrowserRouter as Router, Route, Link, Switch } from 'react-router-dom'
 
 function RouterComponent() {
+    // console.log('is this the router page?')
     return (
         <Router>
             {/* Our links. So far, we have three, though 
