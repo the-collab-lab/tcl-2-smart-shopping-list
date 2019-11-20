@@ -2,17 +2,15 @@ import React from "react";
 import getToken from "../token";
 
 const GetToken = () => {
+  // Function triggered on button click which
+  // will create a unique token, save it to
+  // local storage & reload browser
   const onButtonClickHandler = () => {
     const uniqueToken = getToken();
     localStorage.setItem("uniqueToken", uniqueToken);
-    // console.log('is this the get token page?')
-    window.location.reload(false)
+    window.location.reload(false);
   };
-  return (
-    <React.Fragment>
-      <button onClick={onButtonClickHandler}>Get Token</button>
-    </React.Fragment>
-  );
+  return <button onClick={onButtonClickHandler}>Get Token</button>;
 };
 
 export default GetToken;
