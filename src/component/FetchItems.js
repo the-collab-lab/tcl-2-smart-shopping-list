@@ -5,11 +5,17 @@ import { FirestoreCollection } from "react-firestore";
 // need to update timestamp settings with DB
 
 const FetchItems = props => {
+  // Token stored in user's local storage
+  const uniqueToken = localStorage.getItem("uniqueToken");
+
+  // unique DB path based on token
+  const concatPath = "/lists/" + uniqueToken + "/items";
+
   return (
     //fetches specific collection, refreshes every time database chages
     <FirestoreCollection
       //name of collection you want to collect, with filter you can narrow this down to specific document
-      path="items"
+      path={concatPath}
       // optional more parameters (sort, limit, filter)
       render={({ isLoading, data }) => {
         // if data is taking too long you can redirect or alert user it's still loading (i think)
