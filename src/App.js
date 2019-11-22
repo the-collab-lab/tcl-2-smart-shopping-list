@@ -1,7 +1,7 @@
 import React from "react";
 import "./App.css";
 import RouterComponent from "./RouterComponent";
-import GetToken from "./component/GetToken";
+import Home from "./component/Home";
 
 // For now, the App simply returns our RouterComponent, which holds all the links
 // and all of the components for each of those links.
@@ -10,8 +10,8 @@ function App() {
   const checkToken = localStorage.getItem("uniqueToken");
   // console.log(checkToken)
 
-  if (checkToken === "") {
-    return <GetToken />;
+  if (checkToken === null) {
+    return <Home />;
   } else {
     return <RouterComponent />;
   }
