@@ -1,16 +1,16 @@
 import React, { useState } from "react";
-// import { withFirestore } from "react-firestore";
+import { withFirestore } from "react-firestore";
 
 const JoinList = ({ firestore }) => {
   const [token, setToken] = useState("");
 
-  // const checkTokenExists = token => {
-  //   return (
-  //     (firestore
-  //       .collection("lists")
-  //       .doc(token)) === null
-  //   )
-  // }
+  const checkTokenExists = token => {
+      firestore
+        .collection("lists")
+        .doc(token).onSnapshot(snapshot => {
+          console.log('hello world')
+        });
+  }
 
   const handleChange = event => {
     setToken(event.target.value);
@@ -23,8 +23,12 @@ const JoinList = ({ firestore }) => {
 
   const handleSubmit = event => {
     event.preventDefault();
-    // let exists = checkTokenExists(token);
-    // if (exists) { addToLS(token) }
+    let exists = checkTokenExists(token);
+    console.log('here', exists)
+    if (exists) { 
+      addToLS(token) 
+    } else { 
+      alert("Enter a valid share code and try again.")}
     addToLS(token)
     setToken("");
   }
@@ -48,4 +52,4 @@ const JoinList = ({ firestore }) => {
   )
 }
 
-export default JoinList;
+export default withFirestore(JoinList);
