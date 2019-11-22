@@ -1,16 +1,9 @@
 import React, { useState } from "react";
 import { withFirestore } from "react-firestore";
+import { db } from '../lib/firebase.js';
 
 const JoinList = ({ firestore }) => {
   const [token, setToken] = useState("");
-
-  const checkTokenExists = token => {
-      firestore
-        .collection("lists")
-        .doc(token).onSnapshot(snapshot => {
-          console.log('hello world')
-        });
-  }
 
   const handleChange = event => {
     setToken(event.target.value);
@@ -18,18 +11,23 @@ const JoinList = ({ firestore }) => {
 
   const addToLS = token => {
     localStorage.setItem("uniqueToken", token);
-    window.location.reload(false);
   }
 
   const handleSubmit = event => {
     event.preventDefault();
-    let exists = checkTokenExists(token);
-    console.log('here', exists)
-    if (exists) { 
-      addToLS(token) 
-    } else { 
-      alert("Enter a valid share code and try again.")}
-    addToLS(token)
+    
+    db
+      .collection("lists")
+      .doc(token)
+      .get()
+      .then(function(doc) {
+        if (doc.exists) {
+          addToLS(token) 
+        } else {
+          alert("Enter a valid share code and try again.");
+        }
+      })
+
     setToken("");
   }
 
