@@ -1,6 +1,9 @@
 describe("Join an existing list", function() {
-  it("Checks for existence of token field", function() {
+  it("Adds token to local storage on submit", function() {
     cy.visit("/");
-    cy.get(".inputField");
+		cy.get(".inputField").type("Token1234");
+		cy.get(".joinListButton").click().should(() => {
+			expect(localStorage.getItem("uniqueToken")).to.eq("Token1234")
+		});
   });
 });
