@@ -10,7 +10,7 @@ function App() {
   const checkToken = localStorage.getItem("uniqueToken");
   // console.log(checkToken)
 
-  if (checkToken === "") {
+  if (checkToken === null) {
     return <GetToken />;
   } else {
     return <RouterComponent />;
