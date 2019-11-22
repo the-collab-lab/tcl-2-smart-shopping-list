@@ -5,11 +5,14 @@ const JoinList = ({ firestore }) => {
   const [token, setToken] = useState("");
 
   const checkTokenExists = token => {
-      firestore
-        .collection("lists")
-        .doc(token).onSnapshot(snapshot => {
-          console.log('hello world')
-        });
+
+    firestore
+      .collection('lists')
+      .doc(token)
+      .onSnapshot(snapshot => {
+        console.log(snapshot, 'HERE')
+      })
+       
   }
 
   const handleChange = event => {
