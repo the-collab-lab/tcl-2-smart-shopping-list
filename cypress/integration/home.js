@@ -1,3 +1,4 @@
+
 describe("Join an existing list", function() {
   it("Adds token to local storage on submit", function() {
     cy.visit("/");
@@ -23,8 +24,7 @@ describe("Join an existing list", function() {
 		cy.get(".inputField").type("token5678");
 		cy.get(".joinListButton").click()
     .then(() => {
-      expect(stub.getCall(0)).to.be.called      
+			expect(stub.getCall(0)).to.be.calledWith('Enter a valid share code and try again.')      
     })
 	})
 });
-
