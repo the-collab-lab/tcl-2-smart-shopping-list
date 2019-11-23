@@ -10,5 +10,6 @@ describe("Which view to land on", function() {
   });
 });
 
+
 // How to also check if the other view has a token? I can't figure out how to get
 // cypress to load the new page with a token after pressing the button...
