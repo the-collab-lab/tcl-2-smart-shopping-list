@@ -1,8 +1,16 @@
 import React, { useState } from "react";
 import { withFirestore } from "react-firestore";
+import { Redirect } from 'react-router-dom'
 
 const JoinList = ({ firestore }) => {
   const [token, setToken] = useState("");
+  const [redirect, setRedirect] = useState(false)
+
+  const renderRedirect = () => {
+    if (redirect) {
+      return <Redirect to='/list' />
+    }
+  }
 
   const checkTokenExists = token => {
     firestore
@@ -11,6 +19,7 @@ const JoinList = ({ firestore }) => {
       .onSnapshot(snapshot => {
         if (snapshot.exists) {
           addToLS(token)
+          setRedirect(true)
         } else {
           alert("Enter a valid share code and try again.");
         }
@@ -30,7 +39,9 @@ const JoinList = ({ firestore }) => {
     event.preventDefault();
     checkTokenExists(token);
     setToken("");
+
   }
+
 
   return (
     <div>
@@ -45,6 +56,7 @@ const JoinList = ({ firestore }) => {
             className="inputField"
           />  
         </label>
+        { renderRedirect() }
         <button onClick={handleSubmit} className="joinListButton">
           Join List
         </button>

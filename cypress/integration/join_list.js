@@ -7,6 +7,13 @@ describe("Join an existing list", function() {
 			expect(localStorage.getItem("uniqueToken")).to.eq("token1234")
 		});
 	});
+
+	it("Redirects to list page on valid token submit", function() {
+    cy.visit("/join");
+		cy.get(".inputField").type("token1234");
+		cy.get(".joinListButton").click()
+		cy.url().should('eq', Cypress.config().baseUrl + '/list')
+	});
 	
 	it("Alert pops up if token does not exist", function () {
 		cy.visit("/join");
