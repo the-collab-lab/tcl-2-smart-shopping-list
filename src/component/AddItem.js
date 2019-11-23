@@ -12,8 +12,7 @@ const AddItem = ({ firestore }) => {
     firestore
       .collection("lists")
       .doc(uniqueToken)
-      .collection("items")
-      .add({ name });
+      .set({ items: name });
   };
 
   //   Update state whenever user input changes
