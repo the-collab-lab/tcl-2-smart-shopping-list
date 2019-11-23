@@ -10,7 +10,7 @@ const GetToken = () => {
     localStorage.setItem("uniqueToken", uniqueToken);
     window.location.reload(false);
   };
-  return <button onClick={onButtonClickHandler}>Get Token</button>;
+  return <button onClick={onButtonClickHandler} className="tokenButton">Get Token</button>;
 };
 
 export default GetToken;
