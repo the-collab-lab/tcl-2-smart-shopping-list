@@ -1,6 +1,6 @@
 import React from "react";
 import "./App.css";
-import RouterComponent from "./RouterComponent";
+import RouterComponent from "./component/Router";
 import Home from "./component/Home";
 
 // For now, the App simply returns our RouterComponent, which holds all the links

@@ -15,5 +15,5 @@ describe("Join an existing list", function() {
 		cy.on('window:alert', str => {
 			expect(str).to.equal("Enter a valid share code and try again.")
 		});
-	})
+	});
 });
