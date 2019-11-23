@@ -4,22 +4,29 @@ import '../App.css';
 import Home from './Home';
 import FetchItems from './FetchItems';
 import AddItem from './AddItem';
+import JoinList from './JoinList';
 import { BrowserRouter as Router, Route, Link, Switch } from 'react-router-dom'
 
 function RouterComponent() {
+    const checkToken = localStorage.getItem("uniqueToken");
+
     return (
         <Router>
             <Link to="/list">List</Link>
             <Link to="/add">Add</Link>
+
             <Switch>
-                <Route exact path="/list">
+                <Route path="/list">
                     <FetchItems />
                 </Route>
-                <Route exact path="/add">
+                <Route path="/add">
                     <AddItem />
                 </Route>
-                <Route exact path="/">
-                    <Home />
+                <Route path="/join">
+                    <JoinList />
+                </Route>
+                <Route path="">
+                    { checkToken === null ? <Home/> : <FetchItems/> }
                 </Route>
             </Switch>
         </Router>

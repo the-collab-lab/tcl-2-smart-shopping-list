@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { withFirestore } from "react-firestore";
-// import { db } from '../lib/firebase.js';
 
 const JoinList = ({ firestore }) => {
   const [token, setToken] = useState("");
@@ -30,38 +29,29 @@ const JoinList = ({ firestore }) => {
   const handleSubmit = event => {
     event.preventDefault();
     checkTokenExists(token);
-    // db
-    //   .collection("lists")
-    //   .doc(token)
-      // .get()
-      // .then(function(doc) {
-      //   if (doc.exists) {
-      //     addToLS(token) 
-      //   } else {
-      //     console.log('no')
-      //     alert("Enter a valid share code and try again.");
-      //   }
-      // })
-
     setToken("");
   }
 
   return (
-    <form onSubmit={handleSubmit}>
-      <label>
-        Type in list token:
-        <input
-          value={token}
-          type="text"
-          id="uniqueToken"
-          onChange={handleChange}
-          className="inputField"
-        />  
-      </label>
-      <button onClick={handleSubmit} className="joinListButton">
-        Join List
-      </button>
-    </form>
+    <div>
+      <form onSubmit={handleSubmit}>
+        <label>
+          Type in list token:
+          <input
+            value={token}
+            type="text"
+            id="uniqueToken"
+            onChange={handleChange}
+            className="inputField"
+          />  
+        </label>
+        <button onClick={handleSubmit} className="joinListButton">
+          Join List
+        </button>
+      </form>
+
+      <p>Nevermind! <a href="/" className="newListLink">Start a New List</a></p>
+    </div>
   )
 }
 
