@@ -37,7 +37,7 @@ const AddItem = ({ firestore }) => {
   return (
     <form onSubmit={handleSubmit}>
       <label>
-        Name a food:
+        Add item:
         <input
           value={name}
           type="text"
