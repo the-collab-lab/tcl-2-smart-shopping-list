@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { withFirestore } from "react-firestore";
+import BuyFrequencyButtons from "./BuyFrequencyButtons";
 
 const AddItem = ({ firestore }) => {
   const [name, setName] = useState("");
@@ -37,7 +38,7 @@ const AddItem = ({ firestore }) => {
   return (
     <form onSubmit={handleSubmit}>
       <label>
-        Add item:
+        New item:
         <input
           value={name}
           type="text"
@@ -46,6 +47,9 @@ const AddItem = ({ firestore }) => {
           className="inputField"
         />
       </label>
+      <br />
+      <BuyFrequencyButtons />
+      <br />
       <button onClick={handleSubmit} className="addItemButton">
         Add Item
       </button>
