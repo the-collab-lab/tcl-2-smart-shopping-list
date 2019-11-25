@@ -9,7 +9,7 @@ const FetchItems = props => {
   const uniqueToken = localStorage.getItem("uniqueToken");
 
   // unique DB path based on token
-  const concatPath = "/lists/" + uniqueToken + "/items";
+  const concatPath = `/lists/${uniqueToken}/items`;
 
   return (
     //fetches specific collection, refreshes every time database chages

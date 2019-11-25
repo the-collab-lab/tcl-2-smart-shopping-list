@@ -12,6 +12,11 @@ const AddItem = ({ firestore }) => {
     firestore
       .collection("lists")
       .doc(uniqueToken)
+      .set({ items: "" });
+
+    firestore
+      .collection("lists")
+      .doc(uniqueToken)
       .collection("items")
       .add({ name });
   };
@@ -32,7 +37,7 @@ const AddItem = ({ firestore }) => {
   return (
     <form onSubmit={handleSubmit}>
       <label>
-        Add Item:
+        Add item:
         <input
           value={name}
           type="text"

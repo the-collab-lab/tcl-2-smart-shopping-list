@@ -6,6 +6,7 @@ import FetchItems from './FetchItems';
 import AddItem from './AddItem';
 import JoinList from './JoinList';
 import { BrowserRouter as Router, Route, Link, Switch } from 'react-router-dom'
+import GetToken from './GetToken';
 
 function RouterComponent() {
     const checkToken = localStorage.getItem("uniqueToken");
@@ -14,6 +15,9 @@ function RouterComponent() {
         <Router>
             <Link to="/list">List</Link>
             <Link to="/add">Add</Link>
+            {/* For next week we will take these and move them 
+            to a nav component, and then we will import that nav
+            into the FetchItems component */}
 
             <Switch>
                 <Route path="/list">
