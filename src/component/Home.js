@@ -1,9 +1,14 @@
-import React from 'react';
+import React from "react";
+import GetToken from './GetToken';
 
 function Home() {
-	return (
-		<h1>congrats this is the home page</h1>
-	)
+  return (
+    <div>
+      <h1>New Shopping List</h1>
+      <GetToken />
+      <p><a href="/join">Join Existing List</a></p>
+    </div>
+  );
 }
 
-export default Home
+export default Home;

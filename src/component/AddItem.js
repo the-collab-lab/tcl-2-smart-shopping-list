@@ -4,9 +4,16 @@ import { withFirestore } from "react-firestore";
 const AddItem = ({ firestore }) => {
   const [name, setName] = useState("");
 
-  //   Write item to Firebase
+  //   Write item to Firebase setting uniqueToken as document name
+
+  const uniqueToken = localStorage.getItem("uniqueToken");
+
   const addItem = name => {
-    firestore.collection("items").add({ name });
+    firestore
+      .collection("lists")
+      .doc(uniqueToken)
+      .collection("items")
+      .add({ name });
   };
 
   //   Update state whenever user input changes

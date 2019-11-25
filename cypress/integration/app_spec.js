@@ -1,4 +1,4 @@
-describe('Week 1 Tests', function() {
+describe('General App', function() {
   it('Confirms the testing suite is configured', function() {
     expect(true).to.equal(true)
 	})
