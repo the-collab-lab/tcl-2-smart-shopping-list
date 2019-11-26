@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Router, Redirect } from "react-router-dom";
+import { Redirect } from "react-router-dom";
 
 import getToken from "../token";
 

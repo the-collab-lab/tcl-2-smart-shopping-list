@@ -1,5 +1,6 @@
 import React from "react";
 import { FirestoreCollection } from "react-firestore";
+import Navbar from "./Navbar"
 
 // ** NOTES **
 // need to update timestamp settings with DB
@@ -31,6 +32,7 @@ const FetchItems = props => {
                 </li>
               ))}
             </ul>
+            <Navbar />
           </div>
         );
       }}

@@ -1,24 +1,18 @@
-// This page uses the React Router library to make links to navigate from page to page
+// This page uses the React Router library to make links to navigate from view to view
+
 import React from 'react';
 import '../App.css';
 import Home from './Home';
 import FetchItems from './FetchItems';
 import AddItem from './AddItem';
 import JoinList from './JoinList';
-import { BrowserRouter as Router, Route, Link, Switch } from 'react-router-dom'
-import GetToken from './GetToken';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 
 function RouterComponent() {
     const checkToken = localStorage.getItem("uniqueToken");
 
     return (
         <Router>
-            <Link to="/list">List</Link>
-            <Link to="/add">Add</Link>
-            {/* For next week we will take these and move them 
-            to a nav component, and then we will import that nav
-            into the FetchItems component */}
-
             <Switch>
                 <Route path="/list">
                     <FetchItems />
