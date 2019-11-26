@@ -6,10 +6,8 @@ import FetchItems from './FetchItems';
 import AddItem from './AddItem';
 import JoinList from './JoinList';
 import { BrowserRouter as Router, Route, Link, Switch } from 'react-router-dom'
-import GetToken from './GetToken';
 
 function RouterComponent() {
-    const checkToken = localStorage.getItem("uniqueToken");
 
     return (
         <Router>
@@ -30,7 +28,7 @@ function RouterComponent() {
                     <JoinList />
                 </Route>
                 <Route path="">
-                    { checkToken === null ? <Home/> : <FetchItems/> }
+                    <Home />
                 </Route>
             </Switch>
         </Router>
