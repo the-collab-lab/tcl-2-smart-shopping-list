@@ -9,7 +9,6 @@ import JoinList from './JoinList';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 
 function RouterComponent() {
-    const checkToken = localStorage.getItem("uniqueToken");
 
     return (
         <Router>
@@ -24,7 +23,7 @@ function RouterComponent() {
                     <JoinList />
                 </Route>
                 <Route path="">
-                    { checkToken === null ? <Home/> : <FetchItems/> }
+                    <Home />
                 </Route>
             </Switch>
         </Router>
