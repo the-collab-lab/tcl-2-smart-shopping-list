@@ -32,7 +32,7 @@ function getRandomInt(min, max) {
     }
 }
 
-function GenerateToken() {
+function generateToken() {
     var phrase = []
 
     for (var i = 0; i < 3; i += 1) {
@@ -42,4 +42,4 @@ function GenerateToken() {
     return phrase.join(' ')
 }
 
-export default GenerateToken;
+export default generateToken;

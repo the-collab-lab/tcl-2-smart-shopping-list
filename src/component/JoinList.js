@@ -2,9 +2,9 @@ import React, { useState } from "react";
 import { withFirestore } from "react-firestore";
 import { Redirect } from 'react-router-dom'
 
-const JoinList = ({ firestore }) => {
-  const [token, setToken] = useState("");
+const JoinList = ({ firestore }, props) => {
   const [redirect, setRedirect] = useState(false)
+  const { token: [token, setToken] } = { token: useState(null), ...(props.state || {}) };
 
   const renderRedirect = () => {
     if (redirect) {

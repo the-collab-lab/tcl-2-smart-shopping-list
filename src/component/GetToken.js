@@ -1,23 +1,23 @@
 import React, { useState } from "react";
 import { Redirect } from "react-router-dom";
+import generateToken from "../token";
 
-import GenerateToken from "../token";
+const GetToken = (props) => {
+  const { token: [token, setToken] } = { token: useState(null), ...(props.state || {}) };
 
-const GetToken = () => {
-  const [needToken, setNeedToken] = useState(true);
   // Function triggered on button click which
   // will create a unique token, save it to
-  // local storage & reload browser
+  // local storage, change state & redirect
   const renderRedirect = () => {
-    if (needToken === false) {
+    if (token !== null) {
       console.log("render redirect");
       return <Redirect to="/list" />;
     }
   };
   const onButtonClickHandler = () => {
-    const uniqueToken = GenerateToken();
+    const uniqueToken = generateToken();
     localStorage.setItem("uniqueToken", uniqueToken);
-    setNeedToken(false);
+    setToken(uniqueToken);
   };
 
   return (
@@ -31,5 +31,3 @@ const GetToken = () => {
 };
 
 export default GetToken;
-
-// 11-27-19 renamed getToken to GenerateToken, because that seems more clear to me

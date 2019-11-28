@@ -7,42 +7,8 @@ import AddItem from './AddItem';
 import JoinList from './JoinList';
 import { BrowserRouter as Router, Route, Link, Switch } from 'react-router-dom'
 
-function RouterComponent() {
-
-    // if setView is false, show token generator button, if true, show home
-    const [needToken, setNeedToken] = useState(false)
-    const uniqueToken = localStorage.getItem("uniqueToken")
-
-    // const checkView = () => {
-    //     if (uniqueToken === null) {
-    //         hasToken(false)
-    //     } else {
-    //         hasToken(true)
-    //     }
-    // }
-
-    const setView = () => {
-        // if (uniqueToken === null) {
-        //     hasToken(false)
-        // } else {
-        //     hasToken(true)
-        // }
-
-        if (token === false) {
-            return (
-                <Route path="">
-                    <Home />
-                </Route>
-            )
-        } else {
-            return (
-                <Route path="">
-                    <FetchItems />
-                </Route>
-            )
-        }
-    }
-
+function RouterComponent(props) {
+    const { token: [token, setToken] } = { token: useState(null), ...(props.state || {}) };
 
     return (
         <Router>
@@ -60,12 +26,10 @@ function RouterComponent() {
                     <AddItem />
                 </Route>
                 <Route path="/join">
-                    <JoinList />
+                    <JoinList state={{ token: [token, setToken] }}/>
                 </Route>
                 <Route path="">
-                    {/* should the list or home be shown? */}
-                    { setView() }
-                    {/* { token === false ? <Home/> : <FetchItems/> } */}
+                    { token === null ? <Home state={{ token: [token, setToken] }}/> : <FetchItems/> }
                 </Route>
             </Switch>
         </Router>
