@@ -5,11 +5,9 @@ import '../App.css';
 const AddItem = ({ firestore }) => {
   const [name, setName] = useState("");
   const [frequency, setFrequency] = useState("");
-
-  //   Write item to Firebase setting uniqueToken as document name
-
   const uniqueToken = localStorage.getItem("uniqueToken");
 
+  //   Write item to Firebase setting uniqueToken as document name
   const addItem = (name, frequency) => {
     firestore
       .collection("lists")
@@ -40,7 +38,6 @@ const AddItem = ({ firestore }) => {
     event.preventDefault();
     addItem(name, frequency);
     setName("");
-    // alert("item added to database!");
   };
 
   return (
