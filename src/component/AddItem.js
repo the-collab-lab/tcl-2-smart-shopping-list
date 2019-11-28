@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 import { withFirestore } from "react-firestore";
-import BuyFrequencyButtons from "./BuyFrequencyButtons";
+import '../App.css';
 
 const AddItem = ({ firestore }) => {
   const [name, setName] = useState("");
+  // const [frequency, setFrequency] = useState("");
 
   //   Write item to Firebase setting uniqueToken as document name
 
@@ -48,7 +49,21 @@ const AddItem = ({ firestore }) => {
         />
       </label>
       <br />
-      <BuyFrequencyButtons />
+      <div className="frequencyButtons">
+        <p>How soon are you likely to buy it again?</p>
+        <label className="soonButton">
+          <input type="radio" name="frequencyButtons" value="soon" />
+          Soon
+        </label>
+        <label className="prettySoonButton">
+          <input type="radio" name="frequencyButtons" value="pretty-soon" />
+          Pretty Soon
+        </label>
+        <label className="notSoonButton">
+          <input type="radio" name="frequencyButtons" value="not-soon" />
+          Not Soon
+        </label>
+      </div>
       <br />
       <button onClick={handleSubmit} className="addItemButton">
         Add Item
