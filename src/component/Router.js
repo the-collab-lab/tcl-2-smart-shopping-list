@@ -10,7 +10,7 @@ import { BrowserRouter as Router, Route, Link, Switch } from 'react-router-dom'
 function RouterComponent() {
 
     // if setView is false, show token generator button, if true, show home
-    const [token, hasToken] = useState(false)
+    const [needToken, setNeedToken] = useState(false)
     const uniqueToken = localStorage.getItem("uniqueToken")
 
     // const checkView = () => {
