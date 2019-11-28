@@ -77,19 +77,21 @@ button:hover {
   border: 2px solid black;
 }
 
-.frequencyButtons label:hover {
+.frequencyButtons input[type="radio"]:focus + label, 
+  .frequencyButtons input[type="radio"]:checked + label, 
+  .frequencyButtons label:hover {
   opacity: 100%;
   box-shadow: 1px 1px 2px black;
 }
 
-.soonButton {
+#soonButton {
   background-color:#f6f7d7;
 }
 
-.prettySoonButton {
+#prettySoonButton {
   background-color:#ff9a00;
 }
 
-.notSoonButton {
+#notSoonButton {
   background-color:#ff165d;
 }

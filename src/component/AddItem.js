@@ -51,18 +51,14 @@ const AddItem = ({ firestore }) => {
       <br />
       <div className="frequencyButtons">
         <p>How soon are you likely to buy it again?</p>
-        <label className="soonButton">
-          <input type="radio" name="frequencyButtons" value="soon" />
-          Soon
-        </label>
-        <label className="prettySoonButton">
-          <input type="radio" name="frequencyButtons" value="pretty-soon" />
-          Pretty Soon
-        </label>
-        <label className="notSoonButton">
-          <input type="radio" name="frequencyButtons" value="not-soon" />
-          Not Soon
-        </label>
+          <input type="radio" id="soonButton" name="frequencyButtons" value="soon" checked={ true } />
+          <label for="soonButton" id="soonButton">Soon</label>
+      
+          <input type="radio" id="prettySoonButton" name="frequencyButtons" value="pretty-soon" checked={ true } />
+          <label for="prettySoonButton" id="prettySoonButton">Pretty Soon</label>
+
+          <input type="radio" id="notSoonButton" name="frequencyButtons" value="not-soon" checked={ true } />
+          <label for="notSoonButton" id="notSoonButton">Not Soon</label>
       </div>
       <br />
       <button onClick={handleSubmit} className="addItemButton">
