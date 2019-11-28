@@ -1,5 +1,5 @@
 // This page uses the React Router library to make links to navigate from page to page
-import React from 'react';
+import React, { useState } from 'react';
 import '../App.css';
 import Home from './Home';
 import FetchItems from './FetchItems';
@@ -8,6 +8,41 @@ import JoinList from './JoinList';
 import { BrowserRouter as Router, Route, Link, Switch } from 'react-router-dom'
 
 function RouterComponent() {
+
+    // if setView is false, show token generator button, if true, show home
+    const [token, hasToken] = useState(false)
+    const uniqueToken = localStorage.getItem("uniqueToken")
+
+    // const checkView = () => {
+    //     if (uniqueToken === null) {
+    //         hasToken(false)
+    //     } else {
+    //         hasToken(true)
+    //     }
+    // }
+
+    const setView = () => {
+        // if (uniqueToken === null) {
+        //     hasToken(false)
+        // } else {
+        //     hasToken(true)
+        // }
+
+        if (token === false) {
+            return (
+                <Route path="">
+                    <Home />
+                </Route>
+            )
+        } else {
+            return (
+                <Route path="">
+                    <FetchItems />
+                </Route>
+            )
+        }
+    }
+
 
     return (
         <Router>
@@ -28,7 +63,9 @@ function RouterComponent() {
                     <JoinList />
                 </Route>
                 <Route path="">
-                    <Home />
+                    {/* should the list or home be shown? */}
+                    { setView() }
+                    {/* { token === false ? <Home/> : <FetchItems/> } */}
                 </Route>
             </Switch>
         </Router>

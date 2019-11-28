@@ -1,3 +1,5 @@
+// AKA, the "Add View"
+
 import React, { useState } from "react";
 import { withFirestore } from "react-firestore";
 

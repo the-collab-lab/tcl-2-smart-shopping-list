@@ -1,3 +1,5 @@
+// AKA, the "List View"
+
 import React from "react";
 import { FirestoreCollection } from "react-firestore";
 

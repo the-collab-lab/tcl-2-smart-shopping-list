@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import { Router, Redirect } from "react-router-dom";
+import { Redirect } from "react-router-dom";
 
-import getToken from "../token";
+import GenerateToken from "../token";
 
 const GetToken = () => {
   const [needToken, setNeedToken] = useState(true);
@@ -15,7 +15,7 @@ const GetToken = () => {
     }
   };
   const onButtonClickHandler = () => {
-    const uniqueToken = getToken();
+    const uniqueToken = GenerateToken();
     localStorage.setItem("uniqueToken", uniqueToken);
     setNeedToken(false);
   };
@@ -31,3 +31,5 @@ const GetToken = () => {
 };
 
 export default GetToken;
+
+// 11-27-19 renamed getToken to GenerateToken, because that seems more clear to me
