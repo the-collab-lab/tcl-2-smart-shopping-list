@@ -58,3 +58,41 @@ button:hover {
   font-size: 23px;
   box-shadow: 1px 1px 2px black;
 }
+
+.frequencyButtons {
+  margin-top: 5vh;
+}
+
+.frequencyButtons input[type="radio"] {
+  opacity: 0;
+  position: fixed;
+  width: 0;
+}
+
+.frequencyButtons label {
+  display: inline-block;
+  padding: 10px 20px;
+  margin: 1vh;
+  opacity: 90%;
+  border: 2px solid black;
+}
+
+.frequencyButtons input[type="radio"]:focus + label, 
+  .frequencyButtons input[type="radio"]:checked + label, 
+  .frequencyButtons label:hover {
+  opacity: 100%;
+  box-shadow: 1px 1px 2px black;
+  font-size: 23px;
+}
+
+#soonButton {
+  background-color:#f6f7d7;
+}
+
+#prettySoonButton {
+  background-color:#ff9a00;
+}
+
+#notSoonButton {
+  background-color:#ff165d;
+}
