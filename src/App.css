@@ -92,7 +92,7 @@ input {
 }
 
 .joinListButton {
-
+  color: black;
 }
 
 .tokenButton {
@@ -144,11 +144,12 @@ input {
 
 .itemInputField {
   /* display: flex; */
-
+  color: black;
 }
 
 .addFormLabel {
   /* display: flex; */
+  color: black;
 }
 
 .Navbar {
