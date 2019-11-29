@@ -4,7 +4,7 @@ import "../App.css";
 
 const AddItem = ({ firestore }) => {
   const [name, setName] = useState("");
-  const [frequency, setFrequency] = useState("");
+  const [frequency, setFrequency] = useState("pretty-soon");
   const uniqueToken = localStorage.getItem("uniqueToken");
 
   //   Write item to Firebase setting uniqueToken as document name
@@ -38,22 +38,6 @@ const AddItem = ({ firestore }) => {
     event.preventDefault();
     addItem(name, frequency);
     setName("");
-  };
-
-  // buyFrequency holds the string that will be stored in the database
-  const [buyFrequency, setBuyFrequency] = useState("");
-
-  // frequency button handlers that update the value of buyFrequency
-  const soonClickedHandler = () => {
-    setBuyFrequency("Soon");
-  };
-
-  const prettySoonClickedHandler = () => {
-    setBuyFrequency("Pretty soon");
-  };
-
-  const notSoonClickedHandler = () => {
-    setBuyFrequency("Not soon");
   };
 
   return (
