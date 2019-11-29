@@ -19,7 +19,7 @@ const AddItem = ({ firestore }) => {
       .collection("lists")
       .doc(uniqueToken)
       .collection("items")
-      .add({ name });
+      .add({ name, buyFrequency });
   };
 
   //   Update state whenever user input changes
@@ -35,6 +35,22 @@ const AddItem = ({ firestore }) => {
     // alert("item added to database!");
   };
 
+  // buyFrequency holds the string that will be stored in the database
+  const [buyFrequency, setBuyFrequency] = useState("");
+
+  // frequency button handlers that update the value of buyFrequency
+  const soonClickedHandler = () => {
+    setBuyFrequency("Soon");
+  };
+
+  const prettySoonClickedHandler = () => {
+    setBuyFrequency("Pretty soon");
+  };
+
+  const notSoonClickedHandler = () => {
+    setBuyFrequency("Not soon");
+  };
+
   return (
     <form onSubmit={handleSubmit}>
       <label>
@@ -48,7 +64,11 @@ const AddItem = ({ firestore }) => {
         />
       </label>
       <br />
-      <BuyFrequencyButtons />
+      <BuyFrequencyButtons
+        soonClicked={soonClickedHandler()}
+        prettySoonClicked={prettySoonClickedHandler()}
+        notSoonClicked={notSoonClickedHandler()}
+      />
       <br />
       <button onClick={handleSubmit} className="addItemButton">
         Add Item
