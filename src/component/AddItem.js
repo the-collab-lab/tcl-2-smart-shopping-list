@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { withFirestore } from "react-firestore";
 import Navbar from "./Navbar"
+import BackButton from "./BackButton"
 
 const AddItem = ({ firestore }) => {
   const [name, setName] = useState("");
@@ -37,15 +38,16 @@ const AddItem = ({ firestore }) => {
 
   return (
     <React.Fragment >
-      <form onSubmit={handleSubmit}>
-        <label>
+      <BackButton />
+      <form className="addForm" onSubmit={handleSubmit}>
+        <label className="addFormLabel">
           Add item:
           <input
             value={name}
             type="text"
             id="name"
             onChange={handleChange}
-            className="inputField"
+            className="itemInputField"
           />
         </label>
         <button onClick={handleSubmit} className="addItemButton">
