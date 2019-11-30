@@ -6,6 +6,12 @@
   font-family: "PT Sans Narrow", sans-serif;
 }
 
+/* Add temporary styling to link for contrast (accessibility).
+Other pair creating button links, so this can be deleted on merge */
+a:visited {
+  color: #fff;
+}
+
 body {
   background-color: #3ec1d3;
   display: flex;
