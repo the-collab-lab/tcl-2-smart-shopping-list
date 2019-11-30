@@ -25,4 +25,17 @@ describe("Add Item To List", function() {
 
     cy.get(".inputField").should("have.value", "");
   });
+
+  it("Selects correct frequency button", function() {
+    cy.visit("/add");
+    cy.get("#soonButton").should("have.value", "soon");
+  });
+
+  it("Checks that the selected frequency button get focused", function() {
+    cy.visit("/add");
+    cy.get("#soonButton")
+      .click({ force: true })
+      .focused()
+      .should("have.id", "soonButton");
+  });
 });
