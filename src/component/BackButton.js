@@ -8,7 +8,7 @@ function BackButton() {
     return (
         <React.Fragment>
             <div className="BackButton" data-cy="Back">
-                <Link className="BackButton_List" to="/list">&#9756;<span style={{fontSize:'20px'}}>Back</span></Link>
+                <Link className="BackButton_List" to="/list">&#9756;</Link>
             </div>
         </React.Fragment >
     )
