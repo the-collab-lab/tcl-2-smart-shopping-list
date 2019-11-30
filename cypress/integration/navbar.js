@@ -4,9 +4,10 @@ describe("Show the navbar", function() {
           cy.contains('List') & cy.contains('Add')
       })
 
-      it('Verifies that the navbar (and back arrow) are present on the add item page', function() {
+      it('Verifies that the navbar ispresent on the add item page', function() {
         cy.visit('/add')
         cy.contains('List') & cy.contains('Add')
     })
+
   });
   
