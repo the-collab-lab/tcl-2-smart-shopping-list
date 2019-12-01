@@ -7,7 +7,7 @@ import DeleteToken from "./DeleteToken"
 // ** NOTES **
 // need to update timestamp settings with DB
 
-const FetchItems = (token, setToken) => {
+const FetchItems = ({token, setToken}) => {
   // console.log(token)
   // console.log(token.value)
   // console.log(token === undefined)

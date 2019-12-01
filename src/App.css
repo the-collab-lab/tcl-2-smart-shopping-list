@@ -248,3 +248,13 @@ input {
   transition-timing-function: ease-in;
 
 }
+
+.deleteButton {
+  position: absolute;
+  top: 5vh;
+  right: 5vh;
+  font-size: 16px;
+  border-radius: 1px;
+  background-color: white;
+
+}
