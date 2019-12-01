@@ -22,7 +22,7 @@ function RouterComponent() {
           <AddItem />
         </Route>
         <Route path="/join">
-          <JoinList />
+          <JoinList token={token}/>
         </Route>
         <Route path="">{token === null ? <Home token={token} setToken={setToken}/> : <FetchItems token={token} setToken={setToken}/>}</Route>
         <Route>

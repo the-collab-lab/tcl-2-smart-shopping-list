@@ -83,6 +83,14 @@ input {
   .joinLink:hover {
     font-size: 11px;
   }
+
+  .newListLink {
+    font-size: 15px;
+  }
+
+  .newListLink:hover {
+    font-size: 16px;
+  }
 }
 
 
