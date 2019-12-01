@@ -5,7 +5,6 @@ import Home from "./Home";
 import FetchItems from "./FetchItems";
 import AddItem from "./AddItem";
 import JoinList from "./JoinList";
-// import DeleteToken from "./DeleteToken";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
 function RouterComponent() {
@@ -30,7 +29,6 @@ function RouterComponent() {
             <FetchItems token={token} setToken={setToken} />
           )}
         </Route>
-        <Route>{/* <DeleteToken token={token} setToken={setToken}/> */}</Route>
       </Switch>
     </Router>
   );
