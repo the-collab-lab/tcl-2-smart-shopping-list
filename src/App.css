@@ -113,7 +113,6 @@ input {
 }
 
 .addForm {
-  /* display: flex; */
   border: 1px solid black;
   justify-content: center;
   align-items: center;
@@ -121,18 +120,14 @@ input {
   padding: 2vh;
   height: 50vh;
   background-color: lightblue;
-  /* position: absolute; */
 }
 
 .addItemButton {
-  /* display: flex; */
   background-color: white;
   border: 2px solid black;
   padding: 1vh;
   margin: 1vh;
   height: 10vh;
-  /* align-self: flex-end; */
-  /* position: relative; */
 }
 
 .addItemButton:hover {
@@ -143,12 +138,10 @@ input {
 }
 
 .itemInputField {
-  /* display: flex; */
   color: black;
 }
 
 .addFormLabel {
-  /* display: flex; */
   color: black;
 }
 
@@ -170,7 +163,6 @@ input {
   width: 50vw;
   display: flex;
   justify-content: center;
-  /* box-sizing: border-box; */
   height: 8vh;
   
 }
