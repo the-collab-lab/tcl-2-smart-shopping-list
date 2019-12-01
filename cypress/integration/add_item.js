@@ -1,6 +1,6 @@
 describe("Add Item To List", function() {
-  beforeEach(function () {
-    window.localStorage.setItem('uniqueToken', 'token1234')
+  beforeEach(function() {
+    window.localStorage.setItem("uniqueToken", "token1234");
   });
 
   it("Checks that entered items are added to list", function() {
@@ -28,7 +28,7 @@ describe("Add Item To List", function() {
 
   it("Selects correct frequency button", function() {
     cy.visit("/add");
-    cy.get("#soonButton").should("have.value", "soon");
+    cy.get("#soonButton").should("have.value", "7");
   });
 
   it("Checks that the selected frequency button get focused", function() {

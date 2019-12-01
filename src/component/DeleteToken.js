@@ -1,13 +1,12 @@
-import React from "react"
+import React from "react";
+import { Redirect } from "react-router-dom";
 
-const DeleteToken = ({token, setToken}) => {
-
+const DeleteToken = ({ token, setToken }) => {
   const onButtonClickHandler = () => {
-    localStorage.removeItem("uniqueToken")
-    setToken(localStorage.getItem("uniqueToken"))
+    localStorage.removeItem("uniqueToken");
+    setToken(null);
+    return <Redirect to="" />;
   };
-
-
 
   return (
     <React.Fragment>
@@ -16,6 +15,6 @@ const DeleteToken = ({token, setToken}) => {
       </button>
     </React.Fragment>
   );
-}
+};
 
-export default DeleteToken
+export default DeleteToken;

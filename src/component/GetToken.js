@@ -3,7 +3,7 @@ import { Redirect } from "react-router-dom";
 
 import getToken from "../token";
 
-const GetToken = ({token, setToken}) => {
+const GetToken = ({ token, setToken }) => {
   // go to list if there is already a token
 
   // console.log(token.value !== undefined)
@@ -13,21 +13,18 @@ const GetToken = ({token, setToken}) => {
   //   return <Redirect to="/list" />;
   // }
 
-
   // const renderRedirect = () => {
   //   if (token !== null) {
   //     console.log("render redirect");
   //     return <Redirect to="/" />;
   //   }
   // };
-    const onButtonClickHandler = () => {
-      const uniqueToken = getToken();
-      localStorage.setItem("uniqueToken", uniqueToken);
-      setToken(localStorage.getItem("uniqueToken"))
-      return <Redirect to="/list" />;  
-    };
-
-
+  const onButtonClickHandler = () => {
+    const uniqueToken = getToken();
+    localStorage.setItem("uniqueToken", uniqueToken);
+    setToken(localStorage.getItem("uniqueToken"));
+    return <Redirect to="/list" />;
+  };
 
   return (
     <React.Fragment>
