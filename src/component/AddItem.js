@@ -4,7 +4,7 @@ import "../App.css";
 
 const AddItem = ({ firestore }) => {
   const [name, setName] = useState("");
-  const [frequency, setFrequency] = useState(14);
+  const [frequency, setFrequency] = useState("pretty-soon");
   const uniqueToken = localStorage.getItem("uniqueToken");
 
   //   Write item to Firebase setting uniqueToken as document name
@@ -59,8 +59,8 @@ const AddItem = ({ firestore }) => {
           type="radio"
           id="soonButton"
           name="frequencyButtons"
-          value="soon"
-          checked={frequency === 7}
+          value="7"
+          checked={frequency === "soon"}
           onChange={handleOptionChange}
         />
         <label htmlFor="soonButton" id="soonButton">
@@ -71,8 +71,8 @@ const AddItem = ({ firestore }) => {
           type="radio"
           id="prettySoonButton"
           name="frequencyButtons"
-          value="pretty-soon"
-          checked={frequency === 14}
+          value="14"
+          checked={frequency === "pretty-soon"}
           onChange={handleOptionChange}
         />
         <label htmlFor="prettySoonButton" id="prettySoonButton">
@@ -83,8 +83,8 @@ const AddItem = ({ firestore }) => {
           type="radio"
           id="notSoonButton"
           name="frequencyButtons"
-          value="not-soon"
-          checked={frequency === 30}
+          value="30"
+          checked={frequency === "not-soon"}
           onChange={handleOptionChange}
         />
         <label htmlFor="notSoonButton" id="notSoonButton">
