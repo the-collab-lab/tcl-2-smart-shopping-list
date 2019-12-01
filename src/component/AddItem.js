@@ -20,7 +20,7 @@ const AddItem = ({ firestore }) => {
       .collection("items")
       .add({
         name: name,
-        frequency: frequency
+        frequency: +frequency
       });
   };
 
