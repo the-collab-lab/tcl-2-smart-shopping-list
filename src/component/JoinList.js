@@ -63,7 +63,6 @@ const JoinList = ({ firestore }) => {
           Join List
         </button>
       </form>
-      <br></br>
 
       <p>Nevermind! <a href="/" className="newListLink">Start a New List</a></p>
     </div>

@@ -84,6 +84,9 @@ input {
   border-radius: 2px;
   background-color: white;
   padding: 1vh;
+  position: relative;
+  top: 10vh;
+  left: -20vw;
 
 }
 
