@@ -6,12 +6,10 @@ import { Link } from 'react-router-dom'
 
 function Navbar() {
     return (
-        <React.Fragment>
             <div className="Navbar">
                 <Link className="NavItem" to="/list">List</Link>
                 <Link className="NavItem" to="/add">Add</Link>
             </div>
-        </React.Fragment >
     )
 }
 

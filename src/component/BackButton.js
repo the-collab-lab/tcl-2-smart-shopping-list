@@ -6,11 +6,9 @@ import { Link } from 'react-router-dom'
 
 function BackButton() {
     return (
-        <React.Fragment>
             <div className="BackButton" data-cy="Back">
                 <Link className="BackButton_List" to="/list">&#9756;</Link>
             </div>
-        </React.Fragment >
     )
 }
 
