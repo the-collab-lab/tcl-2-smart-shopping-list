@@ -1,13 +1,13 @@
 import React from "react";
 import { Redirect } from "react-router-dom";
 import { FirestoreCollection } from "react-firestore";
-import Navbar from "./Navbar"
-import DeleteToken from "./DeleteToken"
+import Navbar from "./Navbar";
+import DeleteToken from "./DeleteToken";
 
 // ** NOTES **
 // need to update timestamp settings with DB
 
-const FetchItems = (token, setToken) => {
+const FetchItems = ({ token, setToken }) => {
   // console.log(token)
   // console.log(token.value)
   // console.log(token === undefined)
@@ -15,7 +15,7 @@ const FetchItems = (token, setToken) => {
   // console.log(token === null)
   // console.log(!token)
   if (!token) {
-    console.log("i'm supposed to go home")
+    console.log("i'm supposed to go home");
     return <Redirect to="/" />;
   }
 
@@ -45,7 +45,7 @@ const FetchItems = (token, setToken) => {
                 </li>
               ))}
             </ul>
-            <DeleteToken token={token} setToken={setToken}/>
+            <DeleteToken token={token} setToken={setToken} />
             <Navbar />
           </div>
         );
