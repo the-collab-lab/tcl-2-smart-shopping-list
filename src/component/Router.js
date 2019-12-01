@@ -12,12 +12,6 @@ function RouterComponent() {
 
   return (
     <Router>
-      <Link to="/list">List</Link>
-      <Link to="/add">Add</Link>
-      {/* For next week we will take these and move them 
-            to a nav component, and then we will import that nav
-            into the FetchItems component */}
-
       <Switch>
         <Route path="/list">
           <FetchItems />

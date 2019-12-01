@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { withFirestore } from "react-firestore";
 import "../App.css";
+import Navbar from "./Navbar"
+import BackButton from "./BackButton"
 
 const AddItem = ({ firestore }) => {
   const [name, setName] = useState("");
@@ -41,61 +43,66 @@ const AddItem = ({ firestore }) => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <label>
-        New item:
-        <input
-          value={name}
-          type="text"
-          id="name"
-          onChange={handleChange}
-          className="inputField"
-        />
-      </label>
 
-      <div className="frequencyButtons">
-        <p>How soon are you likely to buy it again?</p>
-        <input
-          type="radio"
-          id="soonButton"
-          name="frequencyButtons"
-          value="7"
-          checked={frequency === "soon"}
-          onChange={handleOptionChange}
-        />
-        <label htmlFor="soonButton" id="soonButton">
-          Soon
-        </label>
+    <React.Fragment>
+      <BackButton />
+        <form onSubmit={handleSubmit}>
+          <label className="addFormLabel">
+            New item:
+            <input
+              value={name}
+              type="text"
+              id="name"
+              onChange={handleChange}
+              className="inputField"
+            />
+          </label>
 
-        <input
-          type="radio"
-          id="prettySoonButton"
-          name="frequencyButtons"
-          value="14"
-          checked={frequency === "pretty-soon"}
-          onChange={handleOptionChange}
-        />
-        <label htmlFor="prettySoonButton" id="prettySoonButton">
-          Pretty Soon
-        </label>
+          <div className="frequencyButtons">
+            <p>How soon are you likely to buy it again?</p>
+            <input
+              type="radio"
+              id="soonButton"
+              name="frequencyButtons"
+              value="7"
+              checked={frequency === "soon"}
+              onChange={handleOptionChange}
+            />
+            <label htmlFor="soonButton" id="soonButton">
+              Soon
+            </label>
 
-        <input
-          type="radio"
-          id="notSoonButton"
-          name="frequencyButtons"
-          value="30"
-          checked={frequency === "not-soon"}
-          onChange={handleOptionChange}
-        />
-        <label htmlFor="notSoonButton" id="notSoonButton">
-          Not Soon
-        </label>
-      </div>
+            <input
+              type="radio"
+              id="prettySoonButton"
+              name="frequencyButtons"
+              value="14"
+              checked={frequency === "pretty-soon"}
+              onChange={handleOptionChange}
+            />
+            <label htmlFor="prettySoonButton" id="prettySoonButton">
+              Pretty Soon
+            </label>
 
-      <button onClick={handleSubmit} className="addItemButton">
-        Add Item
-      </button>
-    </form>
+            <input
+              type="radio"
+              id="notSoonButton"
+              name="frequencyButtons"
+              value="30"
+              checked={frequency === "not-soon"}
+              onChange={handleOptionChange}
+            />
+            <label htmlFor="notSoonButton" id="notSoonButton">
+              Not Soon
+            </label>
+          </div>
+
+          <button onClick={handleSubmit} className="addItemButton">
+            Add Item
+          </button>
+        </form>
+      <Navbar />
+    </React.Fragment>
   );
 };
 
