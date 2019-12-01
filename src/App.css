@@ -70,22 +70,22 @@ input {
   width: 90%;
 }
 
+.joinLink:hover {
+  font-size: 26px;
+  box-shadow: 1px 1px 2px black;
+}
+
 @media screen and (max-width: 700px) {
   .joinLink {
     font-size: 10px;
   }
 
-  .joinLink {
+  .joinLink:hover {
     font-size: 11px;
   }
 }
 
-.joinLink:hover {
-  font-size: 26px;
-  box-shadow: 1px 1px 2px black;
-  
 
-}
 
 .newListLink {
   color: black;
