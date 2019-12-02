@@ -8,12 +8,7 @@ import DeleteToken from "./DeleteToken";
 // need to update timestamp settings with DB
 
 const FetchItems = ({ token, setToken }) => {
-  // console.log(token)
-  // console.log(token.value)
-  // console.log(token === undefined)
-  // console.log(token.value === undefined)
-  // console.log(token === null)
-  // console.log(!token)
+
   if (!token) {
     console.log("i'm supposed to go home");
     return <Redirect to="/" />;
