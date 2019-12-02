@@ -1,5 +1,7 @@
 describe("Show the back button", function() {
       it('Verifies that the back button is on the add item view', function() {
+        cy.visit("/");
+        cy.get(".tokenButton").click();
         cy.visit('/add')
         cy.get('[data-cy=Back]').click()
         cy.url().should('include', '/list')
