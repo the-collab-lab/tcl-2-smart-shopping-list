@@ -1,28 +1,34 @@
 // This page uses the React Router library to make links to navigate from page to page
-import React from "react";
+import React, { useState } from "react";
 import "../App.css";
 import Home from "./Home";
 import FetchItems from "./FetchItems";
 import AddItem from "./AddItem";
 import JoinList from "./JoinList";
-import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
 function RouterComponent() {
-  const checkToken = localStorage.getItem("uniqueToken");
+  const [token, setToken] = useState(localStorage.getItem("uniqueToken"));
 
   return (
     <Router>
       <Switch>
         <Route path="/list">
-          <FetchItems />
+          <FetchItems token={token} setToken={setToken} />
         </Route>
         <Route path="/add">
           <AddItem />
         </Route>
         <Route path="/join">
-          <JoinList />
+          <JoinList token={token}/>
         </Route>
-        <Route path="">{checkToken === null ? <Home /> : <FetchItems />}</Route>
+        <Route path="">
+          {token === null ? (
+            <Home token={token} setToken={setToken} />
+          ) : (
+            <FetchItems token={token} setToken={setToken} />
+          )}
+        </Route>
       </Switch>
     </Router>
   );
