@@ -41,7 +41,7 @@ const FetchItems = ({ token, setToken }) => {
             <ul>
               {data.map(item => (
                 <li key={item.id}>
-                  <div className={item.name} data-cy={item.name}>{item.name}</div>
+                  <div className={item.name}>{item.name}</div>
                 </li>
               ))}
             </ul>

@@ -3,9 +3,9 @@ describe("Add item with token", function() {
     cy.visit("/");
     cy.get(".tokenButton").click();
     cy.contains("Add").click();
-    cy.get(".inputField").type("New Cypress Item");
+    cy.get(".inputField").type("new cypress item");
     cy.get(".addItemButton").click();
     cy.contains("List").click();
-    expect(cy.contains("New Cypress Item"));
+    expect(cy.contains("new cypress item"));
   });
 });

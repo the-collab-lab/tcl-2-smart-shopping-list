@@ -7,15 +7,13 @@ describe("Show a list", function() {
 		cy.url().should('include', '/list')
 	});
 
-    it("Checks that new item has lowercase classname", function() {
-      window.localStorage.setItem("uniqueToken", "token1234");
-      // cy.visit("/");
-      // cy.get(".tokenButton").click();
-      cy.visit("/add");
-      cy.get(".inputField").type("Toast");
+    it("Checks that new item is all lowercase", function() {
+      cy.visit("/");
+      cy.get(".tokenButton").click();
+      cy.contains("Add").click();
+      cy.get(".inputField").type("Cream Cheese");
       cy.get(".addItemButton").click();
-
-      cy.visit("/list");
-      cy.contains("toast");
+      cy.contains("List").click();
+      expect(cy.contains("cream cheese"));
     });
 });
