@@ -4,13 +4,13 @@ describe("Show a list", function() {
     cy.contains("List").click();
     cy.url().should("include", "/list");
   });
-  //   it("Checks that new item has lowercase classname", function() {
-  //     cy.visit("/add");
-  //     cy.get(".inputField").type("Strawberryaiquiri");
-  //     // cy.get("#soonButton").click({ force: true });
-  //     cy.get(".addItemButton").click();
+  it("Checks that new item has lowercase classname", function() {
+    cy.visit("/add");
+    cy.get(".inputField").type("Strawberry Daiquiri");
+    cy.get("#soonButton").click({ force: true });
+    cy.get(".addItemButton").click();
 
-  //     // cy.visit("/list");
-  //     // cy.get(".strawberry daiquiri").contains("strawberry daiquiri");
-  //   });
+    // cy.visit("/list");
+    // cy.get(".strawberry daiquiri").contains("strawberry daiquiri");
+  });
 });
