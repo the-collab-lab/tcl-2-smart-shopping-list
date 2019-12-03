@@ -10,7 +10,7 @@ const AddItem = ({ firestore }) => {
   const uniqueToken = localStorage.getItem("uniqueToken");
 
   //   Write item to Firebase setting uniqueToken as document name
-  const addItem = (name, frequency) => {
+  const addItem = (normalizedName, frequency) => {
     firestore
       .collection("lists")
       .doc(uniqueToken)
@@ -21,7 +21,7 @@ const AddItem = ({ firestore }) => {
       .doc(uniqueToken)
       .collection("items")
       .add({
-        name: name,
+        name: normalizedName,
         frequency: +frequency
       });
   };
@@ -38,7 +38,10 @@ const AddItem = ({ firestore }) => {
   //   Trigger addItem function when "Add Item" button is clicked
   const handleSubmit = event => {
     event.preventDefault();
-    addItem(name, frequency);
+    // function to normalize item
+    const normalizedName = name.toLowerCase();
+
+    addItem(normalizedName, frequency);
     setName("");
   };
 
