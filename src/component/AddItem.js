@@ -6,11 +6,11 @@ import BackButton from "./BackButton";
 
 const AddItem = ({ firestore }) => {
   const [name, setName] = useState("");
-  const [frequency, setFrequency] = useState("14");
+  const [numberOfDays, setNumberOfDays] = useState("14");
   const uniqueToken = localStorage.getItem("uniqueToken");
 
   //   Write item to Firebase setting uniqueToken as document name
-  const addItem = (normalizedName, frequency) => {
+  const addItem = (normalizedName, numberOfDays) => {
     firestore
       .collection("lists")
       .doc(uniqueToken)
@@ -22,7 +22,7 @@ const AddItem = ({ firestore }) => {
       .collection("items")
       .add({
         name: normalizedName,
-        frequency: +frequency
+        numberOfDays: +numberOfDays
       });
   };
 
@@ -32,7 +32,7 @@ const AddItem = ({ firestore }) => {
   };
 
   const handleOptionChange = event => {
-    setFrequency(event.target.value);
+    setNumberOfDays(event.target.value);
   };
 
   //   Trigger addItem function when "Add Item" button is clicked
@@ -41,7 +41,7 @@ const AddItem = ({ firestore }) => {
     // function to normalize item
     const normalizedName = name.toLowerCase();
 
-    addItem(normalizedName, frequency);
+    addItem(normalizedName, numberOfDays);
     setName("");
   };
 
@@ -60,14 +60,14 @@ const AddItem = ({ firestore }) => {
           />
         </label>
 
-        <div className="frequencyButtons">
+        <div className="daysButtons">
           <p>How soon are you likely to buy it again?</p>
           <input
             type="radio"
             id="soonButton"
-            name="frequencyButtons"
+            name="daysButtons"
             value="7"
-            checked={frequency === "7"}
+            checked={numberOfDays === "7"}
             onChange={handleOptionChange}
           />
           <label htmlFor="soonButton" id="soonButton">
@@ -77,9 +77,9 @@ const AddItem = ({ firestore }) => {
           <input
             type="radio"
             id="prettySoonButton"
-            name="frequencyButtons"
+            name="daysButtons"
             value="14"
-            checked={frequency === "14"}
+            checked={numberOfDays === "14"}
             onChange={handleOptionChange}
           />
           <label htmlFor="prettySoonButton" id="prettySoonButton">
@@ -89,9 +89,9 @@ const AddItem = ({ firestore }) => {
           <input
             type="radio"
             id="notSoonButton"
-            name="frequencyButtons"
+            name="daysButtons"
             value="30"
-            checked={frequency === "30"}
+            checked={numberOfDays === "30"}
             onChange={handleOptionChange}
           />
           <label htmlFor="notSoonButton" id="notSoonButton">
