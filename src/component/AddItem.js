@@ -11,38 +11,33 @@ const AddItem = ({ firestore }) => {
 
   //   Write item to Firebase setting uniqueToken as document name
   const addItem = (normalizedName, numberOfDays) => {
+    // adds new items collection to database
     firestore
       .collection("lists")
       .doc(uniqueToken)
       .set({ items: "" });
 
-    firestore
+    // reference path to specific document from items collection
+    // sets document ID equal to item name
+    const itemsDocRef = firestore
       .collection("lists")
       .doc(uniqueToken)
       .collection("items")
-      .add({
-        name: normalizedName,
-        numberOfDays: +numberOfDays
-      });
-  };
+      .doc(normalizedName);
 
-  const checkDuplicate = (normalizedName, numberOfDays) => {
-    firestore
-      .collection("lists")
-      .doc(uniqueToken)
-      .collection("items")
-      .get()
-      .then(function(querySnapshot) {
-        querySnapshot.forEach(function(doc) {
-          if (doc.id.name === normalizedName) {
-            console.log("exists");
-          } else {
-            console.log("truth");
-            return true;
-          }
-          console.log(doc.id, "=>", doc.data());
+    // checks whether an existing doc ID is equal to new item name
+    itemsDocRef.get().then(docSnapshot => {
+      if (docSnapshot.exists) {
+        itemsDocRef.onSnapshot(doc => {
+          alert("already exists");
         });
-      });
+      } else {
+        itemsDocRef.set({
+          name: normalizedName,
+          numberOfDays: +numberOfDays
+        });
+      }
+    });
   };
 
   //   Update state whenever user input changes
@@ -54,10 +49,13 @@ const AddItem = ({ firestore }) => {
     setNumberOfDays(event.target.value);
   };
 
+  // function triggered at handleSubmit -
+  // normalizes item name so that it has all lowercase
+  // letters and no special characters (spaces ok)
   const normalizeName = name => {
     name = name.toLowerCase();
     let normalizedName = "";
-    let alpha = "abcdefghijklmnopqrstuvwxyz";
+    let alpha = "abcdefghijklmnopqrstuvwxyz ";
     for (let i = 0; i < name.length; i++) {
       if (alpha.includes(name[i])) {
         normalizedName += name.slice(i, i + 1);
@@ -69,11 +67,7 @@ const AddItem = ({ firestore }) => {
   const handleSubmit = event => {
     event.preventDefault();
     let normalizedName = normalizeName(name);
-    let duplicateTruth = checkDuplicate(normalizedName, numberOfDays);
-    if (duplicateTruth === true) {
-      addItem(normalizedName, numberOfDays);
-    }
-
+    addItem(normalizedName, numberOfDays);
     setName("");
   };
 
