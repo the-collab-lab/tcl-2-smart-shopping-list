@@ -26,6 +26,25 @@ const AddItem = ({ firestore }) => {
       });
   };
 
+  const checkDuplicate = (normalizedName, numberOfDays) => {
+    firestore
+      .collection("lists")
+      .doc(uniqueToken)
+      .collection("items")
+      .get()
+      .then(function(querySnapshot) {
+        querySnapshot.forEach(function(doc) {
+          if (doc.id.name === normalizedName) {
+            console.log("exists");
+          } else {
+            console.log("truth");
+            return true;
+          }
+          console.log(doc.id, "=>", doc.data());
+        });
+      });
+  };
+
   //   Update state whenever user input changes
   const handleChange = event => {
     setName(event.target.value);
@@ -37,20 +56,24 @@ const AddItem = ({ firestore }) => {
 
   const normalizeName = name => {
     name = name.toLowerCase();
-    let normalizedName = ''
-    let alpha = 'abcdefghijklmnopqrstuvwxyz'
-    for (let i=0; i<name.length; i++){
-      if (alpha.includes(name[i])){
-       normalizedName += name.slice(i, i+1)
+    let normalizedName = "";
+    let alpha = "abcdefghijklmnopqrstuvwxyz";
+    for (let i = 0; i < name.length; i++) {
+      if (alpha.includes(name[i])) {
+        normalizedName += name.slice(i, i + 1);
       }
     }
-    return normalizedName
-  }
+    return normalizedName;
+  };
   //   Trigger addItem function when "Add Item" button is clicked
   const handleSubmit = event => {
     event.preventDefault();
     let normalizedName = normalizeName(name);
-    addItem(normalizedName, numberOfDays);
+    let duplicateTruth = checkDuplicate(normalizedName, numberOfDays);
+    if (duplicateTruth === true) {
+      addItem(normalizedName, numberOfDays);
+    }
+
     setName("");
   };
 

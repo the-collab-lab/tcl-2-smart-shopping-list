@@ -14,6 +14,16 @@ describe("Show a list", function() {
     cy.get(".inputField").type("Cream Cheese");
     cy.get(".addItemButton").click();
     cy.contains("List").click();
-    expect(cy.contains("cream cheese"));
+    expect(cy.contains("creamcheese"));
+  });
+
+  it("Checks that special characters are removed from name", function() {
+    cy.visit("/");
+    cy.get(".tokenButton").click();
+    cy.contains("Add").click();
+    cy.get(".inputField").type("Cream//.Cheese");
+    cy.get(".addItemButton").click();
+    cy.contains("List").click();
+    expect(cy.contains("creamcheese"));
   });
 });
