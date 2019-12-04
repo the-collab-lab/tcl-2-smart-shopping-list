@@ -35,12 +35,21 @@ const AddItem = ({ firestore }) => {
     setNumberOfDays(event.target.value);
   };
 
+  const normalizeName = name => {
+    name = name.toLowerCase();
+    let normalizedName = ''
+    let alpha = 'abcdefghijklmnopqrstuvwxyz'
+    for (let i=0; i<name.length; i++){
+      if (alpha.includes(name[i])){
+       normalizedName += name.slice(i, i+1)
+      }
+    }
+    return normalizedName
+  }
   //   Trigger addItem function when "Add Item" button is clicked
   const handleSubmit = event => {
     event.preventDefault();
-    // function to normalize item
-    const normalizedName = name.toLowerCase();
-
+    let normalizedName = normalizeName(name);
     addItem(normalizedName, numberOfDays);
     setName("");
   };
