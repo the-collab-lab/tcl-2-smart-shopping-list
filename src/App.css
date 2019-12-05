@@ -240,3 +240,34 @@ input {
   transition: 0.1s;
   transition-timing-function: ease-in;
 }
+
+.duplicateMessage {
+  position: fixed;
+  top: 15%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  height: fit-content;
+  width: fit-content;
+  padding: 10px;
+  margin: auto;
+  border-radius: 20px;
+  background: #ffd800;
+  animation: slide 2.5s;
+  opacity: 0.7;
+}
+
+@keyframes slide {
+  0% {
+    top: -10%;
+  }
+  25% {
+    top: 15%;
+  }
+  75% {
+    top: 15%;
+  }
+  100% {
+    top: -10%;
+  }
+}

@@ -3,10 +3,13 @@ import { withFirestore } from "react-firestore";
 import "../App.css";
 import Navbar from "./Navbar";
 import BackButton from "./BackButton";
+import DuplicateMessage from "./DuplicateMessage";
 
 const AddItem = ({ firestore }) => {
   const [name, setName] = useState("");
   const [numberOfDays, setNumberOfDays] = useState("14");
+  const [duplicate, setDuplicate] = useState(false);
+
   const uniqueToken = localStorage.getItem("uniqueToken");
 
   //   Write item to Firebase setting uniqueToken as document name
@@ -29,7 +32,10 @@ const AddItem = ({ firestore }) => {
     itemsDocRef.get().then(docSnapshot => {
       if (docSnapshot.exists) {
         itemsDocRef.onSnapshot(doc => {
-          alert("already exists");
+          setDuplicate(true);
+          setTimeout(function() {
+            setDuplicate(false);
+          }, 2500);
         });
       } else {
         itemsDocRef.set({
@@ -63,6 +69,7 @@ const AddItem = ({ firestore }) => {
     }
     return normalizedName;
   };
+
   //   Trigger addItem function when "Add Item" button is clicked
   const handleSubmit = event => {
     event.preventDefault();
@@ -130,6 +137,7 @@ const AddItem = ({ firestore }) => {
         </button>
       </form>
       <Navbar />
+      {duplicate ? <DuplicateMessage /> : null}
     </React.Fragment>
   );
 };
