@@ -1,18 +1,38 @@
-import React from "react";
+import React, { useState } from "react";
 import { Redirect } from "react-router-dom";
-import { FirestoreCollection } from "react-firestore";
+import { FirestoreCollection, withFirestore } from "react-firestore";
 import Navbar from "./Navbar";
 import DeleteToken from "./DeleteToken";
 
 // ** NOTES **
 // need to update timestamp settings with DB
 
-const FetchItems = ({ token, setToken }) => {
+const FetchItems = ({ token, setToken, firestore }) => {
+  const [empty, setEmpty] = useState(true);
+
+  const checkForEmpty = () => {
+    // check database and return true or false depending on empty OR set state
+
+    firestore
+      .collection('lists')
+      .doc(token)
+      .collection('items')
+      .get().then(items => {
+        if (items.empty) {
+          console.log('There are no items!');
+        } else {
+          console.log('There are items')
+        }
+      })
+  }
 
   if (!token) {
-    console.log("i'm supposed to go home");
     return <Redirect to="/" />;
   }
+
+  // if (empty) {
+  //   // return <button function component>
+  // }
 
   // Token stored in user's local storage
   const uniqueToken = localStorage.getItem("uniqueToken");
@@ -42,6 +62,7 @@ const FetchItems = ({ token, setToken }) => {
             </ul>
             <DeleteToken token={token} setToken={setToken} />
             <Navbar />
+            { checkForEmpty() }
           </div>
         );
       }}
@@ -49,4 +70,4 @@ const FetchItems = ({ token, setToken }) => {
   );
 };
 
-export default FetchItems;
+export default withFirestore(FetchItems);
