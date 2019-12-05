@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Redirect } from "react-router-dom";
+import { Redirect, Link } from "react-router-dom";
 import { FirestoreCollection, withFirestore } from "react-firestore";
 import Navbar from "./Navbar";
 import DeleteToken from "./DeleteToken";
@@ -20,8 +20,13 @@ const FetchItems = ({ token, setToken, firestore }) => {
       .get().then(items => {
         if (items.empty) {
           console.log('There are no items!');
+          setEmpty(true)
+          console.log(empty)
+
         } else {
           console.log('There are items')
+          setEmpty(false)
+          console.log(empty)
         }
       })
   }
@@ -30,9 +35,12 @@ const FetchItems = ({ token, setToken, firestore }) => {
     return <Redirect to="/" />;
   }
 
-  // if (empty) {
-  //   // return <button function component>
-  // }
+  if (empty) {
+    // return <button function component>
+    return (
+      <Link className="emptyAddItemButton" to="/add">Add your first Item</Link>
+    )
+  }
 
   // Token stored in user's local storage
   const uniqueToken = localStorage.getItem("uniqueToken");
@@ -53,6 +61,7 @@ const FetchItems = ({ token, setToken, firestore }) => {
         ) : (
           <div>
             <h2>Items</h2>
+
             <ul>
               {data.map(item => (
                 <li key={item.id}>
@@ -60,6 +69,7 @@ const FetchItems = ({ token, setToken, firestore }) => {
                 </li>
               ))}
             </ul>
+            
             <DeleteToken token={token} setToken={setToken} />
             <Navbar />
             { checkForEmpty() }
