@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { withFirestore } from "react-firestore";
-import { Redirect } from 'react-router-dom'
+import { Redirect, Link } from 'react-router-dom'
 
 const JoinList = ({ firestore }) => {
   const [token, setToken] = useState("");
@@ -41,9 +41,7 @@ const JoinList = ({ firestore }) => {
     event.preventDefault();
     checkTokenExists(token);
     setToken("");
-
   }
-
 
   return (
     <div>
@@ -63,8 +61,8 @@ const JoinList = ({ firestore }) => {
           Join List
         </button>
       </form>
-
-      <p>Nevermind! <a href="/" className="newListLink">Start a New List</a></p>
+      <p> - OR - </p>
+      <Link to="/" className="newListLink">Start a New List</Link>
     </div>
   )
 }
