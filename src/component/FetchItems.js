@@ -4,9 +4,6 @@ import { FirestoreCollection, withFirestore } from "react-firestore";
 import Navbar from "./Navbar";
 import DeleteToken from "./DeleteToken";
 
-// ** NOTES **
-// need to update timestamp settings with DB
-
 const FetchItems = ({ token, setToken, firestore }) => {
   const [empty, setEmpty] = useState(true);
 

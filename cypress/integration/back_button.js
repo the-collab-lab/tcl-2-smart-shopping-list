@@ -9,6 +9,3 @@ describe("Show the back button", function() {
     cy.url().should('include', '/list')
   });
 });
-  
-
-  

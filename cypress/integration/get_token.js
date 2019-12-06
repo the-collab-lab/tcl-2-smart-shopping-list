@@ -19,4 +19,3 @@ describe("Get token functionality", function() {
     });
   });
 });
-  
