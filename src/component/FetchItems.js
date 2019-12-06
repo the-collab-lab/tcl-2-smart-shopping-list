@@ -33,7 +33,7 @@ const FetchItems = ({ token, setToken, firestore }) => {
         path={concatPath}
         // optional more parameters (sort, limit, filter)
         render={({ isLoading, data }) => {
-          // if data is taking too long you can redirect or alert user it's still loading (i think)
+          // Renders according to whether or not the list is empty
           if (isLoading) {
             return <div>Still Loading...</div>
           } else if (empty) {
