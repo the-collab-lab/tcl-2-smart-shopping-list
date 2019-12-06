@@ -31,17 +31,19 @@ const AddItem = ({ firestore }) => {
     // checks whether an existing doc ID is equal to new item name
     itemsDocRef.get().then(docSnapshot => {
       if (docSnapshot.exists) {
+        let timeWindowBeforeRefresh = 2500;
         itemsDocRef.onSnapshot(doc => {
           setDuplicate(true);
           setTimeout(function() {
             setDuplicate(false);
-          }, 2500);
+          }, timeWindowBeforeRefresh);
         });
       } else {
         itemsDocRef.set({
-          name: normalizedName,
+          name: name,
           numberOfDays: +numberOfDays
         });
+        setName("");
       }
     });
   };
@@ -59,11 +61,11 @@ const AddItem = ({ firestore }) => {
   // normalizes item name so that it has all lowercase
   // letters and no special characters (spaces ok)
   const normalizeName = name => {
-    name = name.toLowerCase();
+    name = name.toLowerCase().trim();
     let normalizedName = "";
-    let alpha = "abcdefghijklmnopqrstuvwxyz ";
+    let symbol = `.,;:!?"`;
     for (let i = 0; i < name.length; i++) {
-      if (alpha.includes(name[i])) {
+      if (!symbol.includes(name[i])) {
         normalizedName += name.slice(i, i + 1);
       }
     }
@@ -75,7 +77,6 @@ const AddItem = ({ firestore }) => {
     event.preventDefault();
     let normalizedName = normalizeName(name);
     addItem(normalizedName, numberOfDays);
-    setName("");
   };
 
   return (
