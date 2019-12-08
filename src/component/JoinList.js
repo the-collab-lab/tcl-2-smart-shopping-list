@@ -44,7 +44,7 @@ const JoinList = ({ firestore }) => {
   }
 
   return (
-    <div>
+    <p>
       <form onSubmit={handleSubmit}>
         <label>
           Type in list token:
@@ -61,9 +61,9 @@ const JoinList = ({ firestore }) => {
           Join List
         </button>
       </form>
-      <p> - OR - </p>
+      <span> - OR - </span>
       <Link to="/" className="button-link">Start a New List</Link>
-    </div>
+    </p>
   )
 }
 
