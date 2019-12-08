@@ -7,10 +7,15 @@ import DuplicateMessage from "./DuplicateMessage";
 
 const AddItem = ({ firestore }) => {
   const [name, setName] = useState("");
-  const [numberOfDays, setNumberOfDays] = useState("14");
   const [duplicate, setDuplicate] = useState(false);
 
   const uniqueToken = localStorage.getItem("uniqueToken");
+
+  // consts and state used for the numberOfDays buttons
+  const soon = "7";
+  const prettySoon = "14";
+  const notSoon = "30";
+  const [numberOfDays, setNumberOfDays] = useState(prettySoon);
 
   //   Write item to Firebase setting uniqueToken as document name
   const addItem = (normalizedName, numberOfDays) => {
@@ -100,8 +105,8 @@ const AddItem = ({ firestore }) => {
             type="radio"
             id="soonButton"
             name="daysButtons"
-            value="7"
-            checked={numberOfDays === "7"}
+            value={soon}
+            checked={numberOfDays === soon}
             onChange={handleOptionChange}
           />
           <label htmlFor="soonButton" id="soonButton">
@@ -112,8 +117,8 @@ const AddItem = ({ firestore }) => {
             type="radio"
             id="prettySoonButton"
             name="daysButtons"
-            value="14"
-            checked={numberOfDays === "14"}
+            value={prettySoon}
+            checked={numberOfDays === prettySoon}
             onChange={handleOptionChange}
           />
           <label htmlFor="prettySoonButton" id="prettySoonButton">
@@ -124,8 +129,8 @@ const AddItem = ({ firestore }) => {
             type="radio"
             id="notSoonButton"
             name="daysButtons"
-            value="30"
-            checked={numberOfDays === "30"}
+            value={notSoon}
+            checked={numberOfDays === notSoon}
             onChange={handleOptionChange}
           />
           <label htmlFor="notSoonButton" id="notSoonButton">
