@@ -47,18 +47,18 @@ a, a:visited {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  color: black;
-  border: 2px solid black;
+  color: #000;
+  border: 2px solid #000;
   margin: 1vh;
   padding: 1vh;
-  background-color: white;
+  background-color: #fff;
   font-size: 1rem;
   border-radius: 2px;
 }
 
 .button-link:hover {
   font-size: 1.1rem;
-  box-shadow: 1px 1px 2px black;
+  box-shadow: 1px 1px 2px #000;
   transition: .1s;
   transition-timing-function: ease-in;
   cursor: pointer;
@@ -90,14 +90,14 @@ a, a:visited {
   margin: 1vh;
   opacity: 90%;
   font-size: 0.9rem;
-  border: 2px solid black;
+  border: 2px solid #000;
 }
 
 .frequencyButtons input[type="radio"]:focus + label,
 .frequencyButtons input[type="radio"]:checked + label,
 .frequencyButtons label:hover {
   opacity: 100%;
-  box-shadow: 2px 2px 3px black;
+  box-shadow: 2px 2px 3px #000;
   font-size: 1rem;
   cursor: pointer;
 }
@@ -121,15 +121,15 @@ a, a:visited {
   left: 0;
   justify-content: space-around;
   width: 100vw;
-  background-color: rgb(98, 142, 156);
+  background-color: #628e9c;
 }
 
 .NavItem {
-  color: black;
-  background-color: rgb(98, 142, 156);
+  color: #000;
+  background-color: #628e9c;
   font-size: 1.2rem;
   line-height: 8vh;
-  border: 1px solid burlywood;
+  border: 1px solid #deb887;
   width: 50vw;
   display: flex;
   justify-content: center;
@@ -154,7 +154,7 @@ a, a:visited {
 
 .BackButton_List {
   font-size: 3rem;
-  color: black;
+  color: #000;
   text-decoration: none;
   background: none; 
   border: none;
