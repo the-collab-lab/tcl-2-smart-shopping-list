@@ -10,7 +10,7 @@ const DeleteToken = ({ token, setToken }) => {
 
   return (
     <React.Fragment>
-      <button onClick={onButtonClickHandler} className="deleteButton">
+      <button onClick={onButtonClickHandler} className="button-link delete-button">
         Delete Token
       </button>
     </React.Fragment>

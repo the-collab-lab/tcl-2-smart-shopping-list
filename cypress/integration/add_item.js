@@ -7,7 +7,7 @@ describe("Add Item To List", function() {
     cy.visit("/add");
     cy.get(".inputField").type("New Cypress Item");
 
-    cy.get(".addItemButton").click();
+    cy.get("#addItemButton").click();
   });
 
   it("Input field accepts input", function() {
@@ -21,7 +21,7 @@ describe("Add Item To List", function() {
     cy.visit("/add");
     cy.get(".inputField").type("marshmallows");
 
-    cy.get(".addItemButton").click();
+    cy.get("#addItemButton").click();
 
     cy.get(".inputField").should("have.value", "");
   });
