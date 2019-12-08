@@ -14,7 +14,7 @@ const GetToken = ({ token, setToken }) => {
 
   return (
     <React.Fragment>
-      <button onClick={onButtonClickHandler} className="tokenButton">
+      <button onClick={onButtonClickHandler} className="button-link">
         Get Token
       </button>
     </React.Fragment>

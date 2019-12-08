@@ -57,12 +57,12 @@ const JoinList = ({ firestore }) => {
           />  
         </label>
         { renderRedirect() }
-        <button onClick={handleSubmit} className="joinListButton">
+        <button onClick={handleSubmit} className="button-link">
           Join List
         </button>
       </form>
       <p> - OR - </p>
-      <Link to="/" className="newListLink">Start a New List</Link>
+      <Link to="/" className="button-link">Start a New List</Link>
     </div>
   )
 }

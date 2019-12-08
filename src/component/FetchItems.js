@@ -34,7 +34,7 @@ const FetchItems = ({ token, setToken, firestore }) => {
           if (isLoading) {
             return <div>Still Loading...</div>
           } else if (empty) {
-            return <Link className="emptyAddItemButton" to="/add">Add your first Item</Link>
+            return <Link className="button-link" to="/add">Add your first Item</Link>
           } else {
             return (
               <div>
