@@ -1,3 +1,5 @@
+                           /* universal app stylings */
+
 * {
   box-sizing: border-box;
   margin: 0;
@@ -64,6 +66,8 @@ a, a:visited {
   cursor: pointer;
 }
 
+                       /* Home View Specific Styling */
+
 .homeWrap {
   display: flex;
   align-items: center;
@@ -72,6 +76,25 @@ a, a:visited {
   width: 50vw;
   justify-content: space-around;
 }
+
+                      /* Join List View Specific Styling */
+
+
+                      /* List View Specific Styling */
+
+.delete-button {
+  position: absolute;
+  top: 5vh;
+  right: 5vh;
+  font-size: 1rem;
+}
+
+.delete-button:hover {
+  font-size: 1.1rem;
+}
+
+
+                      /* Add View Specific Styling */
 
 .frequencyButtons {
   margin-top: 5vh;
@@ -114,6 +137,34 @@ a, a:visited {
   background-color: #ff165d;
 }
 
+.BackButton {
+  display: flex;
+  position: absolute;
+  top: 1vh;
+  left: 4vh;
+  background: none; 
+}
+
+.BackButton_List {
+  font-size: 3rem;
+  color: #000;
+  text-decoration: none;
+  background: none; 
+  border: none;
+}
+
+.BackButton_List:hover {
+  font-size: 3rem;
+  transform: scale(1.2);
+  transition: .1s;
+  transition-timing-function: ease-in;
+  box-shadow: none;
+}
+
+                   /* Other Components/Views Specific Styling */
+
+                      /* Navbar Component Styling */
+
 .Navbar {
   display: flex;
   position: fixed;
@@ -144,37 +195,6 @@ a, a:visited {
   transition-timing-function: ease-in;
 }
 
-.BackButton {
-  display: flex;
-  position: absolute;
-  top: 1vh;
-  left: 4vh;
-  background: none; 
-}
 
-.BackButton_List {
-  font-size: 3rem;
-  color: #000;
-  text-decoration: none;
-  background: none; 
-  border: none;
-}
 
-.BackButton_List:hover {
-  font-size: 3rem;
-  transform: scale(1.2);
-  transition: .1s;
-  transition-timing-function: ease-in;
-  box-shadow: none;
-}
 
-.delete-button {
-  position: absolute;
-  top: 5vh;
-  right: 5vh;
-  font-size: 1rem;
-}
-
-.delete-button:hover {
-  font-size: 1.1rem;
-}

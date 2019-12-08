@@ -14,7 +14,7 @@ describe("Get token functionality", function() {
 
   it("Clicking generate token button stores a string in local storage", function() {
     cy.visit("")
-    cy.get('.tokenButton').click().should(() => {
+    cy.get('#tokenButton').click().should(() => {
         expect(localStorage.getItem('uniqueToken')).to.not.eq(null);
     });
   });

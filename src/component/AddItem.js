@@ -96,7 +96,7 @@ const AddItem = ({ firestore }) => {
           </label>
         </div>
 
-        <button onClick={handleSubmit} className="button-link">
+        <button onClick={handleSubmit} className="button-link" id="addItemButton">
           Add Item
         </button>
       </form>

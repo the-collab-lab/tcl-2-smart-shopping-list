@@ -6,7 +6,7 @@ describe("Show list of items", function() {
 		
 		it("Checks for the 'add first item' button on empty list", function() {
       cy.visit("/list");
-      cy.get(".emptyAddItemButton").click();
+      cy.get("#emptyListAddItem").click();
 		});
 	});
 
@@ -18,7 +18,7 @@ describe("Show list of items", function() {
     it("User sees list after adding an item", function() {
       cy.visit("/add")
       cy.get(".inputField").type("New test item");
-      cy.get(".addItemButton").click();
+      cy.get("#addItemButton").click();
       cy.get('[data-cy=Back]').click();
 			cy.contains("New test item");
 		});
