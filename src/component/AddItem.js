@@ -1,36 +1,36 @@
-import React, { useState } from "react";
-import { withFirestore } from "react-firestore";
-import "../App.css";
-import Navbar from "./Navbar";
-import BackButton from "./BackButton";
-import DuplicateMessage from "./DuplicateMessage";
+import React, { useState } from 'react';
+import { withFirestore } from 'react-firestore';
+import '../App.css';
+import Navbar from './Navbar';
+import BackButton from './BackButton';
+import DuplicateMessage from './DuplicateMessage';
 
 const AddItem = ({ firestore }) => {
-  const [name, setName] = useState("");
+  const [name, setName] = useState('');
   const [duplicate, setDuplicate] = useState(false);
 
-  const uniqueToken = localStorage.getItem("uniqueToken");
+  const uniqueToken = localStorage.getItem('uniqueToken');
 
   // consts and state used for the numberOfDays buttons
-  const soon = "7";
-  const prettySoon = "14";
-  const notSoon = "30";
+  const soon = '7';
+  const prettySoon = '14';
+  const notSoon = '30';
   const [numberOfDays, setNumberOfDays] = useState(prettySoon);
 
   //   Write item to Firebase setting uniqueToken as document name
   const addItem = (normalizedName, numberOfDays) => {
     // adds new items collection to database
     firestore
-      .collection("lists")
+      .collection('lists')
       .doc(uniqueToken)
-      .set({ items: "" });
+      .set({ items: '' });
 
     // reference path to specific document from items collection
     // sets document ID equal to item name
     const itemsDocRef = firestore
-      .collection("lists")
+      .collection('lists')
       .doc(uniqueToken)
-      .collection("items")
+      .collection('items')
       .doc(normalizedName);
 
     // checks whether an existing doc ID is equal to new item name
@@ -46,9 +46,9 @@ const AddItem = ({ firestore }) => {
       } else {
         itemsDocRef.set({
           name: name,
-          numberOfDays: +numberOfDays
+          numberOfDays: +numberOfDays,
         });
-        setName("");
+        setName('');
       }
     });
   };
@@ -67,7 +67,7 @@ const AddItem = ({ firestore }) => {
   // letters and no special characters (spaces ok)
   const normalizeName = name => {
     name = name.toLowerCase().trim();
-    let normalizedName = "";
+    let normalizedName = '';
     let symbol = `.,;:!?"`;
     for (let i = 0; i < name.length; i++) {
       if (!symbol.includes(name[i])) {
@@ -138,7 +138,11 @@ const AddItem = ({ firestore }) => {
           </label>
         </div>
 
-        <button onClick={handleSubmit} className="button-link" id="addItemButton">
+        <button
+          onClick={handleSubmit}
+          className="button-link"
+          id="addItemButton"
+        >
           Add Item
         </button>
       </form>
