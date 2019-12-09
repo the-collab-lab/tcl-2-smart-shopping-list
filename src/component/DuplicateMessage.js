@@ -3,7 +3,7 @@ import React from "react";
 const DuplicateMessage = () => {
   return (
     <div className="duplicateMessage" data-cy="duplicateMessage">
-      <h1>Oops! Item already exists.</h1>
+      <h3>Oops! Item already exists.</h3>
     </div>
   );
 };
