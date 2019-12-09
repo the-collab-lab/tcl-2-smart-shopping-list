@@ -38,4 +38,13 @@ describe("Add Item To List", function() {
       .focused()
       .should("have.id", "soonButton");
   });
+
+  it("Checks for alert message when duplicate item is entered", function() {
+    cy.visit("/add");
+    cy.get(".inputField").type("Cream Cheese");
+    cy.get(".addItemButton").click();
+    cy.get(".inputField").type("Cream Cheese");
+    cy.get(".addItemButton").click();
+    expect(cy.contains("Oops!"));
+  });
 });

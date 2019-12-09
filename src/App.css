@@ -1,11 +1,11 @@
-                           /* universal app stylings */
+/* universal app stylings */
 
 * {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
-  font-size: x-large;
-  font-family: 'PT Sans Narrow', sans-serif;
+  font-size: 30px;
+  font-family: "PT Sans Narrow", sans-serif;
 }
 
 @media screen and (max-width: 700px) {
@@ -41,7 +41,8 @@ input {
   width: 80%;
 }
 
-a, a:visited {
+a,
+a:visited {
   text-decoration: none;
 }
 
@@ -61,12 +62,12 @@ a, a:visited {
 .button-link:hover {
   font-size: 1.1rem;
   box-shadow: 1px 1px 2px #000;
-  transition: .1s;
+  transition: 0.1s;
   transition-timing-function: ease-in;
   cursor: pointer;
 }
 
-                       /* Home View Specific Styling */
+/* Home View Specific Styling */
 
 .homeWrap {
   display: flex;
@@ -77,10 +78,9 @@ a, a:visited {
   justify-content: space-around;
 }
 
-                      /* Join List View Specific Styling */
+/* Join List View Specific Styling */
 
-
-                      /* List View Specific Styling */
+/* List View Specific Styling */
 
 .delete-button {
   position: absolute;
@@ -93,21 +93,19 @@ a, a:visited {
   font-size: 1.1rem;
 }
 
+/* Add View Specific Styling */
 
-                      /* Add View Specific Styling */
-
-.frequencyButtons {
+.daysButtons {
   margin-top: 5vh;
 }
 
-/* Removes standard radio buttons */
-.frequencyButtons input[type="radio"] {
+.daysButtons input[type="radio"] {
   opacity: 0;
   position: fixed;
   width: 0;
 }
 
-.frequencyButtons label {
+.daysButtons label {
   display: inline-block;
   padding: 10px 20px;
   margin: 1vh;
@@ -116,9 +114,9 @@ a, a:visited {
   border: 2px solid #000;
 }
 
-.frequencyButtons input[type="radio"]:focus + label,
-.frequencyButtons input[type="radio"]:checked + label,
-.frequencyButtons label:hover {
+.daysButtons input[type="radio"]:focus + label,
+.daysButtons input[type="radio"]:checked + label,
+.daysButtons label:hover {
   opacity: 100%;
   box-shadow: 2px 2px 3px #000;
   font-size: 1rem;
@@ -142,28 +140,28 @@ a, a:visited {
   position: absolute;
   top: 1vh;
   left: 4vh;
-  background: none; 
+  background: none;
 }
 
 .BackButton_List {
   font-size: 3rem;
   color: #000;
   text-decoration: none;
-  background: none; 
+  background: none;
   border: none;
 }
 
 .BackButton_List:hover {
   font-size: 3rem;
   transform: scale(1.2);
-  transition: .1s;
+  transition: 0.1s;
   transition-timing-function: ease-in;
   box-shadow: none;
 }
 
-                   /* Other Components/Views Specific Styling */
+/* Other Components/Views Specific Styling */
 
-                      /* Navbar Component Styling */
+/* Navbar Component Styling */
 
 .Navbar {
   display: flex;
@@ -191,10 +189,42 @@ a, a:visited {
 .NavItem:hover {
   font-size: 1.3rem;
   box-shadow: inset 0px 0px 5px #c1c1c1;
-  transition: .1s;
+  transition: 0.1s;
   transition-timing-function: ease-in;
 }
 
+/* .BackButton_List:hover {
+  transform: scale(1.2);
+  transition: 0.1s;
+  transition-timing-function: ease-in;
+} */
 
+.duplicateMessage {
+  position: fixed;
+  top: 15%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  height: fit-content;
+  width: fit-content;
+  padding: 10px;
+  margin: auto;
+  border-radius: 20px;
+  background: #ffd800;
+  animation: slide 2.5s;
+  opacity: 0.7;
+}
 
-
+@keyframes slide {
+  0% {
+    top: -10%;
+  }
+  25% {
+    top: 15%;
+  }
+  75% {
+    top: 15%;
+  }
+  100% {
+    top: -10%;
+  }
+}

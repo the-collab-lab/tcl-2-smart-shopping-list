@@ -3,27 +3,54 @@ import { withFirestore } from "react-firestore";
 import "../App.css";
 import Navbar from "./Navbar";
 import BackButton from "./BackButton";
+import DuplicateMessage from "./DuplicateMessage";
 
 const AddItem = ({ firestore }) => {
   const [name, setName] = useState("");
-  const [frequency, setFrequency] = useState("14");
+  const [duplicate, setDuplicate] = useState(false);
+
   const uniqueToken = localStorage.getItem("uniqueToken");
 
+  // consts and state used for the numberOfDays buttons
+  const soon = "7";
+  const prettySoon = "14";
+  const notSoon = "30";
+  const [numberOfDays, setNumberOfDays] = useState(prettySoon);
+
   //   Write item to Firebase setting uniqueToken as document name
-  const addItem = (name, frequency) => {
+  const addItem = (normalizedName, numberOfDays) => {
+    // adds new items collection to database
     firestore
       .collection("lists")
       .doc(uniqueToken)
       .set({ items: "" });
 
-    firestore
+    // reference path to specific document from items collection
+    // sets document ID equal to item name
+    const itemsDocRef = firestore
       .collection("lists")
       .doc(uniqueToken)
       .collection("items")
-      .add({
-        name: name,
-        frequency: +frequency
-      });
+      .doc(normalizedName);
+
+    // checks whether an existing doc ID is equal to new item name
+    itemsDocRef.get().then(docSnapshot => {
+      if (docSnapshot.exists) {
+        let timeWindowBeforeRefresh = 2500;
+        itemsDocRef.onSnapshot(doc => {
+          setDuplicate(true);
+          setTimeout(function() {
+            setDuplicate(false);
+          }, timeWindowBeforeRefresh);
+        });
+      } else {
+        itemsDocRef.set({
+          name: name,
+          numberOfDays: +numberOfDays
+        });
+        setName("");
+      }
+    });
   };
 
   //   Update state whenever user input changes
@@ -32,14 +59,29 @@ const AddItem = ({ firestore }) => {
   };
 
   const handleOptionChange = event => {
-    setFrequency(event.target.value);
+    setNumberOfDays(event.target.value);
+  };
+
+  // function triggered at handleSubmit -
+  // normalizes item name so that it has all lowercase
+  // letters and no special characters (spaces ok)
+  const normalizeName = name => {
+    name = name.toLowerCase().trim();
+    let normalizedName = "";
+    let symbol = `.,;:!?"`;
+    for (let i = 0; i < name.length; i++) {
+      if (!symbol.includes(name[i])) {
+        normalizedName += name.slice(i, i + 1);
+      }
+    }
+    return normalizedName;
   };
 
   //   Trigger addItem function when "Add Item" button is clicked
   const handleSubmit = event => {
     event.preventDefault();
-    addItem(name, frequency);
-    setName("");
+    let normalizedName = normalizeName(name);
+    addItem(normalizedName, numberOfDays);
   };
 
   return (
@@ -57,14 +99,14 @@ const AddItem = ({ firestore }) => {
           />
         </label>
 
-        <div className="frequencyButtons">
+        <div className="daysButtons">
           <p>How soon are you likely to buy it again?</p>
           <input
             type="radio"
             id="soonButton"
-            name="frequencyButtons"
-            value="7"
-            checked={frequency === "7"}
+            name="daysButtons"
+            value={soon}
+            checked={numberOfDays === soon}
             onChange={handleOptionChange}
           />
           <label htmlFor="soonButton" id="soonButton">
@@ -74,9 +116,9 @@ const AddItem = ({ firestore }) => {
           <input
             type="radio"
             id="prettySoonButton"
-            name="frequencyButtons"
-            value="14"
-            checked={frequency === "14"}
+            name="daysButtons"
+            value={prettySoon}
+            checked={numberOfDays === prettySoon}
             onChange={handleOptionChange}
           />
           <label htmlFor="prettySoonButton" id="prettySoonButton">
@@ -86,9 +128,9 @@ const AddItem = ({ firestore }) => {
           <input
             type="radio"
             id="notSoonButton"
-            name="frequencyButtons"
-            value="30"
-            checked={frequency === "30"}
+            name="daysButtons"
+            value={notSoon}
+            checked={numberOfDays === notSoon}
             onChange={handleOptionChange}
           />
           <label htmlFor="notSoonButton" id="notSoonButton">
@@ -101,6 +143,7 @@ const AddItem = ({ firestore }) => {
         </button>
       </form>
       <Navbar />
+      {duplicate ? <DuplicateMessage /> : null}
     </React.Fragment>
   );
 };
