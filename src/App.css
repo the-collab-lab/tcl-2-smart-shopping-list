@@ -93,6 +93,31 @@ a:visited {
   font-size: 1.1rem;
 }
 
+.purchasedCheck {
+  height: 5vh;
+
+}
+
+.purchasedCheck:hover {
+  transform: scale(1.1);
+}
+
+.itemsList {
+  display: flex;
+  justify-content: space-between;
+  padding: 2vh;
+  width: 30vw;
+  background-color: #2b9ead;
+}
+
+ul.itemsList > li {
+  display: flex;
+  background-color: #3ec1d3;
+  width: 100%;
+  
+  
+}
+
 /* Add View Specific Styling */
 
 .daysButtons {

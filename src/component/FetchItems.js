@@ -6,7 +6,27 @@ import DeleteToken from './DeleteToken';
 
 const FetchItems = ({ token, setToken, firestore }) => {
   const [empty, setEmpty] = useState(true);
+  // another use of state, which will show if the box is checked or not
+  // need to think of descriptive names...
+  const [checked, setChecked] = useState(false);
 
+  // framework of some kind of function to run when the checkbox is clicked
+  function checkBox() {
+    if (!checked) {
+      setChecked(true);
+    } else {
+      setChecked(false);
+    }
+    console.log('changed the checkbox')
+  }
+
+  // function to run every time the view renders, which will check each item and see if it is checked and also
+  // if it has been 24 hours since it was checked (which we can base off of the other team's dateOfPurchase)
+  // if (item.checked) {
+  // // and still checked will need to look at firestore, at the item, and see if it has been 24 hours
+  // }
+
+  // this conditional determines whether to show the home view or the list view
   if (!token) {
     return <Redirect to="" />;
   } else {
@@ -46,10 +66,11 @@ const FetchItems = ({ token, setToken, firestore }) => {
             return (
               <div>
                 <h2>Items</h2>
-                <ul>
+                <ul className="itemsList">
                   {data.map(item => (
                     <li key={item.id}>
                       <div className={item.name}>{item.name}</div>
+                      <input type="checkbox" className="purchasedCheck" onClick={checkBox} />
                     </li>
                   ))}
                 </ul>
