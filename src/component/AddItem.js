@@ -10,6 +10,7 @@ const AddItem = ({ firestore }) => {
   const [duplicate, setDuplicate] = useState(false);
 
   const uniqueToken = localStorage.getItem('uniqueToken');
+  const todayDate = new Date();
 
   // consts and state used for the numberOfDays buttons
   const soon = '7';
@@ -47,6 +48,10 @@ const AddItem = ({ firestore }) => {
         itemsDocRef.set({
           name: name,
           numberOfDays: +numberOfDays,
+          dateOfPurchase: todayDate
+          //latest interval
+          //number of purchases
+          //next purchase date
         });
         setName('');
       }
