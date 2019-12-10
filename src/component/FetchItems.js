@@ -7,13 +7,28 @@ import DeleteToken from './DeleteToken';
 const FetchItems = ({ token, setToken, firestore }) => {
   const [empty, setEmpty] = useState(true);
 
+  const itemsDocRef = firestore
+    .collection('lists')
+    .doc(token)
+    .collection('items')
+
+  // function to change database on button click
+  const handlePurchase = event => {
+    event.preventDefault();
+    updateDatabase(event.target.id)
+  }
+
+  const updateDatabase = (itemId) => {
+    // itemsDocRef
+    //   .doc()
+    //   .set()
+    console.log('IT got here!', itemId)
+  }
+
   if (!token) {
     return <Redirect to="" />;
   } else {
-    firestore
-      .collection('lists')
-      .doc(token)
-      .collection('items')
+    itemsDocRef
       .get()
       .then(items => {
         setEmpty(items.empty);
@@ -49,7 +64,10 @@ const FetchItems = ({ token, setToken, firestore }) => {
                 <ul>
                   {data.map(item => (
                     <li key={item.id}>
-                      <div className={item.name}>{item.name}</div>
+                      <div className={item.name}>
+                        {item.name}
+                        <button onClick={handlePurchase} className='button-link' id={item.id}>Purchase</button>
+                      </div>
                     </li>
                   ))}
                 </ul>
