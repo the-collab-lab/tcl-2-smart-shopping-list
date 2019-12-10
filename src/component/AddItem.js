@@ -10,7 +10,7 @@ const AddItem = ({ firestore }) => {
   const [duplicate, setDuplicate] = useState(false);
 
   const uniqueToken = localStorage.getItem('uniqueToken');
-  const todayDate = new Date();
+  const today = new Date();
 
   // consts and state used for the numberOfDays buttons
   const soon = '7';
@@ -20,6 +20,8 @@ const AddItem = ({ firestore }) => {
 
   //   Write item to Firebase setting uniqueToken as document name
   const addItem = (normalizedName, numberOfDays) => {
+    let nextPurchase = new Date()
+    nextPurchase.setDate(today.getDate() + parseInt(numberOfDays))
     // adds new items collection to database
     firestore
       .collection('lists')
@@ -48,10 +50,9 @@ const AddItem = ({ firestore }) => {
         itemsDocRef.set({
           name: name,
           numberOfDays: +numberOfDays,
-          dateOfPurchase: todayDate
-          //latest interval
-          //number of purchases
-          //next purchase date
+          dateOfPurchase: today,
+          numberOfPurchases : 1,
+          nextPurchaseDate: nextPurchase
         });
         setName('');
       }
