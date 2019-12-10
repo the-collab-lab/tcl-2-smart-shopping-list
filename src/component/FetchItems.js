@@ -6,6 +6,8 @@ import DeleteToken from './DeleteToken';
 
 const FetchItems = ({ token, setToken, firestore }) => {
   const [empty, setEmpty] = useState(true);
+  const today = new Date();
+
 
   const itemsDocRef = firestore
     .collection('lists')
@@ -18,11 +20,17 @@ const FetchItems = ({ token, setToken, firestore }) => {
     updateDatabase(event.target.id)
   }
 
+  // connect numberOfDays & nextPurchaseDate to estimate.js function
+  // update numberOfPurchases with correct number
   const updateDatabase = (itemId) => {
-    // itemsDocRef
-    //   .doc()
-    //   .set()
-    console.log('IT got here!', itemId)
+    itemsDocRef
+      .doc(itemId)
+      .update({
+        numberOfDays: 300,
+        dateOfPurchase: today,
+        numberOfPurchases : +1,
+        nextPurchaseDate: 7000
+      })
   }
 
   if (!token) {
