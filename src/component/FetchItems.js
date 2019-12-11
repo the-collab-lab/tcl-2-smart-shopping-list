@@ -8,22 +8,17 @@ const FetchItems = ({ token, setToken, firestore }) => {
   const [empty, setEmpty] = useState(true);
   const [purchased, setPurchased] = useState(false);
 
+  // 86,400 is 24 hours in milliseconds
 
-// 86,400 is 24 hours in milliseconds
-
-  function test() {
+  function itemClicked() {
     const purchaseTime = Date.now();
-    const timePassed = 86400;
     const testTimePassed = 3;
     setPurchased(true);
-    console.log(purchased)
-
-    // console.log(Date.now() - purchaseDay)
-
-    if (Date.now() >= (purchaseTime + testTimePassed)) {
-      console.log("it worked")
-    } 
-
+    console.log(purchased);
+    if (Date.now() >= purchaseTime + testTimePassed) {
+      setPurchased(false);
+      console.log('this is working');
+    }
   }
 
   // this conditional determines whether to show the home view or the list view
@@ -39,7 +34,6 @@ const FetchItems = ({ token, setToken, firestore }) => {
         setEmpty(items.empty);
       });
   }
-
 
   // Token stored in user's local storage
   const uniqueToken = localStorage.getItem('uniqueToken');
@@ -70,7 +64,9 @@ const FetchItems = ({ token, setToken, firestore }) => {
                 <ul className="itemsList">
                   {data.map(item => (
                     <li key={item.id}>
-                      <div className={item.name} onClick={test}>{item.name}</div>
+                      <div className={item.name} onClick={itemClicked}>
+                        {item.name}
+                      </div>
                     </li>
                   ))}
                 </ul>
