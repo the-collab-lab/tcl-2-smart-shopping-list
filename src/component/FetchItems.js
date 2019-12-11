@@ -69,11 +69,6 @@ const FetchItems = ({ token, setToken, firestore }) => {
                 <ul className="itemsList">
                   {data.map(item => (
                     <li key={item.id}>
-                      <input
-                        type="checkbox"
-                        className="purchasedCheck"
-                        onClick={checkBox}
-                      />
                       <div className={item.name}>{item.name}</div>
                     </li>
                   ))}

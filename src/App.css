@@ -93,25 +93,33 @@ a:visited {
   font-size: 1.1rem;
 }
 
-.fetchItemsSection {
+/* .fetchItemsSection {
   margin: auto;
   width: fit-content;
-}
+} */
 
-.purchasedCheck {
+/* .purchasedCheck {
   width: 10px;
 }
 
 .purchasedCheck:hover {
   transform: scale(2);
   cursor: pointer;
-}
+} */
 
 ul.itemsList > li {
-  display: flex;
   list-style-type: none;
-  width: fit-content;
-  margin: 20px;
+  padding: 10px;
+  margin: 10px;
+  background-color: #ff165d;
+  border-radius: 8%;
+}
+
+ul.itemsList > li:hover,
+ul.itemsList > li:active {
+  text-decoration: line-through;
+  cursor: pointer;
+  opacity: 80%;
 }
 
 /* Add View Specific Styling */
