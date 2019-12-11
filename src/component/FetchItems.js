@@ -9,17 +9,40 @@ const FetchItems = ({ token, setToken, firestore }) => {
   const [purchased, setPurchased] = useState(false);
 
   // 86,400 is 24 hours in milliseconds
+  const today = Date.now();
 
-  function itemClicked() {
-    const purchaseTime = Date.now();
-    const testTimePassed = 3;
-    setPurchased(true);
-    console.log(purchased);
-    if (Date.now() >= purchaseTime + testTimePassed) {
-      setPurchased(false);
-      console.log('this is working');
-    }
-  }
+  const itemsDocRef = firestore
+    .collection('lists')
+    .doc(token)
+    .collection('items');
+
+  // function to change database on button click
+  const handlePurchase = event => {
+    event.preventDefault();
+    updateDatabase(event.target.id);
+  };
+
+  // connect numberOfDays & nextPurchaseDate to estimate.js function
+  // update numberOfPurchases with correct number
+  const updateDatabase = itemId => {
+    itemsDocRef.doc(itemId).update({
+      numberOfDays: 300,
+      dateOfPurchase: today,
+      numberOfPurchases: +1,
+      nextPurchaseDate: 7000,
+    });
+  };
+
+  // function itemClicked() {
+  //   const purchaseTime = Date.now();
+  //   const testTimePassed = 3;
+  //   setPurchased(true);
+  //   console.log(purchased);
+  //   if (Date.now() >= purchaseTime + testTimePassed) {
+  //     setPurchased(false);
+  //     console.log('this is working');
+  //   }
+  // }
 
   // this conditional determines whether to show the home view or the list view
   if (!token) {
@@ -64,7 +87,11 @@ const FetchItems = ({ token, setToken, firestore }) => {
                 <ul className="itemsList">
                   {data.map(item => (
                     <li key={item.id}>
-                      <div className={item.name} onClick={itemClicked}>
+                      <div
+                        className={item.name}
+                        onClick={handlePurchase}
+                        id={item.id}
+                      >
                         {item.name}
                       </div>
                     </li>
