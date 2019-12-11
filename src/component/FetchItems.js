@@ -6,25 +6,25 @@ import DeleteToken from './DeleteToken';
 
 const FetchItems = ({ token, setToken, firestore }) => {
   const [empty, setEmpty] = useState(true);
-  // another use of state, which will show if the box is checked or not
-  // need to think of descriptive names...
-  const [checked, setChecked] = useState(false);
+  const [purchased, setPurchased] = useState(false);
 
-  // framework of some kind of function to run when the checkbox is clicked
-  function checkBox() {
-    if (!checked) {
-      setChecked(true);
-    } else {
-      setChecked(false);
-    }
-    console.log('changed the checkbox');
+
+// 86,400 is 24 hours in milliseconds
+
+  function test() {
+    const purchaseTime = Date.now();
+    const timePassed = 86400;
+    const testTimePassed = 3;
+    setPurchased(true);
+    console.log(purchased)
+
+    // console.log(Date.now() - purchaseDay)
+
+    if (Date.now() >= (purchaseTime + testTimePassed)) {
+      console.log("it worked")
+    } 
+
   }
-
-  // function to run every time the view renders, which will check each item and see if it is checked and also
-  // if it has been 24 hours since it was checked (which we can base off of the other team's dateOfPurchase)
-  // if (item.checked) {
-  // // and still checked will need to look at firestore, at the item, and see if it has been 24 hours
-  // }
 
   // this conditional determines whether to show the home view or the list view
   if (!token) {
@@ -39,6 +39,7 @@ const FetchItems = ({ token, setToken, firestore }) => {
         setEmpty(items.empty);
       });
   }
+
 
   // Token stored in user's local storage
   const uniqueToken = localStorage.getItem('uniqueToken');
@@ -69,7 +70,7 @@ const FetchItems = ({ token, setToken, firestore }) => {
                 <ul className="itemsList">
                   {data.map(item => (
                     <li key={item.id}>
-                      <div className={item.name}>{item.name}</div>
+                      <div className={item.name} onClick={test}>{item.name}</div>
                     </li>
                   ))}
                 </ul>
