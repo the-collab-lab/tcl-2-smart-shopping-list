@@ -17,7 +17,7 @@ const FetchItems = ({ token, setToken, firestore }) => {
     } else {
       setChecked(false);
     }
-    console.log('changed the checkbox')
+    console.log('changed the checkbox');
   }
 
   // function to run every time the view renders, which will check each item and see if it is checked and also
@@ -64,13 +64,17 @@ const FetchItems = ({ token, setToken, firestore }) => {
             );
           } else {
             return (
-              <div>
+              <div className="fetchItemsSection">
                 <h2>Items</h2>
                 <ul className="itemsList">
                   {data.map(item => (
                     <li key={item.id}>
+                      <input
+                        type="checkbox"
+                        className="purchasedCheck"
+                        onClick={checkBox}
+                      />
                       <div className={item.name}>{item.name}</div>
-                      <input type="checkbox" className="purchasedCheck" onClick={checkBox} />
                     </li>
                   ))}
                 </ul>
