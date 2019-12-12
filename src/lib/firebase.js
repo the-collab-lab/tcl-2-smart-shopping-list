@@ -2,7 +2,6 @@
 // for the second line, which makes both the linter and react-firebase happy
 import firebase from 'firebase/app';
 import 'firebase/firestore';
-
 // Initalize Firebase.
 const firebaseConfig = {
   apiKey: 'AIzaSyAmNT8nRQb3trnjngkynqnQ1H6VCALX5qs',
@@ -12,9 +11,9 @@ const firebaseConfig = {
   storageBucket: 'tcl-2-smart-shopping-list.appspot.com',
   messagingSenderId: '538706887514',
   appId: '1:538706887514:web:30b4235c1e8aa5fa19a963',
+  timestampsinSnapshots: true,
 };
 
 const fb = firebase.initializeApp(firebaseConfig);
 const db = fb.firestore();
-
 export { fb, db };

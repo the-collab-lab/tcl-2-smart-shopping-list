@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Redirect, Link } from 'react-router-dom';
 import { FirestoreCollection, withFirestore } from 'react-firestore';
 import Navbar from './Navbar';
@@ -7,9 +7,17 @@ import DeleteToken from './DeleteToken';
 const FetchItems = ({ token, setToken, firestore }) => {
   const [empty, setEmpty] = useState(true);
   const [purchased, setPurchased] = useState(false);
+  const today = new Date();
 
-  // 86,400 is 24 hours in milliseconds
-  const today = Date.now();
+  useEffect(() => {
+    // all dates in milliseconds from UTC
+    const appVisitDate = Date.now();
+    const purchaseDate = Date.parse(today);
+    const twentyFourHours = 86400000;
+    if (appVisitDate - purchaseDate > twentyFourHours) {
+      setPurchased(false);
+    }
+  });
 
   const itemsDocRef = firestore
     .collection('lists')
@@ -18,7 +26,7 @@ const FetchItems = ({ token, setToken, firestore }) => {
 
   // function to change database on button click
   const handlePurchase = event => {
-    event.preventDefault();
+    setPurchased(true);
     updateDatabase(event.target.id);
   };
 
@@ -33,37 +41,21 @@ const FetchItems = ({ token, setToken, firestore }) => {
     });
   };
 
-  // function itemClicked() {
-  //   const purchaseTime = Date.now();
-  //   const testTimePassed = 3;
-  //   setPurchased(true);
-  //   console.log(purchased);
-  //   if (Date.now() >= purchaseTime + testTimePassed) {
-  //     setPurchased(false);
-  //     console.log('this is working');
-  //   }
-  // }
-
-  // this conditional determines whether to show the home view or the list view
   if (!token) {
     return <Redirect to="" />;
   } else {
     firestore
       .collection('lists')
       .doc(token)
-      .collection('items')
-      .get()
-      .then(items => {
-        setEmpty(items.empty);
-      });
+      .collection('items');
+    itemsDocRef.get().then(items => {
+      setEmpty(items.empty);
+    });
   }
-
   // Token stored in user's local storage
   const uniqueToken = localStorage.getItem('uniqueToken');
-
   // unique DB path based on token
   const concatPath = `/lists/${uniqueToken}/items`;
-
   return (
     <React.Fragment>
       <FirestoreCollection
@@ -82,11 +74,14 @@ const FetchItems = ({ token, setToken, firestore }) => {
             );
           } else {
             return (
-              <div className="fetchItemsSection">
+              <div>
                 <h2>Items</h2>
                 <ul className="itemsList">
                   {data.map(item => (
-                    <li key={item.id}>
+                    <li
+                      key={item.id}
+                      className={purchased ? 'purchasedItem' : null}
+                    >
                       <div
                         className={item.name}
                         onClick={handlePurchase}
@@ -107,5 +102,4 @@ const FetchItems = ({ token, setToken, firestore }) => {
     </React.Fragment>
   );
 };
-
 export default withFirestore(FetchItems);

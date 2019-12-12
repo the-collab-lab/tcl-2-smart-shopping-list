@@ -116,7 +116,7 @@ ul.itemsList > li {
 }
 
 ul.itemsList > li:hover,
-ul.itemsList > li:active {
+.purchasedItem {
   text-decoration: line-through;
   cursor: pointer;
   opacity: 80%;

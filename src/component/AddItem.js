@@ -4,12 +4,12 @@ import '../App.css';
 import Navbar from './Navbar';
 import BackButton from './BackButton';
 import DuplicateMessage from './DuplicateMessage';
-
 const AddItem = ({ firestore }) => {
   const [name, setName] = useState('');
   const [duplicate, setDuplicate] = useState(false);
 
   const uniqueToken = localStorage.getItem('uniqueToken');
+  const today = new Date();
 
   // consts and state used for the numberOfDays buttons
   const soon = '7';
@@ -19,12 +19,13 @@ const AddItem = ({ firestore }) => {
 
   //   Write item to Firebase setting uniqueToken as document name
   const addItem = (normalizedName, numberOfDays) => {
+    let nextPurchase = new Date();
+    nextPurchase.setDate(today.getDate() + parseInt(numberOfDays));
     // adds new items collection to database
     firestore
       .collection('lists')
       .doc(uniqueToken)
       .set({ items: '' });
-
     // reference path to specific document from items collection
     // sets document ID equal to item name
     const itemsDocRef = firestore
@@ -32,7 +33,6 @@ const AddItem = ({ firestore }) => {
       .doc(uniqueToken)
       .collection('items')
       .doc(normalizedName);
-
     // checks whether an existing doc ID is equal to new item name
     itemsDocRef.get().then(docSnapshot => {
       if (docSnapshot.exists) {
@@ -52,16 +52,13 @@ const AddItem = ({ firestore }) => {
       }
     });
   };
-
   //   Update state whenever user input changes
   const handleChange = event => {
     setName(event.target.value);
   };
-
   const handleOptionChange = event => {
     setNumberOfDays(event.target.value);
   };
-
   // function triggered at handleSubmit -
   // normalizes item name so that it has all lowercase
   // letters and no special characters (spaces ok)
@@ -76,14 +73,12 @@ const AddItem = ({ firestore }) => {
     }
     return normalizedName;
   };
-
   //   Trigger addItem function when "Add Item" button is clicked
   const handleSubmit = event => {
     event.preventDefault();
     let normalizedName = normalizeName(name);
     addItem(normalizedName, numberOfDays);
   };
-
   return (
     <React.Fragment>
       <BackButton />
@@ -98,7 +93,6 @@ const AddItem = ({ firestore }) => {
             className="inputField"
           />
         </label>
-
         <div className="daysButtons">
           <p>How soon are you likely to buy it again?</p>
           <input
@@ -112,7 +106,6 @@ const AddItem = ({ firestore }) => {
           <label htmlFor="soonButton" id="soonButton">
             Soon
           </label>
-
           <input
             type="radio"
             id="prettySoonButton"
@@ -124,7 +117,6 @@ const AddItem = ({ firestore }) => {
           <label htmlFor="prettySoonButton" id="prettySoonButton">
             Pretty Soon
           </label>
-
           <input
             type="radio"
             id="notSoonButton"
@@ -137,7 +129,6 @@ const AddItem = ({ firestore }) => {
             Not Soon
           </label>
         </div>
-
         <button
           onClick={handleSubmit}
           className="button-link"
@@ -151,5 +142,4 @@ const AddItem = ({ firestore }) => {
     </React.Fragment>
   );
 };
-
 export default withFirestore(AddItem);
