@@ -3,6 +3,7 @@ import { Redirect, Link } from 'react-router-dom';
 import { FirestoreCollection, withFirestore } from 'react-firestore';
 import Navbar from './Navbar';
 import DeleteToken from './DeleteToken';
+import dayjs from 'dayjs';
 
 const FetchItems = ({ token, setToken, firestore }) => {
   const [empty, setEmpty] = useState(true);
@@ -38,8 +39,10 @@ const FetchItems = ({ token, setToken, firestore }) => {
 
   const calculateNewPurchaseValues = data => {
     let purchaseValues = data;
-    purchaseValues['latestInterval'] =
-      today.getTime() - purchaseValues['lastPurchase'].getTime();
+    purchaseValues['latestInterval'] = dayjs(today).diff(
+      dayjs(purchaseValues['lastPurchase']),
+      'day',
+    );
     console.log('lastpurchase', typeof purchaseValues['lastPurchase']);
     console.log('latestEstimate', typeof purchaseValues['latestEstimate']);
     console.log(purchaseValues);
