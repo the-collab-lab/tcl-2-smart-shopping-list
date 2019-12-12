@@ -20,8 +20,8 @@ const AddItem = ({ firestore }) => {
 
   //   Write item to Firebase setting uniqueToken as document name
   const addItem = (normalizedName, numberOfDays) => {
-    let nextPurchase = new Date()
-    nextPurchase.setDate(today.getDate() + parseInt(numberOfDays))
+    let nextPurchase = new Date();
+    nextPurchase.setDate(today.getDate() + parseInt(numberOfDays));
     // adds new items collection to database
     firestore
       .collection('lists')
@@ -48,11 +48,12 @@ const AddItem = ({ firestore }) => {
         });
       } else {
         itemsDocRef.set({
+          id: normalizedName,
           name: name,
           numberOfDays: +numberOfDays,
           dateOfPurchase: today,
-          numberOfPurchases : 1,
-          nextPurchaseDate: nextPurchase
+          numberOfPurchases: 1,
+          nextPurchaseDate: nextPurchase,
         });
         setName('');
       }

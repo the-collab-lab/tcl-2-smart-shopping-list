@@ -4,6 +4,7 @@ import { FirestoreCollection, withFirestore } from 'react-firestore';
 import Navbar from './Navbar';
 import DeleteToken from './DeleteToken';
 import dayjs from 'dayjs';
+import calculateEstimate from '../estimates';
 
 const FetchItems = ({ token, setToken, firestore }) => {
   const [empty, setEmpty] = useState(true);
@@ -21,42 +22,45 @@ const FetchItems = ({ token, setToken, firestore }) => {
     itemsDocRef
       .doc(itemId)
       .get()
-      .then(originalPull)
-      .then(calculateNewPurchaseValues);
-    // .then(newData => {
-    //   updateDatabase(newData)
-    // })
+      .then(dataPull)
+      .then(calculateNewPurchaseValues)
+      .then(updateDatabase);
   };
 
-  const originalPull = doc => {
+  const dataPull = doc => {
     let data = doc.data();
     return {
+      id: data.id,
       latestEstimate: data.numberOfDays,
       lastPurchase: data.dateOfPurchase.toDate(),
-      numberOfPurchases: data.numberOfPurchases,
+      numberOfPurchases: +data.numberOfPurchases,
     };
   };
 
   const calculateNewPurchaseValues = data => {
-    let purchaseValues = data;
-    purchaseValues['latestInterval'] = dayjs(today).diff(
-      dayjs(purchaseValues['lastPurchase']),
-      'day',
+    let now = dayjs(today);
+    let latestInterval = now.diff(dayjs(data.lastPurchase, 'day'));
+    let newEstimate = calculateEstimate(
+      data.numberOfDays,
+      latestInterval,
+      data.numberOfPurchases,
     );
-    console.log('lastpurchase', typeof purchaseValues['lastPurchase']);
-    console.log('latestEstimate', typeof purchaseValues['latestEstimate']);
-    console.log(purchaseValues);
-    return purchaseValues;
+    let newNextPurchaseDate = now.add(newEstimate.toString(), 'day');
+
+    return {
+      id: data.id,
+      numberOfDays: newEstimate,
+      numberOfPurchases: data.numberOfPurchases + 1,
+      nextPurchaseDate: newNextPurchaseDate.toDate(),
+    };
   };
 
-  // connect numberOfDays & nextPurchaseDate to estimate.js function
-  // update numberOfPurchases with correct number
-  const updateDatabase = (data, itemId) => {
-    itemsDocRef.doc(itemId).update({
-      numberOfDays: 300, //return value of estimate.js
+  const updateDatabase = data => {
+    itemsDocRef.doc(data.id).update({
+      numberOfDays: data.numberOfDays,
       dateOfPurchase: today,
-      numberOfPurchases: +1,
-      nextPurchaseDate: 7000, //today + numberOfDays
+      numberOfPurchases: data.numberOfPurchases,
+      nextPurchaseDate: data.nextPurchaseDate,
     });
   };
 
