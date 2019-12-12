@@ -6,27 +6,26 @@ import DeleteToken from './DeleteToken';
 
 const FetchItems = ({ token, setToken, firestore }) => {
   const [empty, setEmpty] = useState(true);
-  const [purchased, setPurchased] = useState(false);
   const today = new Date();
-
-  useEffect(() => {
-    // all dates in milliseconds from UTC
-    const appVisitDate = Date.now();
-    const purchaseDate = Date.parse(today);
-    const twentyFourHours = 86400000;
-    if (appVisitDate - purchaseDate > twentyFourHours) {
-      setPurchased(false);
-    }
-  });
-
   const itemsDocRef = firestore
     .collection('lists')
     .doc(token)
     .collection('items');
 
+  useEffect((today, itemID, itemsDocRef) => {
+    // all dates in milliseconds from UTC
+    const appVisitDate = Date.now();
+    const purchaseDate = Date.parse(today);
+    const twentyFourHours = 86400000;
+    if (appVisitDate - purchaseDate > twentyFourHours) {
+      itemsDocRef.doc(itemID).update({
+        purchased: false,
+      });
+    }
+  }, []);
+
   // function to change database on button click
   const handlePurchase = event => {
-    setPurchased(true);
     updateDatabase(event.target.id);
   };
 
@@ -38,6 +37,7 @@ const FetchItems = ({ token, setToken, firestore }) => {
       dateOfPurchase: today,
       numberOfPurchases: +1,
       nextPurchaseDate: 7000,
+      purchased: true,
     });
   };
 
@@ -80,7 +80,7 @@ const FetchItems = ({ token, setToken, firestore }) => {
                   {data.map(item => (
                     <li
                       key={item.id}
-                      className={purchased ? 'purchasedItem' : null}
+                      className={item.purchased ? 'purchasedItem' : null}
                     >
                       <div
                         className={item.name}
