@@ -10,7 +10,6 @@ const AddItem = ({ firestore }) => {
   const [duplicate, setDuplicate] = useState(false);
 
   const uniqueToken = localStorage.getItem('uniqueToken');
-  const today = new Date();
 
   // consts and state used for the numberOfDays buttons
   const soon = '7';

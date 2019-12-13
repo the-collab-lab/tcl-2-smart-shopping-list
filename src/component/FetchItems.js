@@ -22,6 +22,7 @@ const FetchItems = ({ token, setToken, firestore }) => {
       .doc(itemId)
       .get()
       .then(dataPull)
+      // .then(calculateIfStillPurchased)
       .then(updateDatabase);
   };
 
@@ -32,9 +33,14 @@ const FetchItems = ({ token, setToken, firestore }) => {
     };
   };
 
-  const updateDatabase = id => {
-    console.log(id);
-    itemsDocRef.doc(id).set({
+  // const calculateIfStillPurchased = data => {
+  //   let now = dayjs(today);
+  //   console.log(now);
+  // };
+
+  const updateDatabase = data => {
+    console.log(data.id);
+    itemsDocRef.doc(data.id).update({
       purchasedWithinLastDay: true,
       dateOfPurchase: today,
     });
