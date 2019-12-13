@@ -3,8 +3,7 @@ import { Redirect, Link } from 'react-router-dom';
 import { FirestoreCollection, withFirestore } from 'react-firestore';
 import Navbar from './Navbar';
 import DeleteToken from './DeleteToken';
-// import dayjs from 'dayjs';
-import calculateEstimate from '../estimates';
+import dayjs from 'dayjs';
 
 const FetchItems = ({ token, setToken, firestore }) => {
   const [empty, setEmpty] = useState(true);
@@ -23,7 +22,6 @@ const FetchItems = ({ token, setToken, firestore }) => {
       .doc(itemId)
       .get()
       .then(dataPull)
-      .then(calculateNewPurchaseValues)
       .then(updateDatabase);
   };
 
@@ -31,36 +29,14 @@ const FetchItems = ({ token, setToken, firestore }) => {
     let data = doc.data();
     return {
       id: data.id,
-      latestEstimate: data.numberOfDays,
-      lastPurchase: data.dateOfPurchase.toDate(),
-      numberOfPurchases: +data.numberOfPurchases,
     };
   };
 
-  const calculateNewPurchaseValues = data => {
-    let now = dayjs(today);
-    let latestInterval = now.diff(dayjs(data.lastPurchase, 'day'));
-    let newEstimate = calculateEstimate(
-      data.numberOfDays,
-      latestInterval,
-      data.numberOfPurchases,
-    );
-    let newNextPurchaseDate = now.add(newEstimate.toString(), 'day');
-
-    return {
-      id: data.id,
-      numberOfDays: newEstimate,
-      numberOfPurchases: data.numberOfPurchases + 1,
-      nextPurchaseDate: newNextPurchaseDate.toDate(),
-    };
-  };
-
-  const updateDatabase = data => {
-    itemsDocRef.doc(data.id).update({
-      numberOfDays: data.numberOfDays,
+  const updateDatabase = id => {
+    console.log(id);
+    itemsDocRef.doc(id).set({
+      purchasedWithinLastDay: true,
       dateOfPurchase: today,
-      numberOfPurchases: data.numberOfPurchases,
-      nextPurchaseDate: data.nextPurchaseDate,
     });
   };
 
@@ -101,12 +77,17 @@ const FetchItems = ({ token, setToken, firestore }) => {
                 <ul>
                   {data.map(item => (
                     <li
+                      id={item.id}
                       key={item.id}
-                      className={item.purchased ? 'purchasedItem' : null}
+                      className={
+                        item.purchasedWithinLastDay
+                          ? 'purchasedItem'
+                          : 'nonPurchasedItem'
+                      }
                     >
                       <div
                         className={item.name}
-                        onclick={handlePurchase}
+                        onClick={handlePurchase}
                         id={item.id}
                       >
                         {item.name}
