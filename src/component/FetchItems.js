@@ -1,61 +1,83 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Redirect, Link } from 'react-router-dom';
 import { FirestoreCollection, withFirestore } from 'react-firestore';
 import Navbar from './Navbar';
 import DeleteToken from './DeleteToken';
+// import dayjs from 'dayjs';
+import calculateEstimate from '../estimates';
 
 const FetchItems = ({ token, setToken, firestore }) => {
   const [empty, setEmpty] = useState(true);
   const today = new Date();
+
   const itemsDocRef = firestore
     .collection('lists')
     .doc(token)
     .collection('items');
 
-  useEffect((today, itemID, itemsDocRef) => {
-    // all dates in milliseconds from UTC
-    const appVisitDate = Date.now();
-    const purchaseDate = Date.parse(today);
-    const twentyFourHours = 86400000;
-    if (appVisitDate - purchaseDate > twentyFourHours) {
-      itemsDocRef.doc(itemID).update({
-        purchased: false,
-      });
-    }
-  }, []);
-
   // function to change database on button click
   const handlePurchase = event => {
-    updateDatabase(event.target.id);
+    let itemId = event.target.id;
+    event.preventDefault();
+    itemsDocRef
+      .doc(itemId)
+      .get()
+      .then(dataPull)
+      .then(calculateNewPurchaseValues)
+      .then(updateDatabase);
   };
 
-  // connect numberOfDays & nextPurchaseDate to estimate.js function
-  // update numberOfPurchases with correct number
-  const updateDatabase = itemId => {
-    itemsDocRef.doc(itemId).update({
-      numberOfDays: 300,
+  const dataPull = doc => {
+    let data = doc.data();
+    return {
+      id: data.id,
+      latestEstimate: data.numberOfDays,
+      lastPurchase: data.dateOfPurchase.toDate(),
+      numberOfPurchases: +data.numberOfPurchases,
+    };
+  };
+
+  const calculateNewPurchaseValues = data => {
+    let now = dayjs(today);
+    let latestInterval = now.diff(dayjs(data.lastPurchase, 'day'));
+    let newEstimate = calculateEstimate(
+      data.numberOfDays,
+      latestInterval,
+      data.numberOfPurchases,
+    );
+    let newNextPurchaseDate = now.add(newEstimate.toString(), 'day');
+
+    return {
+      id: data.id,
+      numberOfDays: newEstimate,
+      numberOfPurchases: data.numberOfPurchases + 1,
+      nextPurchaseDate: newNextPurchaseDate.toDate(),
+    };
+  };
+
+  const updateDatabase = data => {
+    itemsDocRef.doc(data.id).update({
+      numberOfDays: data.numberOfDays,
       dateOfPurchase: today,
-      numberOfPurchases: +1,
-      nextPurchaseDate: 7000,
-      purchased: true,
+      numberOfPurchases: data.numberOfPurchases,
+      nextPurchaseDate: data.nextPurchaseDate,
     });
   };
 
   if (!token) {
     return <Redirect to="" />;
   } else {
-    firestore
-      .collection('lists')
-      .doc(token)
-      .collection('items');
     itemsDocRef.get().then(items => {
       setEmpty(items.empty);
     });
   }
+
   // Token stored in user's local storage
   const uniqueToken = localStorage.getItem('uniqueToken');
+
   // unique DB path based on token
   const concatPath = `/lists/${uniqueToken}/items`;
+
   return (
     <React.Fragment>
       <FirestoreCollection
@@ -76,7 +98,7 @@ const FetchItems = ({ token, setToken, firestore }) => {
             return (
               <div>
                 <h2>Items</h2>
-                <ul className="itemsList">
+                <ul>
                   {data.map(item => (
                     <li
                       key={item.id}
@@ -84,7 +106,7 @@ const FetchItems = ({ token, setToken, firestore }) => {
                     >
                       <div
                         className={item.name}
-                        onClick={handlePurchase}
+                        onclick={handlePurchase}
                         id={item.id}
                       >
                         {item.name}
@@ -102,4 +124,5 @@ const FetchItems = ({ token, setToken, firestore }) => {
     </React.Fragment>
   );
 };
+
 export default withFirestore(FetchItems);
