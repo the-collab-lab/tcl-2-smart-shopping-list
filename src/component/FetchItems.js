@@ -3,11 +3,10 @@ import { Redirect, Link } from 'react-router-dom';
 import { FirestoreCollection, withFirestore } from 'react-firestore';
 import Navbar from './Navbar';
 import DeleteToken from './DeleteToken';
-import dayjs from 'dayjs';
 
 const FetchItems = ({ token, setToken, firestore }) => {
   const [empty, setEmpty] = useState(true);
-  const today = new Date();
+  const today = Date.now();
 
   const itemsDocRef = firestore
     .collection('lists')
@@ -22,7 +21,6 @@ const FetchItems = ({ token, setToken, firestore }) => {
       .doc(itemId)
       .get()
       .then(dataPull)
-      // .then(calculateIfStillPurchased)
       .then(updateDatabase);
   };
 
@@ -30,20 +28,32 @@ const FetchItems = ({ token, setToken, firestore }) => {
     let data = doc.data();
     return {
       id: data.id,
+      dateOfPurchase: data.dateOfPurchase,
     };
   };
 
-  // const calculateIfStillPurchased = data => {
-  //   let now = dayjs(today);
-  //   console.log(now);
-  // };
-
   const updateDatabase = data => {
-    console.log(data.id);
     itemsDocRef.doc(data.id).update({
       purchasedWithinLastDay: true,
       dateOfPurchase: today,
     });
+  };
+
+  const calculateIfPurchased = item => {
+    if (item.purchasedWithinLastDay) {
+      let now = today;
+      let dateOfPurchase = item.dateOfPurchase;
+      let hourInMilliseconds = 3600000;
+      console.log('now:' + now);
+      console.log('date of purchase seconds: ' + dateOfPurchase);
+      if (now - dateOfPurchase >= 24 * hourInMilliseconds) {
+        return 'nonPurchasedItem';
+      } else {
+        return 'purchasedItem';
+      }
+    } else {
+      return 'nonPurchasedItem';
+    }
   };
 
   if (!token) {
@@ -85,11 +95,7 @@ const FetchItems = ({ token, setToken, firestore }) => {
                     <li
                       id={item.id}
                       key={item.id}
-                      className={
-                        item.purchasedWithinLastDay
-                          ? 'purchasedItem'
-                          : 'nonPurchasedItem'
-                      }
+                      className={calculateIfPurchased(item)}
                     >
                       <div
                         className={item.name}
