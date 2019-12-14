@@ -3,8 +3,7 @@ import { Redirect, Link } from 'react-router-dom';
 import { FirestoreCollection, withFirestore } from 'react-firestore';
 import Navbar from './Navbar';
 import DeleteToken from './DeleteToken';
-import dayjs from 'dayjs';
-import calculateEstimate from '../estimates';
+import calculateNewPurchaseValues from '../calculations';
 
 const FetchItems = ({ token, setToken, firestore }) => {
   const [empty, setEmpty] = useState(true);
@@ -23,29 +22,9 @@ const FetchItems = ({ token, setToken, firestore }) => {
       .doc(itemId)
       .get()
       .then(doc => {
-        return calculateNewPurchaseValues(doc.data());
+        return calculateNewPurchaseValues(doc.data(), today);
       })
       .then(updateDatabase);
-  };
-
-  // Uses past data and today's date to calculate new numberOfDays, nextPurchaseDate, and numberOfPurchases
-  const calculateNewPurchaseValues = data => {
-    let now = dayjs(today);
-
-    let latestInterval = now.diff(dayjs(data.dateOfPurchase.toDate(), 'day'));
-    let newEstimate = calculateEstimate(
-      data.numberOfDays,
-      latestInterval,
-      data.numberOfPurchases,
-    );
-    let newNextPurchaseDate = now.add(newEstimate.toString(), 'day');
-
-    return {
-      id: data.id,
-      numberOfDays: newEstimate,
-      numberOfPurchases: data.numberOfPurchases + 1,
-      nextPurchaseDate: newNextPurchaseDate.toDate(),
-    };
   };
 
   const updateDatabase = data => {
