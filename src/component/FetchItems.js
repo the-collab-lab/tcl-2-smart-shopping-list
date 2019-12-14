@@ -22,24 +22,17 @@ const FetchItems = ({ token, setToken, firestore }) => {
     itemsDocRef
       .doc(itemId)
       .get()
-      .then(dataPull)
-      .then(calculateNewPurchaseValues)
+      .then(doc => {
+        return calculateNewPurchaseValues(doc.data());
+      })
       .then(updateDatabase);
   };
 
-  const dataPull = doc => {
-    let data = doc.data();
-    return {
-      id: data.id,
-      latestEstimate: data.numberOfDays,
-      lastPurchase: data.dateOfPurchase.toDate(),
-      numberOfPurchases: +data.numberOfPurchases,
-    };
-  };
-
+  // Uses past data and today's date to calculate new numberOfDays, nextPurchaseDate, and numberOfPurchases
   const calculateNewPurchaseValues = data => {
     let now = dayjs(today);
-    let latestInterval = now.diff(dayjs(data.lastPurchase, 'day'));
+
+    let latestInterval = now.diff(dayjs(data.dateOfPurchase.toDate(), 'day'));
     let newEstimate = calculateEstimate(
       data.numberOfDays,
       latestInterval,
