@@ -17,15 +17,6 @@ describe("Add Item To List", function() {
       .should("have.value", "watermelon");
   });
 
-  it("Resets input field after addItem button click", function() {
-    cy.visit("/add");
-    cy.get(".inputField").type("marshmallows");
-
-    cy.get("#addItemButton").click();
-
-    cy.get(".inputField").should("have.value", "");
-  });
-
   it("Selects correct frequency button", function() {
     cy.visit("/add");
     cy.get("#soonButton").should("have.value", "7");
@@ -42,9 +33,9 @@ describe("Add Item To List", function() {
   it("Checks for alert message when duplicate item is entered", function() {
     cy.visit("/add");
     cy.get(".inputField").type("Cream Cheese");
-    cy.get(".addItemButton").click();
+    cy.get("#addItemButton").click();
     cy.get(".inputField").type("Cream Cheese");
-    cy.get(".addItemButton").click();
+    cy.get("#addItemButton").click();
     expect(cy.contains("Oops!"));
   });
 });
