@@ -6,7 +6,10 @@ import DeleteToken from './DeleteToken';
 
 const FetchItems = ({ token, setToken, firestore }) => {
   const [empty, setEmpty] = useState(true);
-  const today = Date.now();
+
+  // stores the number of milliseconds elapsed since January 1, 1970
+  const todayInMs = Date.now();
+  const today = new Date();
 
   const itemsDocRef = firestore
     .collection('lists')
@@ -20,33 +23,28 @@ const FetchItems = ({ token, setToken, firestore }) => {
     itemsDocRef
       .doc(itemId)
       .get()
-      .then(dataPull)
       .then(updateDatabase);
-  };
-
-  const dataPull = doc => {
-    let data = doc.data();
-    return {
-      id: data.id,
-      dateOfPurchase: data.dateOfPurchase,
-    };
   };
 
   const updateDatabase = data => {
     itemsDocRef.doc(data.id).update({
       purchasedWithinLastDay: true,
+      dateOfPurchaseInMs: todayInMs,
       dateOfPurchase: today,
     });
   };
 
+  // This function is called from within className prop
+  // each time items get rendered & it sets the class
+  // based on whether an item has been purchased within
+  // the last 24 hours
   const calculateIfPurchased = item => {
     if (item.purchasedWithinLastDay) {
-      let now = today;
-      let dateOfPurchase = item.dateOfPurchase;
-      let hourInMilliseconds = 3600000;
-      console.log('now:' + now);
-      console.log('date of purchase seconds: ' + dateOfPurchase);
-      if (now - dateOfPurchase >= 24 * hourInMilliseconds) {
+      let nowInMs = todayInMs;
+      let dateOfPurchaseInMs = item.dateOfPurchase;
+      let hourInMs = 3600000;
+
+      if (nowInMs - dateOfPurchaseInMs >= 24 * hourInMs) {
         return 'nonPurchasedItem';
       } else {
         return 'purchasedItem';
