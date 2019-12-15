@@ -7,7 +7,6 @@ import calculateNewPurchaseValues from '../calculations';
 
 const FetchItems = ({ token, setToken, firestore }) => {
   const [empty, setEmpty] = useState(true);
-  const today = new Date();
 
   const itemsDocRef = firestore
     .collection('lists')
@@ -22,7 +21,7 @@ const FetchItems = ({ token, setToken, firestore }) => {
       .doc(itemId)
       .get()
       .then(doc => {
-        return calculateNewPurchaseValues(doc.data(), today);
+        return calculateNewPurchaseValues(doc.data());
       })
       .then(updateDatabase);
   };
@@ -30,7 +29,7 @@ const FetchItems = ({ token, setToken, firestore }) => {
   const updateDatabase = data => {
     itemsDocRef.doc(data.id).update({
       numberOfDays: data.numberOfDays,
-      dateOfPurchase: today,
+      dateOfPurchase: data.dateOfPurchase,
       numberOfPurchases: data.numberOfPurchases,
       nextPurchaseDate: data.nextPurchaseDate,
     });

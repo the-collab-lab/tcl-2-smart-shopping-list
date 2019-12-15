@@ -20,8 +20,10 @@ const calculateEstimate = (lastEstimate, latestInterval, numberOfPurchases) => {
 };
 
 // Uses past data and today's date to calculate new numberOfDays, nextPurchaseDate, and numberOfPurchases
-const calculateNewPurchaseValues = (data, today) => {
+const calculateNewPurchaseValues = data => {
+  let today = new Date();
   let now = dayjs(today);
+
   let lastPurchaseDate =
     data.dateOfPurchase instanceof Date
       ? data.dateOfPurchase
@@ -39,6 +41,7 @@ const calculateNewPurchaseValues = (data, today) => {
     numberOfDays: newEstimate,
     numberOfPurchases: data.numberOfPurchases + 1,
     nextPurchaseDate: newNextPurchaseDate.toDate(),
+    dateOfPurchase: today,
   };
 };
 
