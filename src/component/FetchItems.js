@@ -3,21 +3,43 @@ import { Redirect, Link } from 'react-router-dom';
 import { FirestoreCollection, withFirestore } from 'react-firestore';
 import Navbar from './Navbar';
 import DeleteToken from './DeleteToken';
+import calculateNewPurchaseValues from '../calculations';
 
 const FetchItems = ({ token, setToken, firestore }) => {
   const [empty, setEmpty] = useState(true);
 
+  const itemsDocRef = firestore
+    .collection('lists')
+    .doc(token)
+    .collection('items');
+
+  // function to change database on button click
+  const handlePurchase = event => {
+    let itemId = event.target.id;
+    event.preventDefault();
+    itemsDocRef
+      .doc(itemId)
+      .get()
+      .then(doc => {
+        return calculateNewPurchaseValues(doc.data());
+      })
+      .then(updateDatabase);
+  };
+
+  const updateDatabase = data => {
+    itemsDocRef.doc(data.id).update({
+      numberOfDays: data.numberOfDays,
+      dateOfPurchase: data.dateOfPurchase,
+      numberOfPurchases: data.numberOfPurchases,
+    });
+  };
+
   if (!token) {
     return <Redirect to="" />;
   } else {
-    firestore
-      .collection('lists')
-      .doc(token)
-      .collection('items')
-      .get()
-      .then(items => {
-        setEmpty(items.empty);
-      });
+    itemsDocRef.get().then(items => {
+      setEmpty(items.empty);
+    });
   }
 
   // Token stored in user's local storage
@@ -49,7 +71,16 @@ const FetchItems = ({ token, setToken, firestore }) => {
                 <ul>
                   {data.map(item => (
                     <li key={item.id}>
-                      <div className={item.name}>{item.name}</div>
+                      <div className={item.name}>
+                        {item.name}
+                        <button
+                          onClick={handlePurchase}
+                          className="button-link"
+                          id={item.id}
+                        >
+                          Purchase
+                        </button>
+                      </div>
                     </li>
                   ))}
                 </ul>

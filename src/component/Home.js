@@ -7,7 +7,7 @@ function Home({ token, setToken }) {
     <div className="homeWrap">
       <h1>New Shopping List</h1>
       <GetToken token={token} setToken={setToken} />
-      <Link to="/join" className="button-link">
+      <Link to="/join" className="button-link" id="join-list">
         Join Existing List
       </Link>
     </div>

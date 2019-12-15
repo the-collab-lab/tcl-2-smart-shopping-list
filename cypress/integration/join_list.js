@@ -9,8 +9,7 @@ describe("Join an existing list", function() {
 
 	it("Redirects to list page on valid token submit", function() {
 		cy.visit("/");
-		cy.get("#tokenButton").click();
-    cy.visit("/join");
+		cy.get("#join-list").click();
 		cy.get(".inputField").type("token1234");
 		cy.get("#joinListButton").click()
 		cy.url().should('eq', Cypress.config().baseUrl + '/list')

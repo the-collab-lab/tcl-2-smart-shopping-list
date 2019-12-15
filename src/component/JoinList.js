@@ -2,15 +2,8 @@ import React, { useState } from 'react';
 import { withFirestore } from 'react-firestore';
 import { Redirect, Link } from 'react-router-dom';
 
-const JoinList = ({ firestore }) => {
-  const [token, setToken] = useState('');
+const JoinList = ({ token, setToken, firestore }) => {
   const [redirect, setRedirect] = useState(false);
-
-  const renderRedirect = () => {
-    if (redirect) {
-      return <Redirect to="/list" />;
-    }
-  };
 
   // checks if token exists and if it does, sends to that specific tokens list page, and adds token to local storage
   //if token does ot exist, alert pops up telling you that
@@ -41,10 +34,11 @@ const JoinList = ({ firestore }) => {
   const handleSubmit = event => {
     event.preventDefault();
     checkTokenExists(token);
-    setToken('');
   };
 
-  return (
+  return redirect ? (
+    <Redirect to="/list" />
+  ) : (
     <p>
       <form onSubmit={handleSubmit}>
         <label>
@@ -57,7 +51,6 @@ const JoinList = ({ firestore }) => {
             className="inputField"
           />
         </label>
-        {renderRedirect()}
         <button
           onClick={handleSubmit}
           className="button-link"
