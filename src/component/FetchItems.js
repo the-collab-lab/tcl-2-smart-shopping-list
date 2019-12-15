@@ -31,7 +31,6 @@ const FetchItems = ({ token, setToken, firestore }) => {
       numberOfDays: data.numberOfDays,
       dateOfPurchase: data.dateOfPurchase,
       numberOfPurchases: data.numberOfPurchases,
-      nextPurchaseDate: data.nextPurchaseDate,
     });
   };
 

@@ -45,15 +45,13 @@ describe("Show list of items", function() {
         numberOfDays: 14,
         numberOfPurchases: 3,
         dateOfPurchase: new Date("2019-11-01"),
-        nextPurchaseDate: new Date("2019-11-15")
       }
 
       let newTestData = calculateNewPurchaseValues(testData, today);
       console.log('DATE OF PURCHASE: ',testData.dateOfPurchase)
       console.log(newTestData);
-      expect(newTestData.numberOfDays).to.eq(19.6);
+      expect(newTestData.numberOfDays).to.eq(26);
       expect(newTestData.numberOfPurchases).to.eq(4);
-      expect(newTestData.nextPurchaseDate.toDateString()).to.eq(new Date("2019-12-20").toDateString());
     })
   })
 });

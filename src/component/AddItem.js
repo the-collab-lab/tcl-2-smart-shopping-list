@@ -53,7 +53,6 @@ const AddItem = ({ firestore }) => {
           numberOfDays: +numberOfDays,
           dateOfPurchase: today,
           numberOfPurchases: 1,
-          nextPurchaseDate: nextPurchase,
         });
         setName('');
       }

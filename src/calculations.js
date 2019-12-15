@@ -34,13 +34,11 @@ const calculateNewPurchaseValues = data => {
     latestInterval,
     data.numberOfPurchases,
   );
-  let newNextPurchaseDate = now.add(newEstimate.toString(), 'day');
 
   return {
     id: data.id,
     numberOfDays: newEstimate,
     numberOfPurchases: data.numberOfPurchases + 1,
-    nextPurchaseDate: newNextPurchaseDate.toDate(),
     dateOfPurchase: today,
   };
 };
