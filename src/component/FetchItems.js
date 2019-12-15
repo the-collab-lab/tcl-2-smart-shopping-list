@@ -28,7 +28,6 @@ const FetchItems = ({ token, setToken, firestore }) => {
 
   const updateDatabase = data => {
     itemsDocRef.doc(data.id).update({
-      purchasedWithinLastDay: true,
       dateOfPurchaseInMs: todayInMs,
       dateOfPurchase: today,
     });
@@ -39,18 +38,12 @@ const FetchItems = ({ token, setToken, firestore }) => {
   // based on whether an item has been purchased within
   // the last 24 hours
   const calculateIfPurchased = item => {
-    if (item.purchasedWithinLastDay) {
-      let nowInMs = todayInMs;
-      let dateOfPurchaseInMs = item.dateOfPurchaseInMs;
-      let hourInMs = 3600000;
+    let nowInMs = todayInMs;
+    let dateOfPurchaseInMs = item.dateOfPurchaseInMs;
+    let hourInMs = 3600000;
 
-      if (nowInMs - dateOfPurchaseInMs >= 24 * hourInMs) {
-        // line below for testing and demonstration purposes
-        // if (nowInMs - dateOfPurchaseInMs >= 3000) {
-        return 'nonPurchasedItem';
-      } else {
-        return 'purchasedItem';
-      }
+    if (nowInMs - dateOfPurchaseInMs <= 24 * hourInMs) {
+      return 'purchasedItem';
     } else {
       return 'nonPurchasedItem';
     }

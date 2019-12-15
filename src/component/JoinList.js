@@ -21,7 +21,7 @@ const JoinList = ({ token, setToken, firestore }) => {
         .get()
         .then(doc => {
           if (doc.exists) {
-            addToLS(token);
+            addToLocalStorage(token);
             setRedirect(true);
           } else {
             alert('Enter a valid share code and try again.');
@@ -35,7 +35,7 @@ const JoinList = ({ token, setToken, firestore }) => {
     setToken(event.target.value);
   };
   // add token to local storage
-  const addToLS = token => {
+  const addToLocalStorage = token => {
     localStorage.setItem('uniqueToken', token);
   };
   // handles submitting form event then fires the checkToken function and sets the state token back to  an empty string
