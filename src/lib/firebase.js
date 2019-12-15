@@ -12,7 +12,6 @@ const firebaseConfig = {
   storageBucket: 'tcl-2-smart-shopping-list.appspot.com',
   messagingSenderId: '538706887514',
   appId: '1:538706887514:web:30b4235c1e8aa5fa19a963',
-  timestampsinSnapshots: true
 };
 
 const fb = firebase.initializeApp(firebaseConfig);
