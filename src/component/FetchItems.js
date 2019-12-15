@@ -3,13 +3,15 @@ import { Redirect, Link } from 'react-router-dom';
 import { FirestoreCollection, withFirestore } from 'react-firestore';
 import Navbar from './Navbar';
 import DeleteToken from './DeleteToken';
+import calculateNewPurchaseValues from '../calculations';
+import dayjs from 'dayjs';
 
 const FetchItems = ({ token, setToken, firestore }) => {
   const [empty, setEmpty] = useState(true);
 
   // stores the number of milliseconds elapsed since January 1, 1970
-  const todayInMs = Date.now();
-  const today = new Date();
+  const now = new Date();
+  const today = dayjs(now);
 
   const itemsDocRef = firestore
     .collection('lists')
@@ -23,13 +25,17 @@ const FetchItems = ({ token, setToken, firestore }) => {
     itemsDocRef
       .doc(itemId)
       .get()
+      .then(doc => {
+        return calculateNewPurchaseValues(doc.data());
+      })
       .then(updateDatabase);
   };
 
   const updateDatabase = data => {
     itemsDocRef.doc(data.id).update({
-      dateOfPurchaseInMs: todayInMs,
-      dateOfPurchase: today,
+      numberOfDays: data.numberOfDays,
+      dateOfPurchase: data.dateOfPurchase,
+      numberOfPurchases: data.numberOfPurchases,
     });
   };
 
@@ -38,11 +44,15 @@ const FetchItems = ({ token, setToken, firestore }) => {
   // based on whether an item has been purchased within
   // the last 24 hours
   const calculateIfPurchased = item => {
-    let nowInMs = todayInMs;
-    let dateOfPurchaseInMs = item.dateOfPurchaseInMs;
-    let hourInMs = 3600000;
+    console.log(today);
 
-    if (nowInMs - dateOfPurchaseInMs <= 24 * hourInMs) {
+    const dateOfPurchaseJS = dayjs(item.dateOfPurchase.toDate());
+
+    console.log(dateOfPurchaseJS);
+
+    console.log(today.diff(dateOfPurchaseJS, 'hour'));
+
+    if (today.diff(dateOfPurchaseJS, 'hour') <= 24) {
       return 'purchasedItem';
     } else {
       return 'nonPurchasedItem';
