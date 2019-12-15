@@ -22,6 +22,7 @@ describe('Show list of items', function() {
       cy.get('[data-cy=Back]').click();
       cy.contains('New test item');
     });
+
     it('Checks that item special characters & capitalization are not removed when rendered in list', function() {
       cy.visit('/add');
       cy.get('.inputField').type('Cream!.Cheese');
@@ -29,6 +30,7 @@ describe('Show list of items', function() {
       cy.contains('List').click();
       expect(cy.contains('Cream!.Cheese'));
     });
+
     it('Checks that list item has css class .purchasedItem after click', function() {
       cy.visit('/add');
       cy.get('.inputField').type('Purchased Item');

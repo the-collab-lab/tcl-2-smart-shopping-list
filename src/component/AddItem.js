@@ -10,6 +10,7 @@ const AddItem = ({ firestore }) => {
   const [duplicate, setDuplicate] = useState(false);
 
   const uniqueToken = localStorage.getItem('uniqueToken');
+  const today = new Date();
 
   // consts and state used for the numberOfDays buttons
   const soon = '7';
@@ -19,6 +20,8 @@ const AddItem = ({ firestore }) => {
 
   //   Write item to Firebase setting uniqueToken as document name
   const addItem = (normalizedName, numberOfDays) => {
+    let nextPurchase = new Date();
+    nextPurchase.setDate(today.getDate() + parseInt(numberOfDays));
     // adds new items collection to database
     firestore
       .collection('lists')
@@ -48,6 +51,9 @@ const AddItem = ({ firestore }) => {
           id: normalizedName,
           name: name,
           numberOfDays: +numberOfDays,
+          dateOfPurchase: today,
+          numberOfPurchases: 1,
+          nextPurchaseDate: nextPurchase,
         });
         setName('');
       }
@@ -82,7 +88,13 @@ const AddItem = ({ firestore }) => {
   const handleSubmit = event => {
     event.preventDefault();
     let normalizedName = normalizeName(name);
-    addItem(normalizedName, numberOfDays);
+    // This conditional allows the add button to be accidentally clicked
+    // while the form is empty without throwing an error
+    if (normalizedName === '') {
+      return;
+    } else {
+      addItem(normalizedName, numberOfDays);
+    }
   };
 
   return (

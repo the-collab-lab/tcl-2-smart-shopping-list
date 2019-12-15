@@ -93,20 +93,6 @@ a:visited {
   font-size: 1.1rem;
 }
 
-/* .fetchItemsSection {
-  margin: auto;
-  width: fit-content;
-} */
-
-/* .purchasedCheck {
-  width: 10px;
-}
-
-.purchasedCheck:hover {
-  transform: scale(2);
-  cursor: pointer;
-} */
-
 .nonPurchasedItem {
   list-style-type: none;
   padding: 10px;
