@@ -41,10 +41,12 @@ const FetchItems = ({ token, setToken, firestore }) => {
   const calculateIfPurchased = item => {
     if (item.purchasedWithinLastDay) {
       let nowInMs = todayInMs;
-      let dateOfPurchaseInMs = item.dateOfPurchase;
+      let dateOfPurchaseInMs = item.dateOfPurchaseInMs;
       let hourInMs = 3600000;
 
       if (nowInMs - dateOfPurchaseInMs >= 24 * hourInMs) {
+        // line below for testing and demonstration purposes
+        // if (nowInMs - dateOfPurchaseInMs >= 3000) {
         return 'nonPurchasedItem';
       } else {
         return 'purchasedItem';
