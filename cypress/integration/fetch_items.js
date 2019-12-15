@@ -1,5 +1,7 @@
-describe('Show list of items', function() {
-  describe('Empty List', function() {
+import calculateNewPurchaseValues from '../../src/calculations'
+
+describe("Show list of items", function() {
+  describe("Empty List", function() {
     beforeEach(function() {
       window.localStorage.setItem('uniqueToken', 'empty_test_token');
     });
@@ -45,4 +47,22 @@ describe('Show list of items', function() {
   afterEach(function() {
     window.localStorage.removeItem('uniqueToken');
   });
+
+  describe("Update purchase values", function() {
+    it("Calculates new values when purchased", function() {
+      const today = new Date("2019-11-30")
+      let testData = {
+        id: 'Test Data',
+        numberOfDays: 14,
+        numberOfPurchases: 3,
+        dateOfPurchase: new Date("2019-11-01"),
+      }
+
+      let newTestData = calculateNewPurchaseValues(testData, today);
+      console.log('DATE OF PURCHASE: ',testData.dateOfPurchase)
+      console.log(newTestData);
+      expect(newTestData.numberOfDays).to.eq(26);
+      expect(newTestData.numberOfPurchases).to.eq(4);
+    })
+  })
 });
