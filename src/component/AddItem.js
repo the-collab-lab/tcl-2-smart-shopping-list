@@ -87,7 +87,13 @@ const AddItem = ({ firestore }) => {
   const handleSubmit = event => {
     event.preventDefault();
     let normalizedName = normalizeName(name);
-    addItem(normalizedName, numberOfDays);
+    // This conditional allows the add button to be accidentally clicked
+    // while the form is empty without throwing an error
+    if (normalizedName === '') {
+      return;
+    } else {
+      addItem(normalizedName, numberOfDays);
+    }
   };
 
   return (

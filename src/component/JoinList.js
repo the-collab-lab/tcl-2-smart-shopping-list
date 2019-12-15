@@ -5,21 +5,29 @@ import { Redirect, Link } from 'react-router-dom';
 const JoinList = ({ token, setToken, firestore }) => {
   const [redirect, setRedirect] = useState(false);
 
-  // checks if token exists and if it does, sends to that specific tokens list page, and adds token to local storage
-  //if token does ot exist, alert pops up telling you that
+  // checks if token exists and if it does, sends to that specific tokens
+  // list page, and adds token to local storage if token does ot exist,
+  // alert pops up telling you that
   const checkTokenExists = token => {
-    firestore
-      .collection('lists')
-      .doc(token)
-      .get()
-      .then(doc => {
-        if (doc.exists) {
-          addToLS(token);
-          setRedirect(true);
-        } else {
-          alert('Enter a valid share code and try again.');
-        }
-      });
+    // This conditional allows the Join List button to be accidentally clicked
+    // when the input is blank without throwing an error. Is there a better
+    // fix? - ethan
+    if (token === null) {
+      return;
+    } else {
+      firestore
+        .collection('lists')
+        .doc(token)
+        .get()
+        .then(doc => {
+          if (doc.exists) {
+            addToLocalStorage(token);
+            setRedirect(true);
+          } else {
+            alert('Enter a valid share code and try again.');
+          }
+        });
+    }
   };
 
   // event listner watching the value of the form change and setting it to token state
@@ -27,7 +35,7 @@ const JoinList = ({ token, setToken, firestore }) => {
     setToken(event.target.value);
   };
   // add token to local storage
-  const addToLS = token => {
+  const addToLocalStorage = token => {
     localStorage.setItem('uniqueToken', token);
   };
   // handles submitting form event then fires the checkToken function and sets the state token back to  an empty string
@@ -39,12 +47,14 @@ const JoinList = ({ token, setToken, firestore }) => {
   return redirect ? (
     <Redirect to="/list" />
   ) : (
-    <p>
+    <React.Fragment>
       <form onSubmit={handleSubmit}>
         <label>
           Type in list token:
           <input
-            value={token}
+            // Setting value to token or a blank string deals with a react
+            //  warning regarding controlled vs uncontrolled components
+            value={token || ''}
             type="text"
             id="uniqueToken"
             onChange={handleChange}
@@ -63,7 +73,7 @@ const JoinList = ({ token, setToken, firestore }) => {
       <Link to="/" className="button-link" id="newListButton">
         Start a New List
       </Link>
-    </p>
+    </React.Fragment>
   );
 };
 

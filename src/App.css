@@ -93,6 +93,26 @@ a:visited {
   font-size: 1.1rem;
 }
 
+.nonPurchasedItem {
+  list-style-type: none;
+  padding: 10px;
+  margin: 10px;
+  background-color: #ff165d;
+  border-radius: 8%;
+}
+
+.nonPurchasedItem:hover,
+.purchasedItem {
+  list-style-type: none;
+  padding: 10px;
+  margin: 10px;
+  background-color: #ff165d;
+  border-radius: 8%;
+  text-decoration: line-through;
+  cursor: pointer;
+  opacity: 80%;
+}
+
 /* Add View Specific Styling */
 
 .daysButtons {

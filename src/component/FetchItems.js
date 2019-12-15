@@ -4,9 +4,14 @@ import { FirestoreCollection, withFirestore } from 'react-firestore';
 import Navbar from './Navbar';
 import DeleteToken from './DeleteToken';
 import calculateNewPurchaseValues from '../calculations';
+import dayjs from 'dayjs';
 
 const FetchItems = ({ token, setToken, firestore }) => {
   const [empty, setEmpty] = useState(true);
+
+  // stores the number of milliseconds elapsed since January 1, 1970
+  const now = new Date();
+  const today = dayjs(now);
 
   const itemsDocRef = firestore
     .collection('lists')
@@ -32,6 +37,26 @@ const FetchItems = ({ token, setToken, firestore }) => {
       dateOfPurchase: data.dateOfPurchase,
       numberOfPurchases: data.numberOfPurchases,
     });
+  };
+
+  // This function is called from within className prop
+  // each time items get rendered & it sets the class
+  // based on whether an item has been purchased within
+  // the last 24 hours
+  const calculateIfPurchased = item => {
+    console.log(today);
+
+    const dateOfPurchaseJS = dayjs(item.dateOfPurchase.toDate());
+
+    console.log(dateOfPurchaseJS);
+
+    console.log(today.diff(dateOfPurchaseJS, 'hour'));
+
+    if (today.diff(dateOfPurchaseJS, 'hour') <= 24) {
+      return 'purchasedItem';
+    } else {
+      return 'nonPurchasedItem';
+    }
   };
 
   if (!token) {
@@ -70,16 +95,17 @@ const FetchItems = ({ token, setToken, firestore }) => {
                 <h2>Items</h2>
                 <ul>
                   {data.map(item => (
-                    <li key={item.id}>
-                      <div className={item.name}>
+                    <li
+                      id={item.id}
+                      key={item.id}
+                      className={calculateIfPurchased(item)}
+                    >
+                      <div
+                        className={item.name}
+                        onClick={handlePurchase}
+                        id={item.id}
+                      >
                         {item.name}
-                        <button
-                          onClick={handlePurchase}
-                          className="button-link"
-                          id={item.id}
-                        >
-                          Purchase
-                        </button>
                       </div>
                     </li>
                   ))}
