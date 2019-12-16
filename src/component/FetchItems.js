@@ -44,13 +44,7 @@ const FetchItems = ({ token, setToken, firestore }) => {
   // based on whether an item has been purchased within
   // the last 24 hours
   const calculateIfPurchased = item => {
-    console.log(today);
-
     const dateOfPurchaseJS = dayjs(item.dateOfPurchase.toDate());
-
-    console.log(dateOfPurchaseJS);
-
-    console.log(today.diff(dateOfPurchaseJS, 'hour'));
 
     if (today.diff(dateOfPurchaseJS, 'hour') <= 24) {
       return 'purchasedItem';
