@@ -9,13 +9,24 @@ import dayjs from 'dayjs';
 const FetchItems = ({ token, setToken, firestore }) => {
   const [empty, setEmpty] = useState(true);
 
+  // This function tricks firestore into believing that there is a valid token
+  // so that the app is able to re-render back to the home page when the delete
+  // token button is used.
+  const handleDelete = () => {
+    if (token) {
+      return token;
+    } else {
+      return 'thisisnotarealtoken';
+    }
+  };
+
   // stores the number of milliseconds elapsed since January 1, 1970
   const now = new Date();
   const today = dayjs(now);
 
   const itemsDocRef = firestore
     .collection('lists')
-    .doc(token)
+    .doc(handleDelete())
     .collection('items');
 
   // function to change database on button click
