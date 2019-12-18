@@ -90,18 +90,17 @@ const FetchItems = ({ token, setToken, firestore }) => {
                 <h2>Items</h2>
                 <ul>
                   {data.map(item => (
-                    <li
-                      id={item.id}
-                      key={item.id}
-                      className={calculateIfPurchased(item)}
-                    >
-                      <div
-                        className={item.name}
+                    <li id={item.id} key={item.id} className="listItem">
+                      <span
+                        className={calculateIfPurchased(item)}
                         onClick={handlePurchase}
                         id={item.id}
                       >
                         {item.name}
-                      </div>
+                      </span>
+                      <Link className="viewMore" to={'/' + item.id}>
+                        >>>
+                      </Link>
                     </li>
                   ))}
                 </ul>

@@ -93,24 +93,33 @@ a:visited {
   font-size: 1.1rem;
 }
 
-.nonPurchasedItem {
+.listItem {
   list-style-type: none;
+  margin: 5vh;
+  margin-left: 6vw;
+}
+
+.nonPurchasedItem {
   padding: 10px;
-  margin: 10px;
   background-color: #ff165d;
   border-radius: 8%;
 }
 
 .nonPurchasedItem:hover,
 .purchasedItem {
-  list-style-type: none;
   padding: 10px;
-  margin: 10px;
   background-color: #ff165d;
   border-radius: 8%;
   text-decoration: line-through;
   cursor: pointer;
-  opacity: 80%;
+  opacity: 0.8;
+}
+
+.viewMore {
+  margin-left: 20px;
+  background-color: #ffd800;
+  border-radius: 8%;
+  padding: 5px;
 }
 
 /* Add View Specific Styling */
@@ -129,7 +138,7 @@ a:visited {
   display: inline-block;
   padding: 10px 20px;
   margin: 1vh;
-  opacity: 90%;
+  opacity: 0.9;
   font-size: 0.9rem;
   border: 2px solid #000;
 }
@@ -137,7 +146,7 @@ a:visited {
 .daysButtons input[type='radio']:focus + label,
 .daysButtons input[type='radio']:checked + label,
 .daysButtons label:hover {
-  opacity: 100%;
+  opacity: 1;
   box-shadow: 2px 2px 3px #000;
   font-size: 1rem;
   cursor: pointer;
