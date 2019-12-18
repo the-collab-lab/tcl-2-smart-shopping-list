@@ -9,25 +9,22 @@ import dayjs from 'dayjs';
 const FetchItems = ({ token, setToken, firestore }) => {
   const [empty, setEmpty] = useState(true);
 
-  // This function tricks firestore into believing that there is a valid token
-  // so that the app is able to re-render back to the home page when the delete
-  // token button is used.
-  const handleDelete = () => {
-    if (token) {
-      return token;
-    } else {
-      return 'thisisnotarealtoken';
-    }
-  };
+  if (!token) {
+    return <Redirect to="" />;
+  } else {
+    var itemsDocRef = firestore // use var for function scoping
+      .collection('lists')
+      .doc(token)
+      .collection('items');
+
+    itemsDocRef.get().then(items => {
+      setEmpty(items.empty);
+    });
+  }
 
   // stores the number of milliseconds elapsed since January 1, 1970
   const now = new Date();
   const today = dayjs(now);
-
-  const itemsDocRef = firestore
-    .collection('lists')
-    .doc(handleDelete())
-    .collection('items');
 
   // function to change database on button click
   const handlePurchase = event => {
@@ -63,14 +60,6 @@ const FetchItems = ({ token, setToken, firestore }) => {
       return 'nonPurchasedItem';
     }
   };
-
-  if (!token) {
-    return <Redirect to="" />;
-  } else {
-    itemsDocRef.get().then(items => {
-      setEmpty(items.empty);
-    });
-  }
 
   // Token stored in user's local storage
   const uniqueToken = localStorage.getItem('uniqueToken');
