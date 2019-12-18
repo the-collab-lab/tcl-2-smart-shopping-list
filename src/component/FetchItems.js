@@ -74,6 +74,8 @@ const FetchItems = ({ token, setToken, firestore }) => {
         //name of collection you want to collect, with filter you can narrow this down to specific document
         path={concatPath}
         // optional more parameters (sort, limit, filter)
+        sort="numberOfDays:asc"
+        filter={['numberOfDays', '>=', 7]}
         render={({ isLoading, data }) => {
           // Renders according to whether or not the list is empty
           if (isLoading) {
