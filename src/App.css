@@ -110,7 +110,7 @@ a:visited {
   border-radius: 8%;
   text-decoration: line-through;
   cursor: pointer;
-  opacity: 80%;
+  opacity: 0.8;
 }
 
 /* Add View Specific Styling */
@@ -129,7 +129,7 @@ a:visited {
   display: inline-block;
   padding: 10px 20px;
   margin: 1vh;
-  opacity: 90%;
+  opacity: 0.9;
   font-size: 0.9rem;
   border: 2px solid #000;
 }
@@ -137,7 +137,7 @@ a:visited {
 .daysButtons input[type='radio']:focus + label,
 .daysButtons input[type='radio']:checked + label,
 .daysButtons label:hover {
-  opacity: 100%;
+  opacity: 1;
   box-shadow: 2px 2px 3px #000;
   font-size: 1rem;
   cursor: pointer;
