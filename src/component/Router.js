@@ -6,6 +6,7 @@ import FetchItems from './FetchItems';
 import AddItem from './AddItem';
 import JoinList from './JoinList';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import ItemDetails from './ItemDetails';
 
 function RouterComponent() {
   const [token, setToken] = useState(localStorage.getItem('uniqueToken'));
@@ -21,6 +22,9 @@ function RouterComponent() {
         </Route>
         <Route path="/join">
           <JoinList token={token} setToken={setToken} />
+        </Route>
+        <Route path="/:itemId">
+          <ItemDetails token={token} setToken={setToken} />
         </Route>
         <Route path="">
           {token === null ? (
