@@ -8,15 +8,24 @@ import dayjs from 'dayjs';
 
 const FetchItems = ({ token, setToken, firestore }) => {
   const [empty, setEmpty] = useState(true);
+  let itemsDocRef;
+
+  if (!token) {
+    return <Redirect to="" />;
+  } else {
+    itemsDocRef = firestore
+      .collection('lists')
+      .doc(token)
+      .collection('items');
+
+    itemsDocRef.get().then(items => {
+      setEmpty(items.empty);
+    });
+  }
 
   // stores the number of milliseconds elapsed since January 1, 1970
   const now = new Date();
   const today = dayjs(now);
-
-  const itemsDocRef = firestore
-    .collection('lists')
-    .doc(token)
-    .collection('items');
 
   // function to change database on button click
   const handlePurchase = event => {
@@ -52,14 +61,6 @@ const FetchItems = ({ token, setToken, firestore }) => {
       return 'nonPurchasedItem';
     }
   };
-
-  if (!token) {
-    return <Redirect to="" />;
-  } else {
-    itemsDocRef.get().then(items => {
-      setEmpty(items.empty);
-    });
-  }
 
   // Token stored in user's local storage
   const uniqueToken = localStorage.getItem('uniqueToken');
