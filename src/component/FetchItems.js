@@ -8,11 +8,12 @@ import dayjs from 'dayjs';
 
 const FetchItems = ({ token, setToken, firestore }) => {
   const [empty, setEmpty] = useState(true);
+  let itemsDocRef;
 
   if (!token) {
     return <Redirect to="" />;
   } else {
-    var itemsDocRef = firestore // use var for function scoping
+    itemsDocRef = firestore
       .collection('lists')
       .doc(token)
       .collection('items');
