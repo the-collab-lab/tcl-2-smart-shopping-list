@@ -256,3 +256,8 @@ a:visited {
     top: -10%;
   }
 }
+
+/* Item Detail Styling */
+.itemDetails {
+  list-style: none;
+}

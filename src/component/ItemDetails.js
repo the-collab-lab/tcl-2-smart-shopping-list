@@ -26,7 +26,7 @@ const ItemDetails = props => {
           return (
             <main>
               <h1>{item.name}</h1>
-              <ul>
+              <ul className="itemDetails">
                 <li>Last purchase date: {lastPurchaseDate.toDateString()}</li>
                 <li>Next purchase date: {nextPurchaseDate.toDateString()}</li>
                 <li>Number of purchases: {item.numberOfPurchases}</li>
