@@ -22,7 +22,7 @@ const SortedList = ({ token, handlePurchase, calculateIfPurchased }) => {
           } else {
             return (
               <div>
-                <h2>Items</h2>
+                <h2>SWWOOON Items</h2>
                 <ul>
                   {data.map(item => (
                     <li
@@ -49,14 +49,17 @@ const SortedList = ({ token, handlePurchase, calculateIfPurchased }) => {
       <FirestoreCollection
         path={concatPath}
         sort="numberOfDays:asc"
-        filter={['numberOfDays', '<', 7]}
+        filter={[
+          ['numberOfDays', '>=', 7],
+          ['numberOfDays', '<=', 30],
+        ]}
         render={({ isLoading, data }) => {
           if (isLoading) {
             return <div>Still Loading...</div>;
           } else {
             return (
               <div>
-                <h2>Items</h2>
+                <h2>Kind of Soon Items</h2>
                 <ul>
                   {data.map(item => (
                     <li
@@ -83,14 +86,14 @@ const SortedList = ({ token, handlePurchase, calculateIfPurchased }) => {
       <FirestoreCollection
         path={concatPath}
         sort="numberOfDays:asc"
-        filter={['numberOfDays', '<', 7]}
+        filter={['numberOfDays', '>', 30]}
         render={({ isLoading, data }) => {
           if (isLoading) {
             return <div>Still Loading...</div>;
           } else {
             return (
               <div>
-                <h2>Items</h2>
+                <h2>Not soon Items</h2>
                 <ul>
                   {data.map(item => (
                     <li
@@ -117,14 +120,14 @@ const SortedList = ({ token, handlePurchase, calculateIfPurchased }) => {
       <FirestoreCollection
         path={concatPath}
         sort="numberOfDays:asc"
-        filter={['numberOfDays', '<', 7]}
+        filter={['numberOfPurchases', '==', 1]}
         render={({ isLoading, data }) => {
           if (isLoading) {
             return <div>Still Loading...</div>;
           } else {
             return (
               <div>
-                <h2>Items</h2>
+                <h2>Inactive Items</h2>
                 <ul>
                   {data.map(item => (
                     <li
