@@ -96,7 +96,10 @@ a:visited {
 .listItem {
   list-style-type: none;
   margin: 5vh;
-  margin-left: 6vw;
+}
+
+.listItem:hover .viewMore {
+  display: inline;
 }
 
 .nonPurchasedItem {
@@ -117,9 +120,11 @@ a:visited {
 
 .viewMore {
   margin-left: 20px;
-  background-color: #ffd800;
+  background-color: #fff;
   border-radius: 8%;
-  padding: 5px;
+  padding: 10px;
+  display: none;
+  color: #000;
 }
 
 /* Add View Specific Styling */
