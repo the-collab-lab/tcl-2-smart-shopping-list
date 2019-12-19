@@ -1,8 +1,10 @@
 import React from 'react';
 import { FirestoreCollection, withFirestore } from 'react-firestore';
 import dayjs from 'dayjs';
+import { useParams } from 'react-router-dom';
 
-const ItemDetails = props => {
+const ItemDetails = () => {
+  let { itemId } = useParams();
   const uniqueToken = localStorage.getItem('uniqueToken');
   const concatPath = `/lists/${uniqueToken}/items`;
 
@@ -13,7 +15,7 @@ const ItemDetails = props => {
       path={concatPath}
       render={({ isLoading, data }) => {
         // Renders according to whether or not the list is empty
-        const item = data.find(x => x.id === 'banana');
+        const item = data.find(x => x.id === itemId);
 
         if (isLoading) {
           return <div>Still Loading...</div>;
