@@ -2,6 +2,7 @@ import React from 'react';
 import { FirestoreCollection, withFirestore } from 'react-firestore';
 import dayjs from 'dayjs';
 import { useParams } from 'react-router-dom';
+import BackButton from './BackButton';
 
 const ItemDetails = () => {
   let { itemId } = useParams();
@@ -27,10 +28,11 @@ const ItemDetails = () => {
 
           return (
             <main>
+              <BackButton />
               <h1>{item.name}</h1>
               <ul className="itemDetails">
-                <li>Last purchase date: {lastPurchaseDate.toDateString()}</li>
-                <li>Next purchase date: {nextPurchaseDate.toDateString()}</li>
+                <li>Last purchase: {lastPurchaseDate.toDateString()}</li>
+                <li>Next purchase: {nextPurchaseDate.toDateString()}</li>
                 <li>Number of purchases: {item.numberOfPurchases}</li>
               </ul>
             </main>

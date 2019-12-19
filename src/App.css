@@ -82,6 +82,10 @@ a:visited {
 
 /* List View Specific Styling */
 
+.fetchItems {
+  width: 80vw;
+}
+
 .delete-button {
   position: absolute;
   top: 5vh;
@@ -95,11 +99,13 @@ a:visited {
 
 .listItem {
   list-style-type: none;
-  margin: 5vh;
+  width: fit-content;
+  margin: 5vh auto;
+  display: flex;
 }
 
 .listItem:hover .viewMore {
-  display: inline;
+  display: inline-block;
 }
 
 .nonPurchasedItem {
@@ -119,12 +125,13 @@ a:visited {
 }
 
 .viewMore {
-  margin-left: 20px;
   background-color: #fff;
   border-radius: 8%;
   padding: 10px;
   display: none;
   color: #000;
+  height: fit-content;
+  margin: auto 0 auto 20px;
 }
 
 /* Add View Specific Styling */

@@ -86,18 +86,18 @@ const FetchItems = ({ token, setToken, firestore }) => {
             );
           } else {
             return (
-              <div>
+              <div className="fetchItems">
                 <h2>Items</h2>
                 <ul>
                   {data.map(item => (
                     <li id={item.id} key={item.id} className="listItem">
-                      <span
+                      <div
                         className={calculateIfPurchased(item)}
                         onClick={handlePurchase}
                         id={item.id}
                       >
                         {item.name}
-                      </span>
+                      </div>
                       <Link className="viewMore" to={'/' + item.id}>
                         >>>
                       </Link>
