@@ -10,7 +10,9 @@ const SortedList = ({ token, handlePurchase, calculateIfPurchased }) => {
   const concatPath = `/lists/${token}/items`;
 
   return (
-    <React.Fragment>
+    <section className="listFrame">
+      <h1>&#128722;My Shopping List</h1>
+      {/* could also use &#128717; which is shopping bags */}
       {/* // items that need to buy soon (fewer than seven days) */}
       <FirestoreCollection
         path={concatPath}
@@ -21,8 +23,8 @@ const SortedList = ({ token, handlePurchase, calculateIfPurchased }) => {
             return <div>Still Loading...</div>;
           } else {
             return (
-              <div>
-                <h2>SWWOOON Items</h2>
+              <div id="soonItems">
+                <h2 className="itemsLabel">Soon Items</h2>
                 <ul>
                   {data.map(item => (
                     <li
@@ -34,6 +36,8 @@ const SortedList = ({ token, handlePurchase, calculateIfPurchased }) => {
                         className={item.name}
                         onClick={handlePurchase}
                         id={item.id}
+                        aria-label="Soon Item"
+                        aria-required="true"
                       >
                         {item.name}
                       </div>
@@ -58,8 +62,8 @@ const SortedList = ({ token, handlePurchase, calculateIfPurchased }) => {
             return <div>Still Loading...</div>;
           } else {
             return (
-              <div>
-                <h2>Kind of Soon Items</h2>
+              <div id="kindOfSoonItems">
+                <h2 className="itemsLabel">Kind of Soon Items</h2>
                 <ul>
                   {data.map(item => (
                     <li
@@ -71,6 +75,8 @@ const SortedList = ({ token, handlePurchase, calculateIfPurchased }) => {
                         className={item.name}
                         onClick={handlePurchase}
                         id={item.id}
+                        aria-label="Kind of soon Item"
+                        aria-required="true"
                       >
                         {item.name}
                       </div>
@@ -92,8 +98,8 @@ const SortedList = ({ token, handlePurchase, calculateIfPurchased }) => {
             return <div>Still Loading...</div>;
           } else {
             return (
-              <div>
-                <h2>Not soon Items</h2>
+              <div id="notSoonItems">
+                <h2 className="itemsLabel">Not soon Items</h2>
                 <ul>
                   {data.map(item => (
                     <li
@@ -105,6 +111,8 @@ const SortedList = ({ token, handlePurchase, calculateIfPurchased }) => {
                         className={item.name}
                         onClick={handlePurchase}
                         id={item.id}
+                        aria-label="Not so soon Item"
+                        aria-required="true"
                       >
                         {item.name}
                       </div>
@@ -126,8 +134,8 @@ const SortedList = ({ token, handlePurchase, calculateIfPurchased }) => {
             return <div>Still Loading...</div>;
           } else {
             return (
-              <div>
-                <h2>Inactive Items</h2>
+              <div id="inactiveItems">
+                <h2 className="itemsLabel">Inactive Items</h2>
                 <ul>
                   {data.map(item => (
                     <li
@@ -139,6 +147,8 @@ const SortedList = ({ token, handlePurchase, calculateIfPurchased }) => {
                         className={item.name}
                         onClick={handlePurchase}
                         id={item.id}
+                        aria-label="Inactive item"
+                        aria-required="true"
                       >
                         {item.name}
                       </div>
@@ -150,7 +160,7 @@ const SortedList = ({ token, handlePurchase, calculateIfPurchased }) => {
           }
         }}
       />
-    </React.Fragment>
+    </section>
   );
 };
 
