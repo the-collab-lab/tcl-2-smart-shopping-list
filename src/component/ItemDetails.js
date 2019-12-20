@@ -11,16 +11,15 @@ const ItemDetails = () => {
 
   return (
     <FirestoreCollection
-      /* //name of collection you want to collect, with filter you can narrow this
-      down to specific document  */
       path={concatPath}
       render={({ isLoading, data }) => {
-        // Renders according to whether or not the list is empty
+        // Finds specific element where the url param :itemId is equal to the item ID in the list.
         const item = data.find(x => x.id === itemId);
 
         if (isLoading) {
           return <div>Still Loading...</div>;
         } else {
+          // Below lines calculate next purchase date using dayjs 'add' function.
           const lastPurchaseDate = item.dateOfPurchase.toDate();
           const nextPurchaseDate = dayjs(lastPurchaseDate)
             .add(item.numberOfDays.toString(), 'day')
