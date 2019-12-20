@@ -4,16 +4,15 @@ import dayjs from 'dayjs';
 import { useParams } from 'react-router-dom';
 import BackButton from './BackButton';
 
-const ItemDetails = () => {
+const ItemDetails = ({ token, setToken }) => {
   let { itemId } = useParams();
-  const uniqueToken = localStorage.getItem('uniqueToken');
-  const concatPath = `/lists/${uniqueToken}/items`;
+  const concatPath = `/lists/${token}/items`;
 
   return (
     <FirestoreCollection
       path={concatPath}
       render={({ isLoading, data }) => {
-        // Finds specific element where the url param :itemId is equal to the item ID in the list.
+        // Finds specific item where the url param :itemId is equal to the item ID in the list.
         const item = data.find(x => x.id === itemId);
 
         if (isLoading) {
