@@ -42,6 +42,12 @@ describe("Show list of items", function() {
       cy.get('.purchasedItem');
       expect(cy.contains('Purchased Item'));
     });
+
+    it('View more link goes to item details page', function() {
+      cy.visit('/list');
+      cy.get('#banana > .viewMore').invoke('show').click();
+      cy.url().should('eq', Cypress.config().baseUrl + '/banana')
+    });
   });
 
   afterEach(function() {
@@ -59,9 +65,7 @@ describe("Show list of items", function() {
       }
 
       let newTestData = calculateNewPurchaseValues(testData, today);
-      console.log('DATE OF PURCHASE: ',testData.dateOfPurchase)
-      console.log(newTestData);
-      expect(newTestData.numberOfDays).to.eq(26);
+      expect(newTestData.numberOfDays).to.eq(28);
       expect(newTestData.numberOfPurchases).to.eq(4);
     })
   })
