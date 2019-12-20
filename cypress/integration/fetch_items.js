@@ -42,6 +42,21 @@ describe("Show list of items", function() {
       cy.get('.purchasedItem');
       expect(cy.contains('Purchased Item'));
     });
+
+    it('Verifies that all four items categories are present on the list view', function() {
+      cy.visit('/list');
+      expect(cy.contains('Soon Items' && 'Kind of Soon Items' && 'Not Soon Items' && 'Inactive Items'));
+    });
+
+    it('Are items being categorized correctly', function() {
+      cy.visit('/add');
+      cy.get('.inputField').type('salad2');
+      cy.get('#soonButton').click({ force: true });
+      cy.get('#addItemButton').click();
+      cy.get('.BackButton_List').click();
+      cy.get('div').contains('salad2').click();
+      cy.get('#soonItems').contains('salad2');
+    });
   });
 
   afterEach(function() {
