@@ -24,23 +24,32 @@ const calculateNewPurchaseValues = data => {
   let today = new Date();
   let now = dayjs(today);
 
-  let lastPurchaseDate =
-    data.dateOfPurchase instanceof Date
-      ? data.dateOfPurchase
-      : data.dateOfPurchase.toDate();
-  let latestInterval = now.diff(dayjs(lastPurchaseDate), 'day');
-  let newEstimate = calculateEstimate(
-    data.numberOfDays,
-    latestInterval,
-    data.numberOfPurchases,
-  );
+  if (data.dateOfPurchase === undefined) {
+    return {
+      id: data.id,
+      numberOfDays: data.numberOfDays,
+      numberOfPurchases: data.numberOfPurchases + 1,
+      dateOfPurchase: today,
+    };
+  } else {
+    let lastPurchaseDate =
+      data.dateOfPurchase instanceof Date
+        ? data.dateOfPurchase
+        : data.dateOfPurchase.toDate();
+    let latestInterval = now.diff(dayjs(lastPurchaseDate), 'day');
+    let newEstimate = calculateEstimate(
+      data.numberOfDays,
+      latestInterval,
+      data.numberOfPurchases,
+    );
 
-  return {
-    id: data.id,
-    numberOfDays: newEstimate,
-    numberOfPurchases: data.numberOfPurchases + 1,
-    dateOfPurchase: today,
-  };
+    return {
+      id: data.id,
+      numberOfDays: newEstimate,
+      numberOfPurchases: data.numberOfPurchases + 1,
+      dateOfPurchase: today,
+    };
+  }
 };
 
 export default calculateNewPurchaseValues;

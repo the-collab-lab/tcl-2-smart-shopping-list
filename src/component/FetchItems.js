@@ -53,9 +53,9 @@ const FetchItems = ({ token, setToken, firestore }) => {
   // based on whether an item has been purchased within
   // the last 24 hours
   const calculateIfPurchased = item => {
-    const dateOfPurchaseJS = dayjs(item.dateOfPurchase.toDate());
-
-    if (today.diff(dateOfPurchaseJS, 'hour') <= 24) {
+    if (item.dateOfPurchase === undefined) {
+      return 'nonPurchasedItem';
+    } else if (today.diff(dayjs(item.dateOfPurchase.toDate()), 'hour') <= 24) {
       return 'purchasedItem';
     } else {
       return 'nonPurchasedItem';
@@ -92,8 +92,8 @@ const FetchItems = ({ token, setToken, firestore }) => {
                   {data.map(item => (
                     <li id={item.id} key={item.id} className="listItem">
                       <div
-                        className={calculateIfPurchased(item)}
                         onClick={handlePurchase}
+                        className={calculateIfPurchased(item)}
                         id={item.id}
                       >
                         {item.name}
