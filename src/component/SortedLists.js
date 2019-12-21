@@ -40,6 +40,7 @@ const SortedList = ({ token, handlePurchase, calculateIfPurchased }) => {
                         aria-required="true"
                       >
                         {item.name}
+                        {item.numberOfDays}
                       </div>
                     </li>
                   ))}
@@ -79,6 +80,7 @@ const SortedList = ({ token, handlePurchase, calculateIfPurchased }) => {
                         aria-required="true"
                       >
                         {item.name}
+                        {item.numberOfDays}
                       </div>
                     </li>
                   ))}
@@ -92,7 +94,10 @@ const SortedList = ({ token, handlePurchase, calculateIfPurchased }) => {
       <FirestoreCollection
         path={concatPath}
         sort="numberOfDays:asc"
-        filter={['numberOfDays', '>', 30]}
+        filter={[
+          ['numberOfDays', '>', 30],
+          ['numberOfDays', '<', 60],
+        ]}
         render={({ isLoading, data }) => {
           if (isLoading) {
             return <div>Still Loading...</div>;
@@ -128,7 +133,7 @@ const SortedList = ({ token, handlePurchase, calculateIfPurchased }) => {
       <FirestoreCollection
         path={concatPath}
         sort="numberOfDays:asc"
-        filter={['numberOfPurchases', '==', 1]}
+        filter={['numberOfDays', '>=', 60]}
         render={({ isLoading, data }) => {
           if (isLoading) {
             return <div>Still Loading...</div>;
