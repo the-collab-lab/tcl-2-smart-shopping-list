@@ -23,3 +23,21 @@
 //
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite("visit", (originalFn, url, options) => { ... })
+
+import { db } from '../../src/lib/firebase';
+
+Cypress.Commands.add("addItem", (token, itemID, dateOfPurchase) => {
+	db.collection('lists').doc(token).set({ items: '' });
+	db.collection('lists').doc(token).collection('items').doc(itemID)
+		.set({
+			id: itemID,
+			name: itemID,
+			numberOfDays: 14,
+			dateOfPurchase: dateOfPurchase,
+			numberOfPurchases: 1,
+	})
+});
+
+Cypress.Commands.add("deleteItem", (token, itemID) => { 
+	db.collection("lists").doc(token).collection('items').doc(itemID).delete();
+ })
