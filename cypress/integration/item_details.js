@@ -6,7 +6,7 @@ describe('Item details view', function() {
   });
 	
 	it('Shows current date as last purchase date when purchased today', function() {
-		let todayString = new Date().toDateString();
+		const todayString = new Date().toDateString();
 
 		cy.visit('/list');
 		cy.get('#banana').click();

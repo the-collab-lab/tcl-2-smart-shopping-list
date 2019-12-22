@@ -12,30 +12,30 @@ const ItemDetails = ({ token, setToken }) => {
     <FirestoreCollection
       path={concatPath}
       render={({ isLoading, data }) => {
-        // Finds specific item where the url param :itemId is equal to the item ID in the list.
+        // Finds specific item mentioned in url param :itemID so we can pull out just that item's details.
         const item = data.find(x => x.id === itemId);
 
         if (isLoading) {
           return <div>Still Loading...</div>;
-        } else {
-          // Below lines calculate next purchase date using dayjs 'add' function.
-          const lastPurchaseDate = item.dateOfPurchase.toDate();
-          const nextPurchaseDate = dayjs(lastPurchaseDate)
-            .add(item.numberOfDays.toString(), 'day')
-            .toDate();
-
-          return (
-            <main>
-              <BackButton />
-              <h1>{item.name}</h1>
-              <ul className="itemDetails">
-                <li>Last purchase: {lastPurchaseDate.toDateString()}</li>
-                <li>Next purchase: {nextPurchaseDate.toDateString()}</li>
-                <li>Number of purchases: {item.numberOfPurchases}</li>
-              </ul>
-            </main>
-          );
         }
+
+        // Below lines calculate next purchase date using dayjs 'add' function.
+        const lastPurchaseDate = item.dateOfPurchase.toDate();
+        const nextPurchaseDate = dayjs(lastPurchaseDate)
+          .add(item.numberOfDays.toString(), 'day')
+          .toDate();
+
+        return (
+          <main>
+            <BackButton />
+            <h1>{item.name}</h1>
+            <ul className="itemDetails">
+              <li>Last purchase: {lastPurchaseDate.toDateString()}</li>
+              <li>Next purchase: {nextPurchaseDate.toDateString()}</li>
+              <li>Number of purchases: {item.numberOfPurchases}</li>
+            </ul>
+          </main>
+        );
       }}
     />
   );
