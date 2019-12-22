@@ -1,6 +1,7 @@
 import React from 'react';
 import { FirestoreCollection, withFirestore } from 'react-firestore';
 import dayjs from 'dayjs';
+import ListContents from './ListContents';
 
 const SortedList = ({ token, handlePurchase, calculateIfPurchased }) => {
   const concatPath = `/lists/${token}/items`;
@@ -32,25 +33,12 @@ const SortedList = ({ token, handlePurchase, calculateIfPurchased }) => {
             return (
               <div className="soonItems">
                 <h2 className="itemsLabel">Soon Items</h2>
-                <ul>
-                  {data.map(item => (
-                    <li
-                      id={item.id}
-                      key={item.id}
-                      className={calculateIfPurchased(item)}
-                    >
-                      <div
-                        className={item.name}
-                        onClick={handlePurchase}
-                        id={item.id}
-                        aria-label="Soon Item"
-                        aria-required="true"
-                      >
-                        {item.name}
-                      </div>
-                    </li>
-                  ))}
-                </ul>
+                <ListContents
+                  data={data}
+                  calculateIfPurchased={calculateIfPurchased}
+                  handlePurchase={handlePurchase}
+                  aria-label="Soon Item"
+                />
               </div>
             );
           }
@@ -71,25 +59,12 @@ const SortedList = ({ token, handlePurchase, calculateIfPurchased }) => {
             return (
               <div className="kindOfSoonItems">
                 <h2 className="itemsLabel">Kind of Soon Items</h2>
-                <ul>
-                  {data.map(item => (
-                    <li
-                      id={item.id}
-                      key={item.id}
-                      className={calculateIfPurchased(item)}
-                    >
-                      <div
-                        className={item.name}
-                        onClick={handlePurchase}
-                        id={item.id}
-                        aria-label="Kind of soon Item"
-                        aria-required="true"
-                      >
-                        {item.name}
-                      </div>
-                    </li>
-                  ))}
-                </ul>
+                <ListContents
+                  data={data}
+                  calculateIfPurchased={calculateIfPurchased}
+                  handlePurchase={handlePurchase}
+                  aria-label="Kind of soon item"
+                />
               </div>
             );
           }
@@ -110,25 +85,12 @@ const SortedList = ({ token, handlePurchase, calculateIfPurchased }) => {
             return (
               <div className="notSoonItems">
                 <h2 className="itemsLabel">Not Soon Items</h2>
-                <ul>
-                  {data.map(item => (
-                    <li
-                      id={item.id}
-                      key={item.id}
-                      className={calculateIfPurchased(item)}
-                    >
-                      <div
-                        className={item.name}
-                        onClick={handlePurchase}
-                        id={item.id}
-                        aria-label="Not so soon Item"
-                        aria-required="true"
-                      >
-                        {item.name}
-                      </div>
-                    </li>
-                  ))}
-                </ul>
+                <ListContents
+                  data={data}
+                  calculateIfPurchased={calculateIfPurchased}
+                  handlePurchase={handlePurchase}
+                  aria-label="Not soon item"
+                />
               </div>
             );
           }
