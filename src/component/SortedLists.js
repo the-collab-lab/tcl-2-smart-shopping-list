@@ -135,51 +135,40 @@ const SortedList = ({ token, handlePurchase, calculateIfPurchased }) => {
           if (isLoading) {
             return <div>Still Loading...</div>;
           } else {
-            const item = data.map(item => {
+            const filteredItem = data.filter(item => {
               let doubleEstimate = item.numberOfDays * 2;
               let lastPurchaseDate = item.dateOfPurchase.toDate();
               let doublePurchaseEstimate = dayjs(lastPurchaseDate)
                 .add(doubleEstimate.toString(), 'day')
                 .toDate();
 
-              let estimateCheck = dayjs(doublePurchaseEstimate) < today;
-
-              if (estimateCheck) {
-                return (
-                  <ul>
-                    <li>{item.id}</li>
-                  </ul>
-                );
-              } else {
-                return null;
-              }
+              return dayjs(doublePurchaseEstimate) < today;
             });
 
-            // return (
-            //   <div id="inactiveItems">
-            //     <h2 className="itemsLabel">Inactive Items</h2>
-            //     <ul>
-            //       {data.map(item => (
-
-            //         <li
-            //           id={item.id}
-            //           key={item.id}
-            //           className={calculateIfPurchased(item)}
-            //         >
-            //           <div
-            //             className={item.name}
-            //             onClick={handlePurchase}
-            //             id={item.id}
-            //             aria-label="Inactive item"
-            //             aria-required="true"
-            //           >
-            //             {item.name}
-            //           </div>
-            //         </li>
-            //       ))}
-            //     </ul>
-            //   </div>
-            // );
+            return (
+              <div id="inactiveItems">
+                <h2 className="itemsLabel">Inactive Items</h2>
+                <ul>
+                  {filteredItem.map(item => (
+                    <li
+                      id={item.id}
+                      key={item.id}
+                      className={calculateIfPurchased(item)}
+                    >
+                      <div
+                        className={item.name}
+                        onClick={handlePurchase}
+                        id={item.id}
+                        aria-label="Inactive item"
+                        aria-required="true"
+                      >
+                        {item.name}
+                      </div>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            );
           }
         }}
       />
