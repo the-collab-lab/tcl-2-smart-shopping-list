@@ -1,13 +1,11 @@
-import React, { useState } from 'react';
-import { Redirect, Link } from 'react-router-dom';
+import React from 'react';
 import { FirestoreCollection, withFirestore } from 'react-firestore';
-import Navbar from './Navbar';
-import DeleteToken from './DeleteToken';
-import calculateNewPurchaseValues from '../calculations';
 import dayjs from 'dayjs';
 
 const SortedList = ({ token, handlePurchase, calculateIfPurchased }) => {
   const concatPath = `/lists/${token}/items`;
+  const now = new Date();
+  const today = dayjs(now);
 
   return (
     <section className="listFrame">
@@ -133,35 +131,55 @@ const SortedList = ({ token, handlePurchase, calculateIfPurchased }) => {
       <FirestoreCollection
         path={concatPath}
         sort="numberOfDays:asc"
-        filter={['numberOfDays', '>=', 60]}
         render={({ isLoading, data }) => {
           if (isLoading) {
             return <div>Still Loading...</div>;
           } else {
-            return (
-              <div id="inactiveItems">
-                <h2 className="itemsLabel">Inactive Items</h2>
-                <ul>
-                  {data.map(item => (
-                    <li
-                      id={item.id}
-                      key={item.id}
-                      className={calculateIfPurchased(item)}
-                    >
-                      <div
-                        className={item.name}
-                        onClick={handlePurchase}
-                        id={item.id}
-                        aria-label="Inactive item"
-                        aria-required="true"
-                      >
-                        {item.name}
-                      </div>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            );
+            const item = data.map(item => {
+              let doubleEstimate = item.numberOfDays * 2;
+              let lastPurchaseDate = item.dateOfPurchase.toDate();
+              let doublePurchaseEstimate = dayjs(lastPurchaseDate)
+                .add(doubleEstimate.toString(), 'day')
+                .toDate();
+
+              let estimateCheck = dayjs(doublePurchaseEstimate) < today;
+
+              if (estimateCheck) {
+                return (
+                  <ul>
+                    <li>{item.id}</li>
+                  </ul>
+                );
+              } else {
+                return null;
+              }
+            });
+
+            // return (
+            //   <div id="inactiveItems">
+            //     <h2 className="itemsLabel">Inactive Items</h2>
+            //     <ul>
+            //       {data.map(item => (
+
+            //         <li
+            //           id={item.id}
+            //           key={item.id}
+            //           className={calculateIfPurchased(item)}
+            //         >
+            //           <div
+            //             className={item.name}
+            //             onClick={handlePurchase}
+            //             id={item.id}
+            //             aria-label="Inactive item"
+            //             aria-required="true"
+            //           >
+            //             {item.name}
+            //           </div>
+            //         </li>
+            //       ))}
+            //     </ul>
+            //   </div>
+            // );
           }
         }}
       />

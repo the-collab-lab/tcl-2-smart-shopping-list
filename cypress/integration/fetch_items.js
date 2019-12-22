@@ -74,8 +74,6 @@ describe("Show list of items", function() {
       }
 
       let newTestData = calculateNewPurchaseValues(testData, today);
-      console.log('DATE OF PURCHASE: ',testData.dateOfPurchase)
-      console.log(newTestData);
       expect(newTestData.numberOfDays).to.eq(26);
       expect(newTestData.numberOfPurchases).to.eq(4);
     })
