@@ -65,7 +65,7 @@ describe("Show list of items", function() {
       }
 
       let newTestData = calculateNewPurchaseValues(testData, today);
-      expect(newTestData.numberOfDays).to.eq(28);
+      expect(newTestData.numberOfDays).to.eq(19.6);
       expect(newTestData.numberOfPurchases).to.eq(4);
     })
   })
