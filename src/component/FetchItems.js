@@ -70,6 +70,7 @@ const FetchItems = ({ token, setToken, firestore }) => {
           Add your first Item
         </Link>
         <DeleteToken token={token} setToken={setToken} />
+        <Navbar />
       </React.Fragment>
     );
   } else {
