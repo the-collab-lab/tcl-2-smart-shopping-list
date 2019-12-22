@@ -38,7 +38,6 @@ const SortedList = ({ token, handlePurchase, calculateIfPurchased }) => {
                         aria-required="true"
                       >
                         {item.name}
-                        {item.numberOfDays}
                       </div>
                     </li>
                   ))}
@@ -78,7 +77,6 @@ const SortedList = ({ token, handlePurchase, calculateIfPurchased }) => {
                         aria-required="true"
                       >
                         {item.name}
-                        {item.numberOfDays}
                       </div>
                     </li>
                   ))}
