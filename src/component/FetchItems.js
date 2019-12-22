@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Redirect, Link } from 'react-router-dom';
-import { FirestoreCollection, withFirestore } from 'react-firestore';
+import { withFirestore } from 'react-firestore';
 import Navbar from './Navbar';
 import DeleteToken from './DeleteToken';
 import calculateNewPurchaseValues from '../calculations';

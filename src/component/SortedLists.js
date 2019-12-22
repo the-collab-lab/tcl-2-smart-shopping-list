@@ -9,19 +9,28 @@ const SortedList = ({ token, handlePurchase, calculateIfPurchased }) => {
 
   return (
     <section className="listFrame">
-      <h1>&#128722;My Shopping List</h1>
+      <h1 className="listTitle">
+        <span
+          role="img"
+          className="shoppingCart"
+          aria-label="Illustration of a shopping cart"
+        >
+          &#128722;
+        </span>
+        My Shopping List
+      </h1>
       {/* could also use &#128717; which is shopping bags */}
       {/* // items that need to buy soon (fewer than seven days) */}
       <FirestoreCollection
         path={concatPath}
         sort="numberOfDays:asc"
-        filter={['numberOfDays', '<', 7]}
+        filter={['numberOfDays', '<=', 7]}
         render={({ isLoading, data }) => {
           if (isLoading) {
             return <div>Still Loading...</div>;
           } else {
             return (
-              <div id="soonItems">
+              <div className="soonItems">
                 <h2 className="itemsLabel">Soon Items</h2>
                 <ul>
                   {data.map(item => (
@@ -52,15 +61,15 @@ const SortedList = ({ token, handlePurchase, calculateIfPurchased }) => {
         path={concatPath}
         sort="numberOfDays:asc"
         filter={[
-          ['numberOfDays', '>=', 7],
-          ['numberOfDays', '<=', 30],
+          ['numberOfDays', '>', 7],
+          ['numberOfDays', '<', 30],
         ]}
         render={({ isLoading, data }) => {
           if (isLoading) {
             return <div>Still Loading...</div>;
           } else {
             return (
-              <div id="kindOfSoonItems">
+              <div className="kindOfSoonItems">
                 <h2 className="itemsLabel">Kind of Soon Items</h2>
                 <ul>
                   {data.map(item => (
@@ -91,7 +100,7 @@ const SortedList = ({ token, handlePurchase, calculateIfPurchased }) => {
         path={concatPath}
         sort="numberOfDays:asc"
         filter={[
-          ['numberOfDays', '>', 30],
+          ['numberOfDays', '>=', 30],
           ['numberOfDays', '<', 60],
         ]}
         render={({ isLoading, data }) => {
@@ -99,8 +108,8 @@ const SortedList = ({ token, handlePurchase, calculateIfPurchased }) => {
             return <div>Still Loading...</div>;
           } else {
             return (
-              <div id="notSoonItems">
-                <h2 className="itemsLabel">Not soon Items</h2>
+              <div className="notSoonItems">
+                <h2 className="itemsLabel">Not Soon Items</h2>
                 <ul>
                   {data.map(item => (
                     <li
@@ -134,9 +143,9 @@ const SortedList = ({ token, handlePurchase, calculateIfPurchased }) => {
             return <div>Still Loading...</div>;
           } else {
             const filteredItem = data.filter(item => {
-              let doubleEstimate = item.numberOfDays * 2;
-              let lastPurchaseDate = item.dateOfPurchase.toDate();
-              let doublePurchaseEstimate = dayjs(lastPurchaseDate)
+              const doubleEstimate = item.numberOfDays * 2;
+              const lastPurchaseDate = item.dateOfPurchase.toDate();
+              const doublePurchaseEstimate = dayjs(lastPurchaseDate)
                 .add(doubleEstimate.toString(), 'day')
                 .toDate();
 
@@ -144,7 +153,7 @@ const SortedList = ({ token, handlePurchase, calculateIfPurchased }) => {
             });
 
             return (
-              <div id="inactiveItems">
+              <div className="inactiveItems">
                 <h2 className="itemsLabel">Inactive Items</h2>
                 <ul>
                   {filteredItem.map(item => (

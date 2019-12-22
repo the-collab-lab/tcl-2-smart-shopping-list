@@ -98,7 +98,7 @@ a:visited {
   top: 7%;
   right: 6%;
   font-size: 0.8rem;
-  opacity: 90%;
+  opacity: 0.9;
 }
 
 .delete-button:hover {
@@ -106,7 +106,7 @@ a:visited {
   transition: 0.1s;
   transition-timing-function: ease-in;
   cursor: pointer;
-  opacity: 95%;
+  opacity: 0.95;
 }
 
 @media screen and (max-width: 500px) {
@@ -128,7 +128,6 @@ a:visited {
   list-style-type: none;
   padding: 10px;
   margin: 10px;
-  background-color: var(--pink);
   border-radius: 8%;
   text-decoration: line-through;
   cursor: pointer;
@@ -149,29 +148,29 @@ a:visited {
   padding: 5vw;
 }
 
-.listFrame > h1 {
+.listFrame > .listTitle {
   flex: 0 0 100%;
 }
 
-#soonItems li {
+.shoppingCart {
+  font-size: 2rem;
+}
+
+.soonItems li {
   background-color: var(--white);
 }
 
-#kindOfSoonItems li {
+.kindOfSoonItems li {
   background-color: var(--brown);
 }
 
-#notSoonItems li {
+.notSoonItems li {
   background-color: var(--red);
 }
 
-#inactiveItems li {
+.inactiveItems li {
   background-color: var(--yellow);
 }
-
-/* #soonItems, #kindOfSoonItems, #notSoonItems, #inactiveItems ul {
-  can delete later, use this if we want to edit all the ul's in this section
-} */
 
 .itemsLabel {
   border-bottom: 2px dotted var(--black);
