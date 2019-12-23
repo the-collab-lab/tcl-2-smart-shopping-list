@@ -30,6 +30,7 @@ const ItemDetails = () => {
             <main>
               <BackButton />
               <h1>{item.name}</h1>
+
               <ul className="itemDetails">
                 <li>Last purchase: {lastPurchaseDate.toDateString()}</li>
                 <li>Next purchase: {nextPurchaseDate.toDateString()}</li>
