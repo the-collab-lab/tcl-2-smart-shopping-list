@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 import { Redirect, Link } from 'react-router-dom';
-import { FirestoreCollection, withFirestore } from 'react-firestore';
+import { withFirestore } from 'react-firestore';
 import Navbar from './Navbar';
 import DeleteToken from './DeleteToken';
 import calculateNewPurchaseValues from '../calculations';
 import dayjs from 'dayjs';
+import SortedLists from './SortedLists';
 
 const FetchItems = ({ token, setToken, firestore }) => {
   const [empty, setEmpty] = useState(true);
@@ -35,7 +36,7 @@ const FetchItems = ({ token, setToken, firestore }) => {
       .doc(itemId)
       .get()
       .then(doc => {
-        return calculateNewPurchaseValues(doc.data());
+        return calculateNewPurchaseValues(doc.data(), now);
       })
       .then(updateDatabase);
   };
@@ -67,57 +68,29 @@ const FetchItems = ({ token, setToken, firestore }) => {
     }
   };
 
-  // Token stored in user's local storage
-  const uniqueToken = localStorage.getItem('uniqueToken');
-
-  // unique DB path based on token
-  const concatPath = `/lists/${uniqueToken}/items`;
-
-  return (
-    <React.Fragment>
-      <FirestoreCollection
-        //name of collection you want to collect, with filter you can narrow this down to specific document
-        path={concatPath}
-        // optional more parameters (sort, limit, filter)
-        render={({ isLoading, data }) => {
-          // Renders according to whether or not the list is empty
-          if (isLoading) {
-            return <div>Still Loading...</div>;
-          } else if (empty) {
-            return (
-              <Link className="button-link" id="emptyListAddItem" to="/add">
-                Add your first Item
-              </Link>
-            );
-          } else {
-            return (
-              <div className="fetchItems">
-                <h2>Items</h2>
-                <ul>
-                  {data.map(item => (
-                    <li id={item.id} key={item.id} className="listItem">
-                      <div
-                        onClick={handlePurchase}
-                        className={calculateIfPurchased(item)}
-                        id={item.id}
-                      >
-                        {item.name}
-                      </div>
-                      <Link className="viewMore" to={'/' + item.id}>
-                        >>>
-                      </Link>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            );
-          }
-        }}
-      />
-      <DeleteToken token={token} setToken={setToken} />
-      <Navbar />
-    </React.Fragment>
-  );
+  if (empty) {
+    return (
+      <React.Fragment>
+        <Link className="button-link" id="emptyListAddItem" to="/add">
+          Add your first Item
+        </Link>
+        <DeleteToken token={token} setToken={setToken} />
+        <Navbar />
+      </React.Fragment>
+    );
+  } else {
+    return (
+      <React.Fragment>
+        <SortedLists
+          token={token}
+          handlePurchase={handlePurchase}
+          calculateIfPurchased={calculateIfPurchased}
+        />
+        <Navbar />
+        <DeleteToken token={token} setToken={setToken} />
+      </React.Fragment>
+    );
+  }
 };
 
 export default withFirestore(FetchItems);
