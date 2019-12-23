@@ -3,6 +3,7 @@ import { FirestoreCollection, withFirestore } from 'react-firestore';
 import dayjs from 'dayjs';
 import { useParams } from 'react-router-dom';
 import BackButton from './BackButton';
+import DeleteItem from './DeleteItem';
 
 const ItemDetails = ({ token, setToken }) => {
   let { itemId } = useParams();
@@ -34,6 +35,7 @@ const ItemDetails = ({ token, setToken }) => {
               <li>Next purchase: {nextPurchaseDate.toDateString()}</li>
               <li>Number of purchases: {item.numberOfPurchases}</li>
             </ul>
+            <DeleteItem token={token} />
           </main>
         );
       }}

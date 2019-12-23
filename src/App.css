@@ -264,6 +264,12 @@ a:visited {
   box-shadow: none;
 }
 
+/* Item Details Specific Styling  */
+
+.deleteItemButton {
+  font-size: 1rem;
+}
+
 /* Other Components/Views Specific Styling */
 
 /* Navbar Component Styling */
