@@ -35,7 +35,7 @@ const FetchItems = ({ token, setToken, firestore }) => {
       .doc(itemId)
       .get()
       .then(doc => {
-        return calculateNewPurchaseValues(doc.data());
+        return calculateNewPurchaseValues(doc.data(), now);
       })
       .then(updateDatabase);
   };
