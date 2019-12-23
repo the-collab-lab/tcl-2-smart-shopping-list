@@ -93,6 +93,10 @@ a:visited {
 
 /* List View Specific Styling */
 
+.fetchItems {
+  width: 80vw;
+}
+
 .delete-button {
   position: absolute;
   top: 7%;
@@ -115,23 +119,41 @@ a:visited {
   }
 }
 
-.nonPurchasedItem {
+.listItem {
   list-style-type: none;
+  width: fit-content;
+  margin: 5vh auto;
+  display: flex;
+}
+
+.listItem:hover .viewMore {
+  display: inline-block;
+}
+
+.nonPurchasedItem {
   padding: 10px;
   margin: 10px;
-  background-color: var(--pink);
   border-radius: 8%;
 }
 
 .nonPurchasedItem:hover,
 .purchasedItem {
-  list-style-type: none;
   padding: 10px;
   margin: 10px;
   border-radius: 8%;
   text-decoration: line-through;
   cursor: pointer;
-  opacity: 80%;
+  opacity: 0.8;
+}
+
+.viewMore {
+  background-color: #fff;
+  border-radius: 8%;
+  padding: 10px;
+  display: none;
+  color: #000;
+  height: fit-content;
+  margin: auto 0 auto 20px;
 }
 
 .listFrame {
@@ -192,7 +214,7 @@ a:visited {
   display: inline-block;
   padding: 10px 20px;
   margin: 1vh;
-  opacity: 90%;
+  opacity: 0.9;
   font-size: 0.9rem;
   border: 2px solid #000;
 }
@@ -200,7 +222,7 @@ a:visited {
 .daysButtons input[type='radio']:focus + label,
 .daysButtons input[type='radio']:checked + label,
 .daysButtons label:hover {
-  opacity: 100%;
+  opacity: 1;
   box-shadow: 2px 2px 3px #000;
   font-size: 1rem;
   cursor: pointer;
@@ -305,4 +327,9 @@ a:visited {
   100% {
     top: -10%;
   }
+}
+
+/* Item Detail Styling */
+.itemDetails {
+  list-style: none;
 }

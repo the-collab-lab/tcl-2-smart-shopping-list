@@ -60,6 +60,12 @@ describe("Show list of items", function() {
       cy.get('div').contains('salad2').click();
       cy.get('.soonItems').contains('salad2');
     });
+
+    it('View more link goes to item details page', function() {
+      cy.visit('/list');
+      cy.get('#banana > .viewMore').invoke('show').click();
+      cy.url().should('eq', Cypress.config().baseUrl + '/banana')
+    });
   });
 
   afterEach(function() {

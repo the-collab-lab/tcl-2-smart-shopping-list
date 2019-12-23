@@ -2,6 +2,7 @@ import React from 'react';
 import { FirestoreCollection, withFirestore } from 'react-firestore';
 import dayjs from 'dayjs';
 import ListContents from './ListContents';
+import { Link } from 'react-router-dom';
 
 const SortedList = ({ token, handlePurchase, calculateIfPurchased }) => {
   const concatPath = `/lists/${token}/items`;
@@ -119,13 +120,9 @@ const SortedList = ({ token, handlePurchase, calculateIfPurchased }) => {
                 <h2 className="itemsLabel">Inactive Items</h2>
                 <ul>
                   {filteredItem.map(item => (
-                    <li
-                      id={item.id}
-                      key={item.id}
-                      className={calculateIfPurchased(item)}
-                    >
+                    <li id={item.id} key={item.id} className="listItem">
                       <div
-                        className={item.name}
+                        className={calculateIfPurchased(item)}
                         onClick={handlePurchase}
                         id={item.id}
                         aria-label="Inactive item"
@@ -133,6 +130,9 @@ const SortedList = ({ token, handlePurchase, calculateIfPurchased }) => {
                       >
                         {item.name}
                       </div>
+                      <Link className="viewMore" to={'/' + item.id}>
+                        >>>
+                      </Link>
                     </li>
                   ))}
                 </ul>
