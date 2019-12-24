@@ -32,173 +32,99 @@ const SortedList = ({ token, handlePurchase, calculateIfPurchased }) => {
           } else {
             const filteredItems = {
               soon: [],
-              kindaSoon: null,
-              notSoon: null,
-              inactive: null,
+              prettySoon: [],
+              notSoon: [],
+              inactive: [],
             };
 
             const items = data.map(item => {
               if (item.numberOfDays <= 7) {
                 filteredItems.soon.push(item);
+              } else if (item.numberOfDays > 7 && item.numberOfDays < 30) {
+                filteredItems.prettySoon.push(item);
+              } else if (item.numberOfDays >= 30) {
+                filteredItems.notSoon.push(item);
               }
             });
 
             console.log(filteredItems);
 
             return (
-              <div className="inactiveItems">
-                <h2 className="itemsLabel">Inactive Items</h2>
-                {/* <ul>
-                  {soonItems.map(item => (
-                    <li id={item.id} key={item.id} className="listItem">
-                      <div
-                        className={calculateIfPurchased(item)}
-                        onClick={handlePurchase}
-                        id={item.id}
-                        aria-label="Inactive item"
-                        aria-required="true"
-                      >
-                        {item.name}
-                      </div>
-                      {item.dateOfPurchase ? (
-                        <Link className="viewMore" to={'/' + item.id}>
-                          >>>
-                        </Link>
-                      ) : null}
-                    </li>
-                  ))}
-                </ul> */}
-              </div>
+              <React.Fragment>
+                <div className="soonItems">
+                  <h2 className="itemsLabel">Soon Items</h2>
+                  <ul>
+                    {filteredItems.soon.map(item => (
+                      <li id={item.id} key={item.id} className="listItem">
+                        <div
+                          className={calculateIfPurchased(item)}
+                          onClick={handlePurchase}
+                          id={item.id}
+                          aria-label="Soon item"
+                          aria-required="true"
+                        >
+                          {item.name}
+                        </div>
+                        {item.dateOfPurchase ? (
+                          <Link className="viewMore" to={'/' + item.id}>
+                            >>>
+                          </Link>
+                        ) : null}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+                <div className="prettySoonItems">
+                  <h2 className="itemsLabel">Pretty-Soon Items</h2>
+                  <ul>
+                    {filteredItems.prettySoon.map(item => (
+                      <li id={item.id} key={item.id} className="listItem">
+                        <div
+                          className={calculateIfPurchased(item)}
+                          onClick={handlePurchase}
+                          id={item.id}
+                          aria-label="Pretty soon item"
+                          aria-required="true"
+                        >
+                          {item.name}
+                        </div>
+                        {item.dateOfPurchase ? (
+                          <Link className="viewMore" to={'/' + item.id}>
+                            >>>
+                          </Link>
+                        ) : null}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+                <div className="Not-Soon Items">
+                  <h2 className="itemsLabel">Not-Soon Items</h2>
+                  <ul>
+                    {filteredItems.notSoon.map(item => (
+                      <li id={item.id} key={item.id} className="listItem">
+                        <div
+                          className={calculateIfPurchased(item)}
+                          onClick={handlePurchase}
+                          id={item.id}
+                          aria-label="Not soon item"
+                          aria-required="true"
+                        >
+                          {item.name}
+                        </div>
+                        {item.dateOfPurchase ? (
+                          <Link className="viewMore" to={'/' + item.id}>
+                            >>>
+                          </Link>
+                        ) : null}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </React.Fragment>
             );
           }
         }}
       />
-
-      {/* // items that need to buy soon (fewer than seven days) */}
-      {/* <FirestoreCollection
-        path={concatPath}
-        sort="numberOfDays:asc"
-        filter={['numberOfDays', '<=', 7]}
-        render={({ isLoading, data }) => {
-          if (isLoading) {
-            return <div>Still Loading...</div>;
-          } else {
-            return (
-              <div className="soonItems">
-                <h2 className="itemsLabel">Soon Items</h2>
-                <ListContents
-                  data={data}
-                  calculateIfPurchased={calculateIfPurchased}
-                  handlePurchase={handlePurchase}
-                  aria-label="Soon Item"
-                />
-              </div>
-            );
-          }
-        }}
-      /> */}
-
-      {/* // items that need to buy kind of soon (between 7 and 30 days, inclusive)  */}
-      {/* <FirestoreCollection
-        path={concatPath}
-        sort="numberOfDays:asc"
-        filter={[
-          ['numberOfDays', '>', 7],
-          ['numberOfDays', '<', 30],
-        ]}
-        render={({ isLoading, data }) => {
-          if (isLoading) {
-            return <div>Still Loading...</div>;
-          } else {
-            return (
-              <div className="kindOfSoonItems">
-                <h2 className="itemsLabel">Kind of Soon Items</h2>
-                <ListContents
-                  data={data}
-                  calculateIfPurchased={calculateIfPurchased}
-                  handlePurchase={handlePurchase}
-                  aria-label="Kind of soon item"
-                />
-              </div>
-            );
-          }
-        }}
-      /> */}
-      {/* items that need to buy not soon (greater than 30 days)  */}
-      {/* <FirestoreCollection
-        path={concatPath}
-        sort="numberOfDays:asc"
-        filter={[
-          ['numberOfDays', '>=', 30],
-          ['numberOfDays', '<', 60],
-        ]}
-        render={({ isLoading, data }) => {
-          if (isLoading) {
-            return <div>Still Loading...</div>;
-          } else {
-            return (
-              <div className="notSoonItems">
-                <h2 className="itemsLabel">Not Soon Items</h2>
-                <ListContents
-                  data={data}
-                  calculateIfPurchased={calculateIfPurchased}
-                  handlePurchase={handlePurchase}
-                  aria-label="Not soon item"
-                />
-              </div>
-            );
-          }
-        }}
-      /> */}
-      {/* items that are inactive (inactive meaning only one purchase or purchase is out date) */}
-      {/* <FirestoreCollection
-        path={concatPath}
-        sort="numberOfDays:asc"
-        render={({ isLoading, data }) => {
-          if (isLoading) {
-            return <div>Still Loading...</div>;
-          } else {
-            // eslint-disable-next-line
-            const filteredItem = data.filter(item => {
-              if (item.dateOfPurchase) {
-                const doubleEstimate = item.numberOfDays * 2;
-                const lastPurchaseDate = item.dateOfPurchase.toDate();
-                const doublePurchaseEstimate = dayjs(lastPurchaseDate)
-                  .add(doubleEstimate.toString(), 'day')
-                  .toDate();
-
-                return dayjs(doublePurchaseEstimate) < today;
-              }
-            });
-
-            return (
-              <div className="inactiveItems">
-                <h2 className="itemsLabel">Inactive Items</h2>
-                <ul>
-                  {filteredItem.map(item => (
-                    <li id={item.id} key={item.id} className="listItem">
-                      <div
-                        className={calculateIfPurchased(item)}
-                        onClick={handlePurchase}
-                        id={item.id}
-                        aria-label="Inactive item"
-                        aria-required="true"
-                      >
-                        {item.name}
-                      </div>
-                      {item.dateOfPurchase ? (
-                        <Link className="viewMore" to={'/' + item.id}>
-                          >>>
-                        </Link>
-                      ) : null}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            );
-          }
-        }}
-      /> */}
     </section>
   );
 };
