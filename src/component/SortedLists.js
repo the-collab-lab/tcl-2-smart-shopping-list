@@ -37,25 +37,27 @@ const SortedList = ({ token, handlePurchase, calculateIfPurchased }) => {
               inactive: [],
             };
 
-            const items = data.map(item => {
-              if (item.numberOfDays <= 7) {
+            const inActive = item => {
+              const doubleEstimate = item.numberOfDays * 2;
+              const lastPurchaseDate = item.dateOfPurchase.toDate();
+              const doublePurchaseEstimate = dayjs(lastPurchaseDate)
+                .add(doubleEstimate.toString(), 'day')
+                .toDate();
+
+              if (dayjs(doublePurchaseEstimate) < today) {
+                return item;
+              }
+            };
+
+            data.map(item => {
+              if (inActive(item)) {
+                filteredItems.inactive.push(item);
+              } else if (item.numberOfDays <= 7) {
                 filteredItems.soon.push(item);
               } else if (item.numberOfDays > 7 && item.numberOfDays < 30) {
                 filteredItems.prettySoon.push(item);
               } else if (item.numberOfDays >= 30) {
                 filteredItems.notSoon.push(item);
-              } else if (item.numberOfPurchases < 2) {
-                filteredItems.inactive.push(item);
-              } else {
-                const doubleEstimate = item.numberOfDays * 2;
-                const lastPurchaseDate = item.dateOfPurchase.toDate();
-                const doublePurchaseEstimate = dayjs(lastPurchaseDate)
-                  .add(doubleEstimate.toString(), 'day')
-                  .toDate();
-
-                filteredItems.inactive.push(
-                  dayjs(doublePurchaseEstimate) < today,
-                );
               }
             });
 
