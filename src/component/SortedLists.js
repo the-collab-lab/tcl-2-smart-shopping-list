@@ -50,7 +50,7 @@ const SortedList = ({ token, handlePurchase, calculateIfPurchased }) => {
             };
 
             data.map(item => {
-              if (inActive(item)) {
+              if (item.dateOfPurchase && inActive(item)) {
                 filteredItems.inactive.push(item);
               } else if (item.numberOfDays <= 7) {
                 filteredItems.soon.push(item);
