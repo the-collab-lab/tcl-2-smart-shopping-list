@@ -23,8 +23,59 @@ const SortedList = ({ token, handlePurchase, calculateIfPurchased }) => {
       </h1>
       {/* could also use &#128717; which is shopping bags */}
 
-      {/* // items that need to buy soon (fewer than seven days) */}
       <FirestoreCollection
+        path={concatPath}
+        sort="numberOfDays:asc"
+        render={({ isLoading, data }) => {
+          if (isLoading) {
+            return <div>Still Loading...</div>;
+          } else {
+            const filteredItems = {
+              soon: [],
+              kindaSoon: null,
+              notSoon: null,
+              inactive: null,
+            };
+
+            const items = data.map(item => {
+              if (item.numberOfDays <= 7) {
+                filteredItems.soon.push(item);
+              }
+            });
+
+            console.log(filteredItems);
+
+            return (
+              <div className="inactiveItems">
+                <h2 className="itemsLabel">Inactive Items</h2>
+                {/* <ul>
+                  {soonItems.map(item => (
+                    <li id={item.id} key={item.id} className="listItem">
+                      <div
+                        className={calculateIfPurchased(item)}
+                        onClick={handlePurchase}
+                        id={item.id}
+                        aria-label="Inactive item"
+                        aria-required="true"
+                      >
+                        {item.name}
+                      </div>
+                      {item.dateOfPurchase ? (
+                        <Link className="viewMore" to={'/' + item.id}>
+                          >>>
+                        </Link>
+                      ) : null}
+                    </li>
+                  ))}
+                </ul> */}
+              </div>
+            );
+          }
+        }}
+      />
+
+      {/* // items that need to buy soon (fewer than seven days) */}
+      {/* <FirestoreCollection
         path={concatPath}
         sort="numberOfDays:asc"
         filter={['numberOfDays', '<=', 7]}
@@ -45,9 +96,10 @@ const SortedList = ({ token, handlePurchase, calculateIfPurchased }) => {
             );
           }
         }}
-      />
+      /> */}
+
       {/* // items that need to buy kind of soon (between 7 and 30 days, inclusive)  */}
-      <FirestoreCollection
+      {/* <FirestoreCollection
         path={concatPath}
         sort="numberOfDays:asc"
         filter={[
@@ -71,9 +123,9 @@ const SortedList = ({ token, handlePurchase, calculateIfPurchased }) => {
             );
           }
         }}
-      />
+      /> */}
       {/* items that need to buy not soon (greater than 30 days)  */}
-      <FirestoreCollection
+      {/* <FirestoreCollection
         path={concatPath}
         sort="numberOfDays:asc"
         filter={[
@@ -97,9 +149,9 @@ const SortedList = ({ token, handlePurchase, calculateIfPurchased }) => {
             );
           }
         }}
-      />
+      /> */}
       {/* items that are inactive (inactive meaning only one purchase or purchase is out date) */}
-      <FirestoreCollection
+      {/* <FirestoreCollection
         path={concatPath}
         sort="numberOfDays:asc"
         render={({ isLoading, data }) => {
@@ -146,7 +198,7 @@ const SortedList = ({ token, handlePurchase, calculateIfPurchased }) => {
             );
           }
         }}
-      />
+      /> */}
     </section>
   );
 };
