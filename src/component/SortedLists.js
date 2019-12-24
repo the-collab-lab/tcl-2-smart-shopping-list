@@ -44,6 +44,18 @@ const SortedList = ({ token, handlePurchase, calculateIfPurchased }) => {
                 filteredItems.prettySoon.push(item);
               } else if (item.numberOfDays >= 30) {
                 filteredItems.notSoon.push(item);
+              } else if (item.numberOfPurchases < 2) {
+                filteredItems.inactive.push(item);
+              } else {
+                const doubleEstimate = item.numberOfDays * 2;
+                const lastPurchaseDate = item.dateOfPurchase.toDate();
+                const doublePurchaseEstimate = dayjs(lastPurchaseDate)
+                  .add(doubleEstimate.toString(), 'day')
+                  .toDate();
+
+                filteredItems.inactive.push(
+                  dayjs(doublePurchaseEstimate) < today,
+                );
               }
             });
 
@@ -69,6 +81,14 @@ const SortedList = ({ token, handlePurchase, calculateIfPurchased }) => {
                   <h2 className="itemsLabel">Not-Soon Items</h2>
                   <ListContents
                     data={filteredItems.notSoon}
+                    calculateIfPurchased={calculateIfPurchased}
+                    handlePurchase={handlePurchase}
+                  />
+                </div>
+                <div className="Inactive Items">
+                  <h2 className="itemsLabel">Inactive Items</h2>
+                  <ListContents
+                    data={filteredItems.inactive}
                     calculateIfPurchased={calculateIfPurchased}
                     handlePurchase={handlePurchase}
                   />
