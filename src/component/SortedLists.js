@@ -79,7 +79,7 @@ const SortedList = ({ token, handlePurchase, calculateIfPurchased }) => {
                     handlePurchase={handlePurchase}
                   />
                 </div>
-                <div className="Not-Soon Items">
+                <div className="notSoonItems">
                   <h2 className="itemsLabel">Not-Soon Items</h2>
                   <ListContents
                     data={filteredItems.notSoon}
@@ -87,7 +87,7 @@ const SortedList = ({ token, handlePurchase, calculateIfPurchased }) => {
                     handlePurchase={handlePurchase}
                   />
                 </div>
-                <div className="Inactive Items">
+                <div className="inactiveItems">
                   <h2 className="itemsLabel">Inactive Items</h2>
                   <ListContents
                     data={filteredItems.inactive}
