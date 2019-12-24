@@ -47,8 +47,6 @@ const SortedList = ({ token, handlePurchase, calculateIfPurchased }) => {
               }
             });
 
-            console.log(filteredItems);
-
             return (
               <React.Fragment>
                 <div className="soonItems">
