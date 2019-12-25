@@ -2,7 +2,6 @@ import React from 'react';
 import { FirestoreCollection, withFirestore } from 'react-firestore';
 import dayjs from 'dayjs';
 import ListContents from './ListContents';
-import { Link } from 'react-router-dom';
 
 const SortedList = ({ token, handlePurchase, calculateIfPurchased }) => {
   const concatPath = `/lists/${token}/items`;
@@ -30,6 +29,7 @@ const SortedList = ({ token, handlePurchase, calculateIfPurchased }) => {
           if (isLoading) {
             return <div>Still Loading...</div>;
           } else {
+            // this object will organize the list items into categories
             const filteredItems = {
               soon: [],
               prettySoon: [],
@@ -37,6 +37,8 @@ const SortedList = ({ token, handlePurchase, calculateIfPurchased }) => {
               inactive: [],
             };
 
+            // this function will determine if an item should be considered
+            // inactive, because it hasn't been purchased for so long
             const inActive = item => {
               const doubleEstimate = item.numberOfDays * 2;
               const lastPurchaseDate = item.dateOfPurchase.toDate();
@@ -44,12 +46,18 @@ const SortedList = ({ token, handlePurchase, calculateIfPurchased }) => {
                 .add(doubleEstimate.toString(), 'day')
                 .toDate();
 
+              // (if the item in question has not been purchased for
+              // a long time (i.e., if you were going to buy it in 10 days
+              // but 20 days have gone by and you didn't end up getting it)
+              // then set it to inactive)
               if (dayjs(doublePurchaseEstimate) < today) {
                 return item;
               }
             };
 
-            data.map(item => {
+            // sort each item according to how long it will be before you
+            // need to buy it again
+            data.forEach(item => {
               if (item.dateOfPurchase && inActive(item)) {
                 filteredItems.inactive.push(item);
               } else if (item.numberOfDays <= 7) {
