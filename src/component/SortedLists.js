@@ -11,7 +11,6 @@ const SortedList = ({ token, handlePurchase, calculateIfPurchased }) => {
 
   useEffect(() => {
     setFilteredItem(filteredItem);
-    console.log(filteredItem);
   }, [filteredItem]);
 
   return (
@@ -35,16 +34,13 @@ const SortedList = ({ token, handlePurchase, calculateIfPurchased }) => {
           if (isLoading) {
             return <div>Still Loading...</div>;
           } else {
-            const filterItems = item => {
-              console.log('this one', item);
-              data.forEach(item => {
-                if (item.name === filteredItem) {
-                  console.log('filtered item', item.name);
-                } else {
-                  console.log('else');
-                }
-              });
-            };
+            data.forEach(item => {
+              if (item.name === filteredItem) {
+                console.log('filtered item', item.name);
+              } else {
+                console.log('else');
+              }
+            });
 
             // this object will organize the list items into categories
             const sortedItems = {
