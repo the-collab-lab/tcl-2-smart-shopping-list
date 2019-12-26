@@ -3,11 +3,20 @@ import { FirestoreCollection, withFirestore } from 'react-firestore';
 import dayjs from 'dayjs';
 import { useParams } from 'react-router-dom';
 import BackButton from './BackButton';
-import DeleteItem from './DeleteItem';
 
 const ItemDetails = ({ token, purchased }) => {
   let { itemId } = useParams();
   const concatPath = `/lists/${token}/items`;
+
+  const confirmDeleteClick = event => {
+    if (window.confirm('Are you sure you wish to delete this item?')) {
+      deleteEntry(event.target.value);
+    }
+  };
+
+  const deleteEntry = () => {
+    console.log('hi');
+  };
 
   return (
     <FirestoreCollection
@@ -35,7 +44,9 @@ const ItemDetails = ({ token, purchased }) => {
               <li>Next purchase: {nextPurchaseDate.toDateString()}</li>
               <li>Number of purchases: {item.numberOfPurchases}</li>
             </ul>
-            <DeleteItem token={token} />
+            <button className="button-link" onClick={confirmDeleteClick}>
+              Delete this Item?
+            </button>
           </main>
         );
       }}
