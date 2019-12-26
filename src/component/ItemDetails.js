@@ -1,22 +1,31 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { FirestoreCollection, withFirestore } from 'react-firestore';
 import dayjs from 'dayjs';
-import { useParams } from 'react-router-dom';
+import { useParams, Redirect } from 'react-router-dom';
 import BackButton from './BackButton';
 
-const ItemDetails = ({ token, purchased }) => {
-  let { itemId } = useParams();
+const ItemDetails = ({ token, purchased, firestore }) => {
+  const [redirect, setRedirect] = useState(false);
+  const { itemId } = useParams();
   const concatPath = `/lists/${token}/items`;
 
   const confirmDeleteClick = event => {
     if (window.confirm('Are you sure you wish to delete this item?')) {
-      deleteEntry(event.target.value);
+      deleteEntry(event.target.id);
+      setRedirect(true);
     }
   };
 
-  const deleteEntry = () => {
-    console.log('hi');
+  const deleteEntry = itemID => {
+    firestore
+      .collection('lists')
+      .doc(token)
+      .collection('items')
+      .doc(itemID)
+      .delete();
   };
+
+  if (redirect) return <Redirect to="" />;
 
   return (
     <FirestoreCollection
@@ -44,7 +53,11 @@ const ItemDetails = ({ token, purchased }) => {
               <li>Next purchase: {nextPurchaseDate.toDateString()}</li>
               <li>Number of purchases: {item.numberOfPurchases}</li>
             </ul>
-            <button className="button-link" onClick={confirmDeleteClick}>
+            <button
+              className="button-link"
+              onClick={confirmDeleteClick}
+              id={item.id}
+            >
               Delete this Item?
             </button>
           </main>
