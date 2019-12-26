@@ -7,11 +7,6 @@ const SortedList = ({ token, handlePurchase, calculateIfPurchased }) => {
   const concatPath = `/lists/${token}/items`;
   const now = new Date();
   const today = dayjs(now);
-  const [filteredItem, setFilteredItem] = useState('');
-
-  useEffect(() => {
-    setFilteredItem(filteredItem);
-  }, [filteredItem]);
 
   return (
     <section className="listFrame">
@@ -34,13 +29,18 @@ const SortedList = ({ token, handlePurchase, calculateIfPurchased }) => {
           if (isLoading) {
             return <div>Still Loading...</div>;
           } else {
-            data.forEach(item => {
-              if (item.name === filteredItem) {
-                console.log('filtered item', item.name);
-              } else {
-                console.log('else');
-              }
-            });
+            const onFilterChange = event => {
+              let filtering = event.target.value;
+              console.log(filtering);
+            };
+
+            // data.forEach(item => {
+            //   if (item.name === filteredItem) {
+            //     console.log('filtered item', item.name);
+            //   } else {
+            //     console.log('else');
+            //   }
+            // });
 
             // this object will organize the list items into categories
             const sortedItems = {
@@ -87,9 +87,8 @@ const SortedList = ({ token, handlePurchase, calculateIfPurchased }) => {
                 <div className="listFilter">
                   <input
                     type="text"
-                    value={filteredItem}
                     className="filterField"
-                    onChange={e => setFilteredItem(e.target.value)}
+                    onChange={onFilterChange}
                     type="text"
                   ></input>
                 </div>
