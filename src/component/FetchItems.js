@@ -11,6 +11,30 @@ const FetchItems = ({ token, setToken, firestore }) => {
   const concatPath = `/lists/${token}/items`;
   const today = dayjs(new Date());
 
+  // this object will organize the list items into lists
+  const lists = {
+    soon: {
+      items: [],
+      className: 'soonItems',
+      label: 'Soon Items',
+    },
+    prettySoon: {
+      items: [],
+      className: 'prettySoonItems',
+      label: 'Pretty Soon Items',
+    },
+    notSoon: {
+      items: [],
+      className: 'notSoonItems',
+      label: 'Not Soon Items',
+    },
+    inactive: {
+      items: [],
+      className: 'inactiveItems',
+      label: 'Inactive Items',
+    },
+  };
+
   if (!token) return <Redirect to="" />;
 
   firestore
@@ -56,30 +80,6 @@ const FetchItems = ({ token, setToken, firestore }) => {
             if (isLoading) {
               return <div>Still Loading...</div>;
             } else {
-              // this object will organize the list items into categories
-              const categories = {
-                soon: {
-                  items: [],
-                  className: 'soonItems',
-                  label: 'Soon Items',
-                },
-                prettySoon: {
-                  items: [],
-                  className: 'prettySoonItems',
-                  label: 'Pretty Soon Items',
-                },
-                notSoon: {
-                  items: [],
-                  className: 'notSoonItems',
-                  label: 'Not Soon Items',
-                },
-                inactive: {
-                  items: [],
-                  className: 'inactiveItems',
-                  label: 'Inactive Items',
-                },
-              };
-
               // this function will determine if an item should be considered
               // inactive, because it hasn't been purchased for so long
               const inActive = item => {
@@ -102,31 +102,22 @@ const FetchItems = ({ token, setToken, firestore }) => {
               // need to buy it again
               data.forEach(item => {
                 if (item.dateOfPurchase && inActive(item)) {
-                  categories.inactive.items.push(item);
+                  lists.inactive.items.push(item);
                 } else if (item.numberOfDays <= 7) {
-                  categories.soon.items.push(item);
+                  lists.soon.items.push(item);
                 } else if (item.numberOfDays > 7 && item.numberOfDays < 30) {
-                  categories.prettySoon.items.push(item);
+                  lists.prettySoon.items.push(item);
                 } else if (item.numberOfDays >= 30) {
-                  categories.notSoon.items.push(item);
+                  lists.notSoon.items.push(item);
                 }
               });
 
               return (
                 <React.Fragment>
-                  <ListContents categoryData={categories.soon} token={token} />
-                  <ListContents
-                    categoryData={categories.prettySoon}
-                    token={token}
-                  />
-                  <ListContents
-                    categoryData={categories.notSoon}
-                    token={token}
-                  />
-                  <ListContents
-                    categoryData={categories.inactive}
-                    token={token}
-                  />
+                  <ListContents listData={lists.soon} token={token} />
+                  <ListContents listData={lists.prettySoon} token={token} />
+                  <ListContents listData={lists.notSoon} token={token} />
+                  <ListContents listData={lists.inactive} token={token} />
                 </React.Fragment>
               );
             }

@@ -4,18 +4,19 @@ import { Link } from 'react-router-dom';
 import dayjs from 'dayjs';
 import calculateNewPurchaseValues from '../calculations';
 
-const ListContents = ({ categoryData, firestore, token }) => {
+const ListContents = ({ listData, firestore, token }) => {
   const today = new Date();
-  const items = categoryData.items;
+  const items = listData.items;
+  const itemsDocRef = firestore
+    .collection('lists')
+    .doc(token)
+    .collection('items');
 
   // function to change database on button click
   const handlePurchase = event => {
     let itemId = event.target.id;
     event.preventDefault();
-    firestore
-      .collection('lists')
-      .doc(token)
-      .collection('items')
+    itemsDocRef
       .doc(itemId)
       .get()
       .then(doc => {
@@ -25,16 +26,11 @@ const ListContents = ({ categoryData, firestore, token }) => {
   };
 
   const updateDatabase = data => {
-    firestore
-      .collection('lists')
-      .doc(token)
-      .collection('items')
-      .doc(data.id)
-      .update({
-        numberOfDays: data.numberOfDays,
-        dateOfPurchase: data.dateOfPurchase,
-        numberOfPurchases: data.numberOfPurchases,
-      });
+    itemsDocRef.doc(data.id).update({
+      numberOfDays: data.numberOfDays,
+      dateOfPurchase: data.dateOfPurchase,
+      numberOfPurchases: data.numberOfPurchases,
+    });
   };
 
   // This function is called from within className prop
@@ -58,8 +54,8 @@ const ListContents = ({ categoryData, firestore, token }) => {
   };
 
   return (
-    <div className={categoryData.className}>
-      <h2 className="itemsLabel">{categoryData.label}</h2>
+    <div className={listData.className}>
+      <h2 className="itemsLabel">{listData.label}</h2>
       <ul>
         {items.map(item => (
           <li id={item.id} key={item.id} className="listItem">
