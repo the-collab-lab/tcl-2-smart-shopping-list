@@ -66,12 +66,12 @@ const FetchItems = ({ token, setToken, firestore }) => {
                 prettySoon: {
                   items: [],
                   className: 'prettySoonItems',
-                  label: 'Pretty-Soon Items',
+                  label: 'Pretty Soon Items',
                 },
                 notSoon: {
                   items: [],
                   className: 'notSoonItems',
-                  label: 'Not-Soon Items',
+                  label: 'Not Soon Items',
                 },
                 inactive: {
                   items: [],
