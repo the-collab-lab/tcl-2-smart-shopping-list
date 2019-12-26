@@ -11,30 +11,6 @@ const FetchItems = ({ token, setToken, firestore }) => {
   const concatPath = `/lists/${token}/items`;
   const today = dayjs(new Date());
 
-  // this object will organize the list items into lists
-  const lists = {
-    soon: {
-      items: [],
-      className: 'soonItems',
-      label: 'Soon Items',
-    },
-    prettySoon: {
-      items: [],
-      className: 'prettySoonItems',
-      label: 'Pretty Soon Items',
-    },
-    notSoon: {
-      items: [],
-      className: 'notSoonItems',
-      label: 'Not Soon Items',
-    },
-    inactive: {
-      items: [],
-      className: 'inactiveItems',
-      label: 'Inactive Items',
-    },
-  };
-
   if (!token) return <Redirect to="" />;
 
   firestore
@@ -80,6 +56,29 @@ const FetchItems = ({ token, setToken, firestore }) => {
             if (isLoading) {
               return <div>Still Loading...</div>;
             } else {
+              // this object will organize the list items into lists
+              const lists = {
+                soon: {
+                  items: [],
+                  className: 'soonItems',
+                  label: 'Soon Items',
+                },
+                prettySoon: {
+                  items: [],
+                  className: 'prettySoonItems',
+                  label: 'Pretty Soon Items',
+                },
+                notSoon: {
+                  items: [],
+                  className: 'notSoonItems',
+                  label: 'Not Soon Items',
+                },
+                inactive: {
+                  items: [],
+                  className: 'inactiveItems',
+                  label: 'Inactive Items',
+                },
+              };
               // this function will determine if an item should be considered
               // inactive, because it hasn't been purchased for so long
               const inActive = item => {
