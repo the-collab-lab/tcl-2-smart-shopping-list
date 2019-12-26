@@ -1,28 +1,85 @@
 import React from 'react';
 import { withFirestore } from 'react-firestore';
 import { Link } from 'react-router-dom';
+import dayjs from 'dayjs';
+import calculateNewPurchaseValues from '../calculations';
 
-const ListContents = ({ data, calculateIfPurchased, handlePurchase }) => {
+const ListContents = ({ categoryData, firestore, token }) => {
+  const today = new Date();
+  const items = categoryData.items;
+
+  // function to change database on button click
+  const handlePurchase = event => {
+    let itemId = event.target.id;
+    event.preventDefault();
+    firestore
+      .collection('lists')
+      .doc(token)
+      .collection('items')
+      .doc(itemId)
+      .get()
+      .then(doc => {
+        return calculateNewPurchaseValues(doc.data(), today);
+      })
+      .then(updateDatabase);
+  };
+
+  const updateDatabase = data => {
+    firestore
+      .collection('lists')
+      .doc(token)
+      .collection('items')
+      .doc(data.id)
+      .update({
+        numberOfDays: data.numberOfDays,
+        dateOfPurchase: data.dateOfPurchase,
+        numberOfPurchases: data.numberOfPurchases,
+      });
+  };
+
+  // This function is called from within className prop
+  // each time items get rendered & it sets the class
+  // based on whether an item has been purchased within
+  // the last 24 hours
+  const calculateIfPurchased = item => {
+    // returns true if item was purchased within last 24 hours
+    const wasItemPurchasedToday = today => {
+      today = dayjs(today);
+      return today.diff(dayjs(item.dateOfPurchase.toDate()), 'hour') <= 24;
+    };
+
+    if (item.dateOfPurchase === undefined) {
+      return 'nonPurchasedItem';
+    } else if (wasItemPurchasedToday(today)) {
+      return 'purchasedItem';
+    } else {
+      return 'nonPurchasedItem';
+    }
+  };
+
   return (
-    <ul>
-      {data.map(item => (
-        <li id={item.id} key={item.id} className="listItem">
-          <div
-            className={calculateIfPurchased(item)}
-            onClick={handlePurchase}
-            id={item.id}
-            aria-required="true"
-          >
-            {item.name}
-          </div>
-          {item.dateOfPurchase ? (
-            <Link className="viewMore" to={'/' + item.id}>
-              >>>
-            </Link>
-          ) : null}
-        </li>
-      ))}
-    </ul>
+    <div className={categoryData.className}>
+      <h2 className="itemsLabel">{categoryData.label}</h2>
+      <ul>
+        {items.map(item => (
+          <li id={item.id} key={item.id} className="listItem">
+            <div
+              className={calculateIfPurchased(item)}
+              onClick={handlePurchase}
+              id={item.id}
+              aria-required="true"
+            >
+              {item.name}
+            </div>
+            {item.dateOfPurchase ? (
+              <Link className="viewMore" to={'/' + item.id}>
+                >>>
+              </Link>
+            ) : null}
+          </li>
+        ))}
+      </ul>
+    </div>
   );
 };
 

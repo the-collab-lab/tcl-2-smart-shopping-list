@@ -1,72 +1,26 @@
 import React, { useState } from 'react';
 import { Redirect, Link } from 'react-router-dom';
-import { withFirestore } from 'react-firestore';
+import { withFirestore, FirestoreCollection } from 'react-firestore';
 import Navbar from './Navbar';
 import DeleteToken from './DeleteToken';
-import calculateNewPurchaseValues from '../calculations';
 import dayjs from 'dayjs';
-import SortedLists from './SortedLists';
+import ListContents from './ListContents';
 
 const FetchItems = ({ token, setToken, firestore }) => {
   const [empty, setEmpty] = useState(true);
-  let itemsDocRef;
+  const concatPath = `/lists/${token}/items`;
+  const today = dayjs(new Date());
 
-  if (!token) {
-    return <Redirect to="" />;
-  } else {
-    itemsDocRef = firestore
-      .collection('lists')
-      .doc(token)
-      .collection('items');
+  if (!token) return <Redirect to="" />;
 
-    itemsDocRef.get().then(items => {
+  firestore
+    .collection('lists')
+    .doc(token)
+    .collection('items')
+    .get()
+    .then(items => {
       setEmpty(items.empty);
     });
-  }
-
-  // stores the number of milliseconds elapsed since January 1, 1970
-  const now = new Date();
-  const today = dayjs(now);
-
-  // function to change database on button click
-  const handlePurchase = event => {
-    let itemId = event.target.id;
-    event.preventDefault();
-    itemsDocRef
-      .doc(itemId)
-      .get()
-      .then(doc => {
-        return calculateNewPurchaseValues(doc.data(), now);
-      })
-      .then(updateDatabase);
-  };
-
-  const updateDatabase = data => {
-    itemsDocRef.doc(data.id).update({
-      numberOfDays: data.numberOfDays,
-      dateOfPurchase: data.dateOfPurchase,
-      numberOfPurchases: data.numberOfPurchases,
-    });
-  };
-
-  // This function is called from within className prop
-  // each time items get rendered & it sets the class
-  // based on whether an item has been purchased within
-  // the last 24 hours
-  const calculateIfPurchased = item => {
-    // returns true if item was purchased within last 24 hours
-    const wasItemPurchasedToday = today => {
-      return today.diff(dayjs(item.dateOfPurchase.toDate()), 'hour') <= 24;
-    };
-
-    if (item.dateOfPurchase === undefined) {
-      return 'nonPurchasedItem';
-    } else if (wasItemPurchasedToday(today)) {
-      return 'purchasedItem';
-    } else {
-      return 'nonPurchasedItem';
-    }
-  };
 
   if (empty) {
     return (
@@ -78,19 +32,111 @@ const FetchItems = ({ token, setToken, firestore }) => {
         <Navbar />
       </React.Fragment>
     );
-  } else {
-    return (
-      <React.Fragment>
-        <SortedLists
-          token={token}
-          handlePurchase={handlePurchase}
-          calculateIfPurchased={calculateIfPurchased}
-        />
-        <Navbar />
-        <DeleteToken token={token} setToken={setToken} />
-      </React.Fragment>
-    );
   }
+
+  return (
+    <React.Fragment>
+      <section className="listFrame">
+        <h1 className="listTitle">
+          <span
+            role="img"
+            className="shoppingCart"
+            aria-label="Illustration of a shopping cart"
+          >
+            &#128722;
+          </span>
+          My Shopping List
+        </h1>
+        {/* could also use &#128717; which is shopping bags */}
+
+        <FirestoreCollection
+          path={concatPath}
+          sort="numberOfDays:asc"
+          render={({ isLoading, data }) => {
+            if (isLoading) {
+              return <div>Still Loading...</div>;
+            } else {
+              // this object will organize the list items into categories
+              const categories = {
+                soon: {
+                  items: [],
+                  className: 'soonItems',
+                  label: 'Soon Items',
+                },
+                prettySoon: {
+                  items: [],
+                  className: 'prettySoonItems',
+                  label: 'Pretty-Soon Items',
+                },
+                notSoon: {
+                  items: [],
+                  className: 'notSoonItems',
+                  label: 'Not-Soon Items',
+                },
+                inactive: {
+                  items: [],
+                  className: 'inactiveItems',
+                  label: 'Inactive Items',
+                },
+              };
+
+              // this function will determine if an item should be considered
+              // inactive, because it hasn't been purchased for so long
+              const inActive = item => {
+                const doubleEstimate = item.numberOfDays * 2;
+                const lastPurchaseDate = item.dateOfPurchase.toDate();
+                const doublePurchaseEstimate = dayjs(lastPurchaseDate)
+                  .add(doubleEstimate.toString(), 'day')
+                  .toDate();
+
+                // (if the item in question has not been purchased for
+                // a long time (i.e., if you were going to buy it in 10 days
+                // but 20 days have gone by and you didn't end up getting it)
+                // then set it to inactive)
+                if (dayjs(doublePurchaseEstimate) < today) {
+                  return item;
+                }
+              };
+
+              // sort each item according to how long it will be before you
+              // need to buy it again
+              data.forEach(item => {
+                if (item.dateOfPurchase && inActive(item)) {
+                  categories.inactive.items.push(item);
+                } else if (item.numberOfDays <= 7) {
+                  categories.soon.items.push(item);
+                } else if (item.numberOfDays > 7 && item.numberOfDays < 30) {
+                  categories.prettySoon.items.push(item);
+                } else if (item.numberOfDays >= 30) {
+                  categories.notSoon.items.push(item);
+                }
+              });
+
+              return (
+                <React.Fragment>
+                  <ListContents categoryData={categories.soon} token={token} />
+                  <ListContents
+                    categoryData={categories.prettySoon}
+                    token={token}
+                  />
+                  <ListContents
+                    categoryData={categories.notSoon}
+                    token={token}
+                  />
+                  <ListContents
+                    categoryData={categories.inactive}
+                    token={token}
+                  />
+                </React.Fragment>
+              );
+            }
+          }}
+        />
+      </section>
+      <DeleteToken token={token} setToken={setToken} />
+      <Navbar />
+    </React.Fragment>
+  );
 };
 
 export default withFirestore(FetchItems);
