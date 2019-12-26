@@ -9,14 +9,10 @@ const SortedList = ({ token, handlePurchase, calculateIfPurchased }) => {
   const today = dayjs(now);
   const [filteredItem, setFilteredItem] = useState('');
 
-  useEffect(
-    event => {
-      setFilteredItem(event.target.value);
-      // filterItems(filteredItem);
-      console.log('this is filtered item:', filteredItem);
-    },
-    [filteredItem],
-  );
+  useEffect(() => {
+    setFilteredItem(filteredItem);
+    console.log(filteredItem);
+  }, [filteredItem]);
 
   return (
     <section className="listFrame">
@@ -42,7 +38,6 @@ const SortedList = ({ token, handlePurchase, calculateIfPurchased }) => {
             const filterItems = item => {
               console.log('this one', item);
               data.forEach(item => {
-                console.log(item.name);
                 if (item.name === filteredItem) {
                   console.log('filtered item', item.name);
                 } else {
@@ -95,9 +90,10 @@ const SortedList = ({ token, handlePurchase, calculateIfPurchased }) => {
               <React.Fragment>
                 <div className="listFilter">
                   <input
+                    type="text"
                     value={filteredItem}
                     className="filterField"
-                    onChange={handleFilterChange}
+                    onChange={e => setFilteredItem(e.target.value)}
                     type="text"
                   ></input>
                 </div>
