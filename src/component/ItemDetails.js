@@ -11,7 +11,7 @@ const ItemDetails = ({ token, purchased, firestore }) => {
 
   const confirmDeleteClick = event => {
     if (window.confirm('Are you sure you wish to delete this item?')) {
-      deleteEntry(event.target.id);
+      deleteEntry(event.target.value);
       setRedirect(true);
     }
   };
@@ -56,7 +56,8 @@ const ItemDetails = ({ token, purchased, firestore }) => {
             <button
               className="button-link"
               onClick={confirmDeleteClick}
-              id={item.id}
+              value={item.id}
+              id="deleteItemButton"
             >
               Delete this Item?
             </button>

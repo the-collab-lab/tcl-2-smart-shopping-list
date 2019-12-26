@@ -266,8 +266,8 @@ a:visited {
 
 /* Item Details Specific Styling  */
 
-.deleteItemButton {
-  font-size: 1rem;
+#deleteItemButton {
+  /* font-size: 1rem; */
 }
 
 /* Other Components/Views Specific Styling */
