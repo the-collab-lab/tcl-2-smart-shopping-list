@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { FirestoreCollection, withFirestore } from 'react-firestore';
 import dayjs from 'dayjs';
 import ListContents from './ListContents';
@@ -7,7 +7,16 @@ const SortedList = ({ token, handlePurchase, calculateIfPurchased }) => {
   const concatPath = `/lists/${token}/items`;
   const now = new Date();
   const today = dayjs(now);
-  const [filterItem, setFilterItem] = useState('');
+  const [filteredItem, setFilteredItem] = useState('');
+
+  useEffect(
+    event => {
+      setFilteredItem(event.target.value);
+      // filterItems(filteredItem);
+      console.log('this is filtered item:', filteredItem);
+    },
+    [filteredItem],
+  );
 
   return (
     <section className="listFrame">
@@ -30,8 +39,16 @@ const SortedList = ({ token, handlePurchase, calculateIfPurchased }) => {
           if (isLoading) {
             return <div>Still Loading...</div>;
           } else {
-            const handleFilterChange = event => {
-              setFilterItem(event.target.value);
+            const filterItems = item => {
+              console.log('this one', item);
+              data.forEach(item => {
+                console.log(item.name);
+                if (item.name === filteredItem) {
+                  console.log('filtered item', item.name);
+                } else {
+                  console.log('else');
+                }
+              });
             };
 
             // this object will organize the list items into categories
@@ -78,8 +95,10 @@ const SortedList = ({ token, handlePurchase, calculateIfPurchased }) => {
               <React.Fragment>
                 <div className="listFilter">
                   <input
+                    value={filteredItem}
                     className="filterField"
                     onChange={handleFilterChange}
+                    type="text"
                   ></input>
                 </div>
                 <div className="soonItems">
