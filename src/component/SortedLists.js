@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { FirestoreCollection, withFirestore } from 'react-firestore';
 import dayjs from 'dayjs';
 import ListContents from './ListContents';
@@ -7,6 +7,7 @@ const SortedList = ({ token, handlePurchase, calculateIfPurchased }) => {
   const concatPath = `/lists/${token}/items`;
   const now = new Date();
   const today = dayjs(now);
+  const [filterItem, setFilterItem] = useState('');
 
   return (
     <section className="listFrame">
@@ -29,8 +30,12 @@ const SortedList = ({ token, handlePurchase, calculateIfPurchased }) => {
           if (isLoading) {
             return <div>Still Loading...</div>;
           } else {
+            const handleFilterChange = event => {
+              setFilterItem(event.target.value);
+            };
+
             // this object will organize the list items into categories
-            const filteredItems = {
+            const sortedItems = {
               soon: [],
               prettySoon: [],
               notSoon: [],
@@ -59,22 +64,28 @@ const SortedList = ({ token, handlePurchase, calculateIfPurchased }) => {
             // need to buy it again
             data.forEach(item => {
               if (item.dateOfPurchase && inActive(item)) {
-                filteredItems.inactive.push(item);
+                sortedItems.inactive.push(item);
               } else if (item.numberOfDays <= 7) {
-                filteredItems.soon.push(item);
+                sortedItems.soon.push(item);
               } else if (item.numberOfDays > 7 && item.numberOfDays < 30) {
-                filteredItems.prettySoon.push(item);
+                sortedItems.prettySoon.push(item);
               } else if (item.numberOfDays >= 30) {
-                filteredItems.notSoon.push(item);
+                sortedItems.notSoon.push(item);
               }
             });
 
             return (
               <React.Fragment>
+                <div className="listFilter">
+                  <input
+                    className="filterField"
+                    onChange={handleFilterChange}
+                  ></input>
+                </div>
                 <div className="soonItems">
                   <h2 className="itemsLabel">Soon Items</h2>
                   <ListContents
-                    data={filteredItems.soon}
+                    data={sortedItems.soon}
                     calculateIfPurchased={calculateIfPurchased}
                     handlePurchase={handlePurchase}
                   />
@@ -82,7 +93,7 @@ const SortedList = ({ token, handlePurchase, calculateIfPurchased }) => {
                 <div className="prettySoonItems">
                   <h2 className="itemsLabel">Pretty-Soon Items</h2>
                   <ListContents
-                    data={filteredItems.prettySoon}
+                    data={sortedItems.prettySoon}
                     calculateIfPurchased={calculateIfPurchased}
                     handlePurchase={handlePurchase}
                   />
@@ -90,7 +101,7 @@ const SortedList = ({ token, handlePurchase, calculateIfPurchased }) => {
                 <div className="notSoonItems">
                   <h2 className="itemsLabel">Not-Soon Items</h2>
                   <ListContents
-                    data={filteredItems.notSoon}
+                    data={sortedItems.notSoon}
                     calculateIfPurchased={calculateIfPurchased}
                     handlePurchase={handlePurchase}
                   />
@@ -98,7 +109,7 @@ const SortedList = ({ token, handlePurchase, calculateIfPurchased }) => {
                 <div className="inactiveItems">
                   <h2 className="itemsLabel">Inactive Items</h2>
                   <ListContents
-                    data={filteredItems.inactive}
+                    data={sortedItems.inactive}
                     calculateIfPurchased={calculateIfPurchased}
                     handlePurchase={handlePurchase}
                   />
