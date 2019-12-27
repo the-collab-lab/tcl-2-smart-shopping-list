@@ -34,14 +34,6 @@ const SortedList = ({ token, handlePurchase, calculateIfPurchased }) => {
           if (isLoading) {
             return <div>Still Loading...</div>;
           } else {
-            data.forEach(item => {
-              if (item.name === filteredItem) {
-                console.log('filtered item', item.name);
-              } else {
-                console.log('else');
-              }
-            });
-
             // this object will organize the list items into categories
             const sortedItems = {
               soon: [],
@@ -82,6 +74,20 @@ const SortedList = ({ token, handlePurchase, calculateIfPurchased }) => {
               }
             });
 
+            const handleFilterChange = (event, data) => {
+              setFilteredItem(event.target.value);
+              filterItems(data);
+            };
+
+            const filterItems = data => {
+              data.forEach(item => {
+                console.log(item.name);
+                if (item.name.indexOf(filteredItem) > -1) {
+                } else {
+                }
+              });
+            };
+
             return (
               <React.Fragment>
                 <div className="listFilter">
@@ -89,8 +95,7 @@ const SortedList = ({ token, handlePurchase, calculateIfPurchased }) => {
                     type="text"
                     value={filteredItem}
                     className="filterField"
-                    onChange={e => setFilteredItem(e.target.value)}
-                    type="text"
+                    onChange={handleFilterChange}
                   ></input>
                 </div>
                 <div className="soonItems">
