@@ -56,6 +56,11 @@ const FetchItems = ({ token, setToken, firestore }) => {
             if (isLoading) {
               return <div>Still Loading...</div>;
             } else {
+              const onFilterChange = event => {
+                let filtering = event.target.value;
+                console.log(filtering);
+              };
+
               // this object will organize the list items into lists
               const lists = {
                 soon: {
@@ -113,6 +118,15 @@ const FetchItems = ({ token, setToken, firestore }) => {
 
               return (
                 <React.Fragment>
+                  <div className="listFilter">
+                    <input
+                      type="text"
+                      className="filterField"
+                      onChange={onFilterChange}
+                      type="text"
+                      onChange={handleFilterChange}
+                    ></input>
+                  </div>
                   <ListContents listData={lists.soon} token={token} />
                   <ListContents listData={lists.prettySoon} token={token} />
                   <ListContents listData={lists.notSoon} token={token} />
