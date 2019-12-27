@@ -15,6 +15,19 @@ describe('Item details view', function() {
 		cy.contains(todayString);
 	});
 
+	
+	it('Does the delete item button function correctly?', function() {
+		cy.visit('/add');
+		cy.get('.inputField').type('alpaca');
+		cy.get('#addItemButton').click();
+		cy.visit('list');
+		expect(cy.contains('alpaca').click());
+		cy.visit('/alpaca');
+		// cy.get('#deleteItemButton').click();
+		
+		// cy.get('alpaca grub').should('not.exist');
+	  })
+
 	afterEach(function() {
 		cy.deleteItem('token1234', 'banana');
 	})
