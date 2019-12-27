@@ -117,6 +117,8 @@ const FetchItems = ({ token, setToken, firestore }) => {
                   <ListContents listData={lists.prettySoon} token={token} />
                   <ListContents listData={lists.notSoon} token={token} />
                   <ListContents listData={lists.inactive} token={token} />
+                  <Navbar />
+                  <DeleteToken token={token} setToken={setToken} />
                 </React.Fragment>
               );
             }
