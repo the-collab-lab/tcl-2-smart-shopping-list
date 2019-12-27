@@ -118,15 +118,14 @@ const FetchItems = ({ token, setToken, firestore }) => {
 
               return (
                 <React.Fragment>
-                  <div className="listFilter">
+                  {/* <div className="listFilter">
                     <input
                       type="text"
                       className="filterField"
                       onChange={onFilterChange}
                       type="text"
-                      onChange={handleFilterChange}
                     ></input>
-                  </div>
+                  </div> */}
                   <ListContents listData={lists.soon} token={token} />
                   <ListContents listData={lists.prettySoon} token={token} />
                   <ListContents listData={lists.notSoon} token={token} />
