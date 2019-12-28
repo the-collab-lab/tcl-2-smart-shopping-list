@@ -10,6 +10,7 @@ const FetchItems = ({ token, setToken, firestore }) => {
   const [empty, setEmpty] = useState(true);
   const concatPath = `/lists/${token}/items`;
   const today = dayjs(new Date());
+  const [filteredInput, setFilteredInput] = useState('');
 
   if (!token) return <Redirect to="" />;
 
@@ -56,11 +57,6 @@ const FetchItems = ({ token, setToken, firestore }) => {
             if (isLoading) {
               return <div>Still Loading...</div>;
             } else {
-              const onFilterChange = event => {
-                let filtering = event.target.value;
-                console.log(filtering);
-              };
-
               // this object will organize the list items into lists
               const lists = {
                 soon: {
@@ -116,16 +112,38 @@ const FetchItems = ({ token, setToken, firestore }) => {
                 }
               });
 
+              // Update state whenever filter input changes
+              const handleFilterChange = event => {
+                setFilteredInput(event.target.value);
+              };
+
+              // function slices items off arr which chars are not equal to filteredInput
+              const filterArr = arr => {
+                return arr.filter(
+                  item =>
+                    item.name.slice(0, filteredInput.length) === filteredInput,
+                );
+              };
+
+              // update value of the items arrays within the lists object to only include
+              // the item(s) that remain after running through filterArr function
+              lists.soon.items = filterArr(lists.soon.items);
+              lists.prettySoon.items = filterArr(lists.prettySoon.items);
+              lists.notSoon.items = filterArr(lists.notSoon.items);
+
               return (
                 <React.Fragment>
-                  {/* <div className="listFilter">
-                    <input
-                      type="text"
-                      className="filterField"
-                      onChange={onFilterChange}
-                      type="text"
-                    ></input>
-                  </div> */}
+                  <div className="listFilter">
+                    <label>
+                      Search:
+                      <input
+                        placeholder="enter item"
+                        type="text"
+                        className="filterField"
+                        onChange={handleFilterChange}
+                      ></input>
+                    </label>
+                  </div>
                   <ListContents listData={lists.soon} token={token} />
                   <ListContents listData={lists.prettySoon} token={token} />
                   <ListContents listData={lists.notSoon} token={token} />
