@@ -117,6 +117,11 @@ const FetchItems = ({ token, setToken, firestore }) => {
                 setFilteredInput(event.target.value);
               };
 
+              const handleClearFieldButtonClick = event => {
+                event.preventDefault();
+                setFilteredInput('');
+              };
+
               // function filters items off arr which chars are not equal to filteredInput
               const filterArr = arr => {
                 return arr.filter(
@@ -143,6 +148,7 @@ const FetchItems = ({ token, setToken, firestore }) => {
                         onChange={handleFilterChange}
                       ></input>
                     </label>
+                    <button onClick={handleClearFieldButtonClick}>x</button>
                   </div>
                   <ListContents listData={lists.soon} token={token} />
                   <ListContents listData={lists.prettySoon} token={token} />
