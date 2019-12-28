@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Redirect, Link } from 'react-router-dom';
 import { withFirestore, FirestoreCollection } from 'react-firestore';
 import Navbar from './Navbar';
@@ -135,6 +135,7 @@ const FetchItems = ({ token, setToken, firestore }) => {
               lists.soon.items = filterArr(lists.soon.items);
               lists.prettySoon.items = filterArr(lists.prettySoon.items);
               lists.notSoon.items = filterArr(lists.notSoon.items);
+              lists.inactive.items = filterArr(lists.inactive.items);
 
               return (
                 <React.Fragment>
@@ -146,6 +147,7 @@ const FetchItems = ({ token, setToken, firestore }) => {
                         type="text"
                         className="filterField"
                         onChange={handleFilterChange}
+                        value={filteredInput}
                       ></input>
                     </label>
                     <button onClick={handleClearFieldButtonClick}>x</button>
