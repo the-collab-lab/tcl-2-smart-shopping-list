@@ -46,7 +46,7 @@ describe("Show list of items", function() {
     it('Verifies that all four items categories are present on the list view', function() {
       cy.visit('/list');
       expect(cy.contains('Soon Items'));
-      expect(cy.contains('Kind of Soon Items'));
+      expect(cy.contains('Pretty Soon Items'));
       expect(cy.contains('Not Soon Items'));
       expect(cy.contains('Inactive Items'));
     });
