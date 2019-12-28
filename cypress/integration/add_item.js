@@ -30,10 +30,6 @@ describe('Add Item To List', function() {
       .should('have.value', 'watermelon');
   });
 
-  // This test was not passing, because of a conflict with our new functionality
-  // that handles duplicate items. I added a function to generate a random item,
-  // instead of "marshmallows" every time, so now the test can work with a new
-  // item on every run - Ethan
   it('Resets input field after addItem button click', function() {
     cy.visit('/add');
     cy.get('.inputField').type(randomInput());

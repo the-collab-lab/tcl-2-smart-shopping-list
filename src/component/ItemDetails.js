@@ -1,12 +1,32 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { FirestoreCollection, withFirestore } from 'react-firestore';
 import dayjs from 'dayjs';
-import { useParams } from 'react-router-dom';
+import { useParams, Redirect } from 'react-router-dom';
 import BackButton from './BackButton';
 
-const ItemDetails = ({ token, purchased }) => {
-  let { itemId } = useParams();
+const ItemDetails = ({ token, purchased, firestore }) => {
+  const [redirect, setRedirect] = useState(false);
+  const [isNewItem, setIsNewItem] = useState(true);
+  const { itemId } = useParams();
   const concatPath = `/lists/${token}/items`;
+
+  const confirmDeleteClick = event => {
+    if (window.confirm('Are you sure you wish to delete this item?')) {
+      deleteEntry(event.target.value);
+      setRedirect(true);
+    }
+  };
+
+  const deleteEntry = itemID => {
+    firestore
+      .collection('lists')
+      .doc(token)
+      .collection('items')
+      .doc(itemID)
+      .delete();
+  };
+
+  if (redirect) return <Redirect to="" />;
 
   return (
     <FirestoreCollection
@@ -20,20 +40,41 @@ const ItemDetails = ({ token, purchased }) => {
         }
 
         // Below lines calculate next purchase date using dayjs 'add' function.
-        const lastPurchaseDate = item.dateOfPurchase.toDate();
-        const nextPurchaseDate = dayjs(lastPurchaseDate)
-          .add(item.numberOfDays.toString(), 'day')
-          .toDate();
+        let lastPurchaseDate;
+        let nextPurchaseDate;
+
+        if (item.dateOfPurchase) {
+          lastPurchaseDate = item.dateOfPurchase.toDate();
+          nextPurchaseDate = dayjs(lastPurchaseDate)
+            .add(item.numberOfDays.toString(), 'day')
+            .toDate();
+
+          setIsNewItem(false);
+        }
 
         return (
           <main>
             <BackButton />
             <h1>{item.name}</h1>
             <ul className="itemDetails">
-              <li>Last purchase: {lastPurchaseDate.toDateString()}</li>
-              <li>Next purchase: {nextPurchaseDate.toDateString()}</li>
+              <li>
+                Last purchase:{' '}
+                {isNewItem ? 'None' : lastPurchaseDate.toDateString()}
+              </li>
+              <li>
+                Next purchase:{' '}
+                {isNewItem ? 'None' : nextPurchaseDate.toDateString()}
+              </li>
               <li>Number of purchases: {item.numberOfPurchases}</li>
             </ul>
+            <button
+              className="button-link"
+              onClick={confirmDeleteClick}
+              value={item.id}
+              id="deleteItemButton"
+            >
+              Delete this Item?
+            </button>
           </main>
         );
       }}
