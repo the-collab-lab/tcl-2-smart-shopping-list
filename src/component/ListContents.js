@@ -62,7 +62,6 @@ const ListContents = ({ listData, firestore, token }) => {
             <div
               className={calculateIfPurchased(item)}
               onClick={handlePurchase}
-              id={item.id}
               aria-required="true"
             >
               {item.name}
