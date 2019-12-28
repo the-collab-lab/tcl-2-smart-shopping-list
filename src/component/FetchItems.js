@@ -117,7 +117,7 @@ const FetchItems = ({ token, setToken, firestore }) => {
                 setFilteredInput(event.target.value);
               };
 
-              // function slices items off arr which chars are not equal to filteredInput
+              // function filters items off arr which chars are not equal to filteredInput
               const filterArr = arr => {
                 return arr.filter(
                   item =>
