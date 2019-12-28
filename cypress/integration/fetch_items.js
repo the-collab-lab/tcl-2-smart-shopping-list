@@ -1,9 +1,9 @@
-import calculateNewPurchaseValues from '../../src/calculations'
+import calculateNewPurchaseValues from '../../src/calculations';
 
 const testDate = new Date('2019-01-01');
 
-describe("Show list of items", function() {
-  describe("Empty List", function() {
+describe('Show list of items', function() {
+  describe('Empty List', function() {
     beforeEach(function() {
       window.localStorage.setItem('uniqueToken', 'empty_test_token');
     });
@@ -60,21 +60,33 @@ describe("Show list of items", function() {
       cy.get('#soonButton').click({ force: true });
       cy.get('#addItemButton').click();
       cy.get('.BackButton_List').click();
-      cy.get('div').contains('salad2').click();
+      cy.get('div')
+        .contains('salad2')
+        .click();
       cy.get('.soonItems').contains('salad2');
     });
 
     it('View more link goes to item details page', function() {
       cy.visit('/list');
-      cy.get('#banana > .viewMore').invoke('show').click();
-      cy.url().should('eq', Cypress.config().baseUrl + '/banana')
+      cy.get('#banana > .viewMore')
+        .invoke('show')
+        .click();
+      cy.url().should('eq', Cypress.config().baseUrl + '/banana');
     });
 
     it('Clears input field search', function() {
       cy.visit('/list');
       cy.get('.filterField').type('Cream Cheese');
       cy.get('.clearFilter').click();
-      cy.get('.filterField').should('be.empty')
+      cy.get('.filterField').should('be.empty');
+    });
+
+    it('filters items based on user input', function() {
+      cy.visit('/list');
+      cy.get('.filterField').type('cr');
+      cy.get('li')
+        .first()
+        .contains('Cream Cheese');
     });
   });
 
@@ -82,19 +94,19 @@ describe("Show list of items", function() {
     window.localStorage.removeItem('uniqueToken');
   });
 
-  describe("Update purchase values", function() {
-    it("Calculates new values when purchased", function() {
-      const today = new Date("2019-11-30")
+  describe('Update purchase values', function() {
+    it('Calculates new values when purchased', function() {
+      const today = new Date('2019-11-30');
       let testData = {
         id: 'Test Data',
         numberOfDays: 14,
         numberOfPurchases: 3,
-        dateOfPurchase: new Date("2019-11-01"),
-      }
+        dateOfPurchase: new Date('2019-11-01'),
+      };
 
       let newTestData = calculateNewPurchaseValues(testData, today);
       expect(newTestData.numberOfDays).to.eq(19.6);
       expect(newTestData.numberOfPurchases).to.eq(4);
-    })
-  })
+    });
+  });
 });
