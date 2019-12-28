@@ -67,11 +67,9 @@ const ListContents = ({ listData, firestore, token }) => {
             >
               {item.name}
             </div>
-            {item.dateOfPurchase ? (
-              <Link className="viewMore" to={'/' + item.id}>
-                >>>
-              </Link>
-            ) : null}
+            <Link className="viewMore" to={'/' + item.id}>
+              >>>
+            </Link>
           </li>
         ))}
       </ul>
