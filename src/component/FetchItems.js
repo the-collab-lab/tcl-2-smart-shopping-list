@@ -150,7 +150,12 @@ const FetchItems = ({ token, setToken, firestore }) => {
                         value={filteredInput}
                       ></input>
                     </label>
-                    <button onClick={handleClearFieldButtonClick}>x</button>
+                    <button
+                      className="clearFilter"
+                      onClick={handleClearFieldButtonClick}
+                    >
+                      x
+                    </button>
                   </div>
                   <ListContents listData={lists.soon} token={token} />
                   <ListContents listData={lists.prettySoon} token={token} />

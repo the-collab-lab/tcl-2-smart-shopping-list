@@ -12,7 +12,7 @@ describe("Show list of items", function() {
     });
   });
 
-  describe('List with Items', function() {
+  describe('List with Items and Filters Items', function() {
     beforeEach(function() {
       window.localStorage.setItem('uniqueToken', 'token1234');
     });
@@ -65,6 +65,13 @@ describe("Show list of items", function() {
       cy.visit('/list');
       cy.get('#banana > .viewMore').invoke('show').click();
       cy.url().should('eq', Cypress.config().baseUrl + '/banana')
+    });
+
+    it('Clears input field search', function() {
+      cy.visit('/list');
+      cy.get('.filterField').type('Cream Cheese');
+      cy.get('.clearFilter').click();
+      cy.get('.filterField').should('be.empty')
     });
   });
 
