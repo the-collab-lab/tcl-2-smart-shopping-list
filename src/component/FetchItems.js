@@ -114,7 +114,7 @@ const FetchItems = ({ token, setToken, firestore }) => {
 
               // Update state whenever filter input changes
               const handleFilterChange = event => {
-                setFilteredInput(event.target.value);
+                setFilteredInput(event.target.value.toLowerCase());
               };
 
               const handleClearFieldButtonClick = event => {
@@ -126,7 +126,7 @@ const FetchItems = ({ token, setToken, firestore }) => {
               const filterArr = arr => {
                 return arr.filter(
                   item =>
-                    item.name.slice(0, filteredInput.length) === filteredInput,
+                    item.id.slice(0, filteredInput.length) === filteredInput,
                 );
               };
 
