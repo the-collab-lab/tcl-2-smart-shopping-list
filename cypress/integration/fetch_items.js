@@ -1,5 +1,7 @@
 import calculateNewPurchaseValues from '../../src/calculations'
 
+const testDate = new Date('2019-01-01');
+
 describe("Show list of items", function() {
   describe("Empty List", function() {
     beforeEach(function() {
@@ -15,6 +17,7 @@ describe("Show list of items", function() {
   describe('List with Items and Filters Items', function() {
     beforeEach(function() {
       window.localStorage.setItem('uniqueToken', 'token1234');
+      cy.addItem('token1234', 'banana', testDate, 2);
     });
 
     it('User sees list after adding an item', function() {
