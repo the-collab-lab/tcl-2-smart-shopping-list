@@ -1,7 +1,8 @@
 describe('Item details view', function() {
+	const testDate = new Date('2019-01-01');
+
   beforeEach(function() {
 		window.localStorage.setItem('uniqueToken', 'token1234')
-		const testDate = new Date('2019-01-01');
 		cy.addItem('token1234', 'banana', testDate);
   });
 	
@@ -17,15 +18,11 @@ describe('Item details view', function() {
 
 	
 	it('Does the delete item button function correctly?', function() {
-		cy.visit('/add');
-		cy.get('.inputField').type('alpaca');
-		cy.get('#addItemButton').click();
-		cy.visit('list');
-		expect(cy.contains('alpaca').click());
+		cy.addItem('token1234', 'alpaca', testDate, 2);
 		cy.visit('/alpaca');
-		// cy.get('#deleteItemButton').click();
-		
-		// cy.get('alpaca grub').should('not.exist');
+		cy.get('#deleteItemButton').click();
+		cy.visit('/list');
+		cy.get('.listFrame').should('not.contain', 'alpaca')
 	  })
 
 	afterEach(function() {

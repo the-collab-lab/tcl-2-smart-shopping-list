@@ -26,15 +26,23 @@
 
 import { db } from '../../src/lib/firebase';
 
-Cypress.Commands.add("addItem", (token, itemID, dateOfPurchase) => {
+/**
+ * Adds an item to the firebase console
+ * @param {String} token The list token
+ * @param {String} itemID The normalized name of the item
+ * @param {Date} dateOfPurchase Date object of when the item was purchased
+ * @param {Number} numberOfPurchases Optional - defaults to 1
+ * @param {Number} numberOfDays Optional - defaults to 14
+ */
+Cypress.Commands.add("addItem", (token, itemID, dateOfPurchase, numberOfPurchases = 1, numberOfDays = 14) => {
 	db.collection('lists').doc(token).set({ items: '' });
 	db.collection('lists').doc(token).collection('items').doc(itemID)
 		.set({
 			id: itemID,
 			name: itemID,
-			numberOfDays: 14,
+			numberOfDays: numberOfDays,
 			dateOfPurchase: dateOfPurchase,
-			numberOfPurchases: 1,
+			numberOfPurchases: numberOfPurchases,
 	})
 });
 
