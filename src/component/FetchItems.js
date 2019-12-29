@@ -144,7 +144,7 @@ const FetchItems = ({ token, setToken, firestore }) => {
                       Search:
                       <input
                         placeholder="enter item"
-                        type="text"
+                        type="search"
                         className="filterField"
                         onChange={handleFilterChange}
                         value={filteredInput}
@@ -153,6 +153,7 @@ const FetchItems = ({ token, setToken, firestore }) => {
                     <button
                       className="clearFilter"
                       onClick={handleClearFieldButtonClick}
+                      ariaLabel="clear filter input"
                     >
                       x
                     </button>
