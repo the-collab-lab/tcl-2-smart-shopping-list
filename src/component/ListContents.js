@@ -58,11 +58,12 @@ const ListContents = ({ listData, firestore, token }) => {
       <h2 className="itemsLabel">{listData.label}</h2>
       <ul>
         {items.map(item => (
-          <li id={item.id} key={item.id} className="listItem">
+          <li id={item.id + '-li'} key={item.id} className="listItem">
             <div
               className={calculateIfPurchased(item)}
               onClick={handlePurchase}
               aria-required="true"
+              id={item.id}
             >
               {item.name}
             </div>

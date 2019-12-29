@@ -68,7 +68,7 @@ describe('Show list of items', function() {
 
     it('View more link goes to item details page', function() {
       cy.visit('/list');
-      cy.get('#banana > .viewMore')
+      cy.get('#banana-li > .viewMore')
         .invoke('show')
         .click();
       cy.url().should('eq', Cypress.config().baseUrl + '/banana');
