@@ -9,9 +9,6 @@ const JoinList = ({ token, setToken, firestore }) => {
   // list page, and adds token to local storage if token does ot exist,
   // alert pops up telling you that
   const checkTokenExists = token => {
-    // This conditional allows the Join List button to be accidentally clicked
-    // when the input is blank without throwing an error. Is there a better
-    // fix? - ethan
     if (token === null) {
       return;
     } else {
