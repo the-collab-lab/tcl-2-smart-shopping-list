@@ -22,6 +22,7 @@ const JoinList = ({ token, setToken, firestore }) => {
             setRedirect(true);
           } else {
             alert('Enter a valid share code and try again.');
+            setToken(null);
           }
         });
     }
