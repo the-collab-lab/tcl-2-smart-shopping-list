@@ -117,11 +117,6 @@ const FetchItems = ({ token, setToken, firestore }) => {
                 setFilteredInput(event.target.value.toLowerCase());
               };
 
-              const handleClearFieldButtonClick = event => {
-                event.preventDefault();
-                setFilteredInput('');
-              };
-
               // function filters items off arr which chars are not equal to filteredInput
               const filterArr = arr => {
                 return arr.filter(
@@ -140,28 +135,20 @@ const FetchItems = ({ token, setToken, firestore }) => {
               return (
                 <React.Fragment>
                   <div className="listFilter">
-                    <label>
-                      Search:
-                      <input
-                        placeholder="enter item"
-                        type="search"
-                        className="filterField"
-                        onChange={handleFilterChange}
-                        value={filteredInput}
-                      ></input>
-                    </label>
-                    <button
-                      className="clearFilter"
-                      onClick={handleClearFieldButtonClick}
-                      ariaLabel="clear filter input"
-                    >
-                      x
-                    </button>
+                    <input
+                      placeholder="search item"
+                      type="search"
+                      className="filterField"
+                      onChange={handleFilterChange}
+                      value={filteredInput}
+                    ></input>
                   </div>
-                  <ListContents listData={lists.soon} token={token} />
-                  <ListContents listData={lists.prettySoon} token={token} />
-                  <ListContents listData={lists.notSoon} token={token} />
-                  <ListContents listData={lists.inactive} token={token} />
+                  <div className="listContents">
+                    <ListContents listData={lists.soon} token={token} />
+                    <ListContents listData={lists.prettySoon} token={token} />
+                    <ListContents listData={lists.notSoon} token={token} />
+                    <ListContents listData={lists.inactive} token={token} />
+                  </div>
                   <Navbar />
                   <DeleteToken token={token} setToken={setToken} />
                 </React.Fragment>
