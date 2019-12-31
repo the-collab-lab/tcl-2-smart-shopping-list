@@ -9,6 +9,8 @@ const JoinList = ({ token, setToken, firestore }) => {
   // list page, and adds token to local storage if token does ot exist,
   // alert pops up telling you that
   const checkTokenExists = token => {
+    if (!token) return;
+
     firestore
       .collection('lists')
       .doc(token)
