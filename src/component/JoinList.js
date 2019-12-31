@@ -9,23 +9,19 @@ const JoinList = ({ token, setToken, firestore }) => {
   // list page, and adds token to local storage if token does ot exist,
   // alert pops up telling you that
   const checkTokenExists = token => {
-    if (token === null) {
-      return;
-    } else {
-      firestore
-        .collection('lists')
-        .doc(token)
-        .get()
-        .then(doc => {
-          if (doc.exists) {
-            addToLocalStorage(token);
-            setRedirect(true);
-          } else {
-            alert('Enter a valid share code and try again.');
-            setToken(null);
-          }
-        });
-    }
+    firestore
+      .collection('lists')
+      .doc(token)
+      .get()
+      .then(doc => {
+        if (doc.exists) {
+          addToLocalStorage(token);
+          setRedirect(true);
+        } else {
+          alert('Enter a valid share code and try again.');
+          setToken(null);
+        }
+      });
   };
 
   // event listner watching the value of the form change and setting it to token state
