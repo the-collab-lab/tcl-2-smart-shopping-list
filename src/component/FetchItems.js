@@ -5,6 +5,7 @@ import Navbar from './Navbar';
 import DeleteToken from './DeleteToken';
 import dayjs from 'dayjs';
 import ListContents from './ListContents';
+import shoppingCartIcon from '../lib/images/shoppingcart-icon.png';
 
 const FetchItems = ({ token, setToken, firestore }) => {
   const [empty, setEmpty] = useState(true);
@@ -39,13 +40,11 @@ const FetchItems = ({ token, setToken, firestore }) => {
     <React.Fragment>
       <section className="listFrame">
         <h1 className="listTitle">
-          <span
-            role="img"
+          <img
+            src={shoppingCartIcon}
             className="shoppingCart"
-            aria-label="Illustration of a shopping cart"
-          >
-            &#128722;
-          </span>
+            alt="Illustration of a shopping cart"
+          ></img>
           My Shopping List
         </h1>
         {/* could also use &#128717; which is shopping bags */}

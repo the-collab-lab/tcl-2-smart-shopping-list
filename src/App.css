@@ -6,13 +6,16 @@
   padding: 0;
   font-size: 30px;
   font-family: 'PT Sans Narrow', sans-serif;
-  color: var(--black);
+  color: var(--darkblue);
 
   /* color palette for quick access named by approximate colors */
   --darkblue: #263f44;
   --blue: #015668;
   --cream: #fff1cf;
-  --yellow: #ffd369;
+  --soonyellow: #ffd369;
+  --prettysoonyellow: #ffd36999;
+  --notsoonyellow: #ffd3694d;
+  --inactiveyellow: #ffd3691a;
   --white: #ffffff;
   --black: #000000;
 }
@@ -35,7 +38,7 @@ body {
   padding: 5vh;
   text-align: center;
   font-size: 1rem;
-  background-image: url('./triangle-mosaic.png');
+  background-image: url('./lib/images/triangle-mosaic.png');
 }
 
 form {
@@ -61,7 +64,7 @@ a:visited {
   flex-direction: column;
   justify-content: center;
   color: var(--black);
-  border: 2px solid var(--black);
+  border: 3px solid var(--blue);
   margin: 1vh;
   padding: 1vh;
   background-color: var(--white);
@@ -164,30 +167,25 @@ a:visited {
 }
 
 .shoppingCart {
-  font-size: 2rem;
+  width: 3vw;
+  height: auto;
+  margin-right: 2vw;
 }
 
 .soonItems li {
-  background-color: var(--cream);
+  background-color: var(--soonyellow);
 }
 
 .prettySoonItems li {
-  background-color: var(--yellow);
+  background-color: var(--prettysoonyellow);
 }
 
 .notSoonItems li {
-  background-color: var(--blue);
-}
-.notSoonItems div {
-  color: white;
+  background-color: var(--notsoonyellow);
 }
 
 .inactiveItems li {
-  background-color: var(--darkblue);
-}
-
-.inactiveItems div {
-  color: white;
+  background-color: var(--inactiveyellow);
 }
 
 .itemsLabel {
@@ -277,10 +275,10 @@ a:visited {
 
 .NavItem {
   color: #000;
-  background-color: var(--brown);
+  background-color: var(--white);
   font-size: 1.2rem;
   line-height: 8vh;
-  border: 1px solid var(--black);
+  border: 1px solid var(--blue);
   width: 50vw;
   display: flex;
   justify-content: center;
@@ -293,6 +291,16 @@ a:visited {
   box-shadow: inset 0px 0px 5px var(--black);
   transition: 0.1s;
   transition-timing-function: ease-in;
+}
+
+.listIcon {
+  width: 40px;
+}
+
+.addIcon {
+  height: 6vh;
+  width: auto;
+  transform: translate(0, 1vh);
 }
 
 .duplicateMessage {
