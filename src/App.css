@@ -81,11 +81,41 @@ a:visited {
 
 .homeWrap {
   display: flex;
+  position: relative;
   align-items: center;
   flex-direction: column;
   height: 50vh;
   width: 50vw;
   justify-content: space-around;
+}
+
+#homeTitle {
+  position: absolute;
+  margin-bottom: 10vh;
+}
+
+#homeIllustration {
+  height: 20vh;
+  width: auto;
+  margin-bottom: 10vh;
+  padding: 0;
+}
+
+#tokenButton {
+  position: absolute;
+  margin-top: 20vh;
+}
+
+#join-list {
+  position: absolute;
+  font-size: 0.8rem;
+  margin-top: 30vh;
+}
+
+#homeGuide {
+  position: absolute;
+  font-size: 0.6rem;
+  margin-top: 40vh;
 }
 
 /* Join List View Specific Styling */
