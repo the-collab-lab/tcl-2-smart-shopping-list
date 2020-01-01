@@ -18,7 +18,7 @@ const GetToken = ({ token, setToken }) => {
         className="button-link"
         id="tokenButton"
       >
-        Get Token
+        Start Your New List!
       </button>
     </React.Fragment>
   );
