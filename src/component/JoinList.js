@@ -5,9 +5,9 @@ import { Redirect, Link } from 'react-router-dom';
 const JoinList = ({ token, setToken, firestore }) => {
   const [redirect, setRedirect] = useState(false);
 
-  // checks if token exists and if it does, sends to that specific tokens
-  // list page, and adds token to local storage if token does ot exist,
-  // alert pops up telling you that
+  // Checks if token exists, and if it does, redirects user to that specific
+  // token's list page, and adds token to local storage. if token does not exist,
+  // then an alert pops up to notify the user
   const checkTokenExists = token => {
     if (!token) return;
 
