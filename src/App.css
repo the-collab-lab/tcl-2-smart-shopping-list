@@ -32,7 +32,7 @@ h1 {
 }
 
 h2 {
-  font-size: 1.5rem;
+  font-size: 1.2rem;
   text-decoration-line: underline;
   text-decoration-style: dotted;
   margin: 5px;
@@ -296,7 +296,7 @@ a:visited {
 .BackButton {
   display: flex;
   position: absolute;
-  top: 1vh;
+  top: 3vh;
   left: 4vh;
   background: none;
 }

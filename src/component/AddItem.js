@@ -4,8 +4,9 @@ import '../App.css';
 import Navbar from './Navbar';
 import BackButton from './BackButton';
 import DuplicateMessage from './DuplicateMessage';
+import TopBar from './TopBar';
 
-const AddItem = ({ firestore }) => {
+const AddItem = ({ token, setToken, firestore }) => {
   const [name, setName] = useState('');
   const [duplicate, setDuplicate] = useState(false);
 
@@ -97,6 +98,7 @@ const AddItem = ({ firestore }) => {
 
   return (
     <React.Fragment>
+      <TopBar token={token} setToken={setToken} />
       <BackButton />
       <form onSubmit={handleSubmit}>
         <label className="addFormLabel">
