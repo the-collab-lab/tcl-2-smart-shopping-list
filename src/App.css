@@ -141,7 +141,15 @@ a:visited {
 .listContents {
   background-size: 100% 1.2em;
   padding: 3px;
-  width: 80vw;
+  width: 30vw;
+  background-color: var(--white);
+  margin: auto;
+}
+
+@media screen and (max-width: 700px) {
+  .listContents {
+    width: 80vw;
+  }
 }
 
 /* .delete-button {
@@ -165,16 +173,30 @@ a:visited {
   margin: auto;
 }
 
+@media screen and (max-width: 700px) {
+  .listFilter {
+    width: 95vw;
+  }
+}
+
 .listFilter input {
   border-style: solid;
-  border-width: 0px 0px 1px 0px;
+  border-width: 0px 0px 2px 0px;
+  border-color: var(--blue);
   outline: none;
+  background-color: transparent;
 }
 
 .listItem {
   list-style-type: none;
   width: 25vw;
   margin: 5px 0;
+}
+
+@media screen and (max-width: 700px) {
+  .listItem {
+    width: 70vw;
+  }
 }
 
 .viewMore {
@@ -204,7 +226,7 @@ a:visited {
 }
 
 .shoppingCart {
-  width: 3vw;
+  width: 40px;
   height: auto;
   margin-right: 2vw;
 }
@@ -334,10 +356,25 @@ a:visited {
   width: 40px;
 }
 
+@media screen and (max-width: 700px) {
+  .listIcon {
+    height: 4vh;
+    width: auto;
+    transform: translate(0, 2vh);
+  }
+}
+
 .addIcon {
   height: 6vh;
   width: auto;
   transform: translate(0, 1vh);
+}
+
+@media screen and (max-width: 700px) {
+  .addIcon {
+    height: 3vh;
+    transform: translate(0, 2.5vh);
+  }
 }
 
 .duplicateMessage {
