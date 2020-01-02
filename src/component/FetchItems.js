@@ -6,23 +6,13 @@ import DeleteToken from './DeleteToken';
 import dayjs from 'dayjs';
 import ListContents from './ListContents';
 import shoppingCartIcon from '../lib/images/shoppingcart-icon.png';
-import ListDetails from './ListDetails';
+import TopBar from './TopBar';
 
 const FetchItems = ({ token, setToken, firestore }) => {
   const [empty, setEmpty] = useState(true);
   const concatPath = `/lists/${token}/items`;
   const today = dayjs(new Date());
   const [filteredInput, setFilteredInput] = useState('');
-  const [listDetails, setListDetails] = useState(false);
-
-  const toggleListDetails = event => {
-    event.preventDefault();
-    setListDetails(!listDetails);
-  };
-
-  const renderListDetails = () => {
-    if (listDetails) return <ListDetails />;
-  };
 
   if (!token) return <Redirect to="" />;
 
@@ -38,21 +28,18 @@ const FetchItems = ({ token, setToken, firestore }) => {
   if (empty) {
     return (
       <React.Fragment>
+        <TopBar token={token} setToken={setToken} />
         <Link className="button-link" id="emptyListAddItem" to="/add">
           Add your first Item
         </Link>
-        <DeleteToken token={token} setToken={setToken} />
         <Navbar />
       </React.Fragment>
     );
   }
 
   return (
-    <React.Fragment>
-      <button id="toggleListDetails" onClick={toggleListDetails}>
-        ≡
-      </button>
-      {renderListDetails()}
+    <React.Fragment className="view">
+      <TopBar token={token} setToken={setToken} />
       <section className="listFrame">
         <h1 className="listTitle">
           <img
@@ -164,15 +151,12 @@ const FetchItems = ({ token, setToken, firestore }) => {
                     <ListContents listData={lists.inactive} token={token} />
                   </div>
                   <Navbar />
-                  <DeleteToken token={token} setToken={setToken} />
                 </React.Fragment>
               );
             }
           }}
         />
       </section>
-      <DeleteToken token={token} setToken={setToken} />
-      <Navbar />
     </React.Fragment>
   );
 };
