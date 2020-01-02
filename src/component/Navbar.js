@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import listIcon from '../lib/images/hamburger-icon.png';
+import listIcon from '../lib/images/list-icon.svg';
 import addIcon from '../lib/images/add-icon.png';
 
 // This Navbar allows users to navigate from the List view to the Add Item view

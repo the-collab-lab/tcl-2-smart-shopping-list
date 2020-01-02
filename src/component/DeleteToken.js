@@ -14,7 +14,7 @@ const DeleteToken = ({ token, setToken }) => {
         onClick={onButtonClickHandler}
         className="button-link delete-button"
       >
-        Delete Token
+        Start Over
       </button>
     </React.Fragment>
   );
