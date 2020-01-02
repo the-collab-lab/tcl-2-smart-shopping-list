@@ -6,12 +6,23 @@ import DeleteToken from './DeleteToken';
 import dayjs from 'dayjs';
 import ListContents from './ListContents';
 import shoppingCartIcon from '../lib/images/shoppingcart-icon.png';
+import ListDetails from './ListDetails';
 
 const FetchItems = ({ token, setToken, firestore }) => {
   const [empty, setEmpty] = useState(true);
   const concatPath = `/lists/${token}/items`;
   const today = dayjs(new Date());
   const [filteredInput, setFilteredInput] = useState('');
+  const [listDetails, setListDetails] = useState(false);
+
+  const toggleListDetails = event => {
+    event.preventDefault();
+    setListDetails(!listDetails);
+  };
+
+  const renderListDetails = () => {
+    if (listDetails) return <ListDetails />;
+  };
 
   if (!token) return <Redirect to="" />;
 
@@ -38,6 +49,10 @@ const FetchItems = ({ token, setToken, firestore }) => {
 
   return (
     <React.Fragment>
+      <button id="toggleListDetails" onClick={toggleListDetails}>
+        ≡
+      </button>
+      {renderListDetails()}
       <section className="listFrame">
         <h1 className="listTitle">
           <img
