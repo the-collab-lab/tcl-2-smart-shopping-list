@@ -1,46 +1,48 @@
 import React from 'react';
 import GetToken from './GetToken';
 import { Link } from 'react-router-dom';
-import groceries from '../backgrounds/groceries.svg';
+import homeIllustration from '../lib/images/undraw_1.svg';
 
 function Home({ token, setToken }) {
   return (
     <div className="homeWrap">
+      <div id="pseudo-TopBar"></div>
+      <div id="homeIntro">Welcome to</div>
+      <h1 id="homeTitle">Listably!</h1>
       <img
-        alt="illustration of groceries"
-        src={groceries}
+        alt="illustration of shopping list"
+        src={homeIllustration}
         id="homeIllustration"
       ></img>
-      <h1 id="homeTitle">Welcome to __(title)__!</h1>
       <GetToken token={token} setToken={setToken} />
       <Link to="/join" className="button-link" id="join-list">
         Join Existing List
       </Link>
-      <div className="button-link" id="homeGuide">
-        How Does It Work?
-      </div>
+      <input
+        type="checkbox"
+        className="button-link"
+        id="homeGuideClick"
+      ></input>
+      <label for="homeGuideClick" id="homeGuide">
+        How does it work?
+      </label>
       <div id="hiddenGuide">
-        <ul>
+        <ol>
           <li>
-            1. Start a new list, or join a friend's list with the code they
-            shared
+            Start a new list, or join a friend's list with the code they shared
+          </li>
+          <li>Begin by adding items that you'll need to buy in the future</li>
+          <li>
+            Your list will be sorted with those items you need to buy first at
+            the top, and last at the bottom
           </li>
           <li>
-            2. Begin by adding items that you'll need to buy in the future
-          </li>
-          <li>
-            3. Your list will be sorted with those items you need to buy first
-            at the top, and last at the bottom
-          </li>
-          <li>
-            4. Click on an item to mark it as purchased, and let __App__ figure
+            Click on an item to mark it as purchased, and let Listably figure
             out the next date you'll need to buy it again
           </li>
-          <li>
-            5. Click on the icon beside each item to check out its details
-          </li>
-          <li>6. Visit the menu if you want to start over with a new list</li>
-        </ul>
+          <li>Click on the icon beside each item to check out its details</li>
+          <li>Visit the menu if you want to start over with a new list</li>
+        </ol>
       </div>
     </div>
   );

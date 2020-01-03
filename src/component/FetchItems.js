@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { Redirect, Link } from 'react-router-dom';
 import { withFirestore, FirestoreCollection } from 'react-firestore';
 import Navbar from './Navbar';
-import DeleteToken from './DeleteToken';
 import dayjs from 'dayjs';
 import ListContents from './ListContents';
 import shoppingCartIcon from '../lib/images/shoppingcart-icon.png';
