@@ -111,10 +111,11 @@ a:visited {
 }
 
 #homeIllustration {
+  position: absolute;
+  bottom: 30vh;
   height: 20vh;
   width: auto;
-  margin-bottom: 10vh;
-  padding: 0;
+  filter: drop-shadow(4px 4px 4px var(--black));
 }
 
 #tokenButton {
@@ -132,6 +133,32 @@ a:visited {
   position: absolute;
   font-size: 0.6rem;
   margin-top: 40vh;
+}
+
+#homeGuide:hover + #hiddenGuide {
+  display: flex;
+}
+
+#hiddenGuide {
+  display: none;
+
+  flex-direction: column;
+  justify-content: center;
+  color: var(--black);
+  border: 3px solid var(--blue);
+  margin: 1vh;
+  padding: 1vh;
+  background-color: var(--white);
+  border-radius: 2px;
+
+  box-shadow: 2px 2px 4px var(--black);
+  position: absolute;
+  top: 70vh;
+}
+
+#hiddenGuide li {
+  list-style: none;
+  font-size: 0.6rem;
 }
 
 /* Join List View Specific Styling */
