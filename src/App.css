@@ -12,10 +12,10 @@
   --darkblue: #263f44;
   --blue: #015668;
   --cream: #fff1cf;
-  --soonyellow: #ffb607;
-  --prettysoonyellow: #ffd97d;
-  --notsoonyellow: #fff0cb;
-  --inactiveyellow: #fffbf2;
+  --soonyellow: #ffd369;
+  --prettysoonyellow: #ffe4a4;
+  --notsoonyellow: #fff6df;
+  --inactiveyellow: #ffffff;
   --white: #ffffff;
   --black: #000000;
 }
@@ -309,15 +309,15 @@ a:visited {
 }
 
 #soonButton {
-  background-color: var(--white);
+  background-color: var(--soonyellow);
 }
 
 #prettySoonButton {
-  background-color: var(--yellow);
+  background-color: var(--prettysoonyellow);
 }
 
 #notSoonButton {
-  background-color: var(--pink);
+  background-color: var(--notsoonyellow);
 }
 
 .BackButton {
