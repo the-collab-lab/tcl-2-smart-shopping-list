@@ -321,23 +321,22 @@ a:visited {
 }
 
 .BackButton {
-  display: flex;
   position: absolute;
-  top: 3vh;
-  left: 4vh;
+  margin-top: 30px;
+  left: 7vh;
   background: none;
 }
 
 .BackButton_List {
-  font-size: 3rem;
+  font-size: 1rem;
   color: #000;
   text-decoration: none;
   background: none;
   border: none;
+  margin: 20px;
 }
 
 .BackButton_List:hover {
-  font-size: 3rem;
   transform: scale(1.2);
   transition: 0.1s;
   transition-timing-function: ease-in;

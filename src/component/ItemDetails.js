@@ -3,6 +3,7 @@ import { FirestoreCollection, withFirestore } from 'react-firestore';
 import dayjs from 'dayjs';
 import { useParams, Redirect } from 'react-router-dom';
 import BackButton from './BackButton';
+import Navbar from './Navbar';
 
 const ItemDetails = ({ token, purchased, firestore }) => {
   const [redirect, setRedirect] = useState(false);
@@ -75,6 +76,7 @@ const ItemDetails = ({ token, purchased, firestore }) => {
             >
               Delete this Item?
             </button>
+            <Navbar />
           </main>
         );
       }}
