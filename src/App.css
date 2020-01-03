@@ -86,7 +86,7 @@ a:visited {
 }
 
 .button-link:hover {
-  font-size: 1.1rem;
+  transform: scale(1.1);
   box-shadow: 1px 1px 2px var(--black);
   transition: 0.1s;
   transition-timing-function: ease-in;
@@ -100,42 +100,66 @@ a:visited {
   position: relative;
   align-items: center;
   flex-direction: column;
-  height: 50vh;
-  width: 50vw;
   justify-content: space-around;
 }
 
+#homeIntro {
+  font-size: 2rem;
+  font-style: italic;
+  border-bottom: none;
+}
+
 #homeTitle {
-  position: absolute;
-  margin-bottom: 10vh;
+  font-size: 4rem;
+  border-bottom: 10px dotted var(--darkblue);
+  margin-bottom: 5vh;
 }
 
 #homeIllustration {
-  position: absolute;
-  bottom: 30vh;
-  height: 20vh;
+  height: 40vh;
   width: auto;
-  filter: drop-shadow(4px 4px 4px var(--black));
+  filter: drop-shadow(4px 4px 6px var(--blue));
 }
 
 #tokenButton {
-  position: absolute;
-  margin-top: 20vh;
+  width: auto;
+  max-height: 20vh;
+  margin: 1vw;
 }
 
 #join-list {
-  position: absolute;
   font-size: 0.8rem;
-  margin-top: 30vh;
+  max-height: 15vh;
+  margin: 1vw;
 }
 
 #homeGuide {
-  position: absolute;
   font-size: 0.6rem;
-  margin-top: 40vh;
+  max-height: 10vh;
+  margin: 1vw;
+  padding: 1vh;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  color: var(--black);
+  border: 3px solid var(--blue);
+  background-color: var(--white);
+  border-radius: 2px;
 }
 
-#homeGuide:hover + #hiddenGuide {
+#homeGuide:hover {
+  transform: scale(1.1);
+  transition: 0.1s;
+  transition-timing-function: ease-in;
+  cursor: pointer;
+}
+
+#homeGuideClick {
+  display: none;
+}
+
+#homeGuideClick:checked ~ #hiddenGuide {
   display: flex;
 }
 
@@ -146,19 +170,16 @@ a:visited {
   justify-content: center;
   color: var(--black);
   border: 3px solid var(--blue);
-  margin: 1vh;
-  padding: 1vh;
   background-color: var(--white);
   border-radius: 2px;
 
   box-shadow: 2px 2px 4px var(--black);
-  position: absolute;
-  top: 70vh;
+  width: 50%;
 }
 
 #hiddenGuide li {
-  list-style: none;
-  font-size: 0.6rem;
+  font-size: 0.8rem;
+  margin: 0 2vw 0 5vw;
 }
 
 /* Join List View Specific Styling */
