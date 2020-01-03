@@ -12,10 +12,10 @@
   --darkblue: #263f44;
   --blue: #015668;
   --cream: #fff1cf;
-  --soonyellow: #ffd369;
-  --prettysoonyellow: #ffd36999;
-  --notsoonyellow: #ffd3694d;
-  --inactiveyellow: #ffd3691a;
+  --soonyellow: #ffb607;
+  --prettysoonyellow: #ffd97d;
+  --notsoonyellow: #fff0cb;
+  --inactiveyellow: #fffbf2;
   --white: #ffffff;
   --black: #000000;
 }
@@ -169,7 +169,6 @@ a:visited {
   background-size: 100% 1.2em;
   padding: 3px;
   width: 30vw;
-  background-color: var(--white);
   margin: auto;
 }
 
@@ -272,6 +271,7 @@ a:visited {
 
 .inactiveItems li {
   background-color: var(--inactiveyellow);
+  border: solid 1px var(--soonyellow);
 }
 
 .itemsLabel {
