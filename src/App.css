@@ -304,7 +304,7 @@ a:visited {
 .daysButtons label:hover {
   opacity: 1;
   box-shadow: 2px 2px 3px #000;
-  font-size: 1rem;
+  transform: scale(1.1);
   cursor: pointer;
 }
 
@@ -456,8 +456,9 @@ a:visited {
   padding: 0 0.3rem;
   justify-self: right;
 }
+
 #toggle-list-details:hover {
-  font-size: 1rem;
+  transform: scale(1.1);
   box-shadow: none;
   background-color: var(--cream);
 }
