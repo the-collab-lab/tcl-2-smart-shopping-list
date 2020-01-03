@@ -48,11 +48,11 @@ p {
 
 body {
   margin: 4vh;
+  padding: 5vh;
   background-color: var(--white);
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 5vh;
   text-align: center;
   font-size: 1rem;
   background-image: url('./backgrounds/round.png');
@@ -105,12 +105,27 @@ a:visited {
   align-items: center;
   flex-direction: column;
   justify-content: space-around;
+  overflow-x: hidden;
+}
+
+#pseudo-TopBar {
+  display: flex;
+  justify-content: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 12vh;
+  background-color: var(--blue);
+  box-shadow: 10px 0 8px var(--black);
+  color: var(--white);
+  mix-blend-mode: hard-light;
 }
 
 #homeIntro {
   font-size: 2rem;
   font-style: italic;
-  border-bottom: none;
+  margin-top: 5vh;
 }
 
 #homeTitle {
