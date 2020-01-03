@@ -16,11 +16,7 @@ const TopBar = ({ token, setToken }) => {
   return (
     <React.Fragment>
       <nav className="top-bar">
-        <button
-          className="button-link"
-          id="toggle-list-details"
-          onClick={toggleListDetails}
-        >
+        <button id="toggle-list-details" onClick={toggleListDetails}>
           ≡
         </button>
       </nav>
