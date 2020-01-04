@@ -488,16 +488,9 @@ a:visited {
 
 #detailsName {
   text-decoration: none;
-  font-size: 55px;
+  font-size: 65px;
   padding-left: 15px;
   margin-top: 0px;
-}
-
-.itemItem {
-  text-decoration: none;
-  font-size: 55px;
-  margin-top: 0px;
-  font-weight: 90;
 }
 
 .soonItemsdetails {
