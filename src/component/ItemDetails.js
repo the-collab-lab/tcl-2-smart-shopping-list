@@ -5,11 +5,13 @@ import { useParams, Redirect } from 'react-router-dom';
 import Navbar from './Navbar';
 import TopBar from './TopBar';
 
-const ItemDetails = ({ token, purchased, firestore }) => {
+const ItemDetails = ({ token, setToken, purchased, firestore }) => {
   const [redirect, setRedirect] = useState(false);
   const [isNewItem, setIsNewItem] = useState(true);
   const { itemId, category } = useParams();
   const concatPath = `/lists/${token}/items`;
+
+  if (!token) return <Redirect to="" />;
 
   const confirmDeleteClick = event => {
     if (window.confirm('Are you sure you wish to delete this item?')) {
@@ -55,7 +57,7 @@ const ItemDetails = ({ token, purchased, firestore }) => {
 
         return (
           <main>
-            <TopBar />
+            <TopBar token={token} setToken={setToken} />
             <div className="detailsContainer">
               <h1 className="detailsHeader">Purchase Details</h1>
               <h2 id="detailsName" className={category + 'details'}>
