@@ -27,7 +27,7 @@ const FetchItems = ({ token, setToken, firestore }) => {
   if (empty) {
     return (
       <React.Fragment>
-        <TopBar token={token} setToken={setToken} />
+        <TopBar token={token} setToken={setToken} isOnListView={true} />
         <Link className="button-link" id="emptyListAddItem" to="/add">
           Add your first Item
         </Link>
@@ -38,7 +38,7 @@ const FetchItems = ({ token, setToken, firestore }) => {
 
   return (
     <React.Fragment className="view">
-      <TopBar token={token} setToken={setToken} />
+      <TopBar token={token} setToken={setToken} isOnListView={true} />
       <section className="listFrame">
         <h1 className="listTitle">
           <img

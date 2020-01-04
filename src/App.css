@@ -272,6 +272,7 @@ a:visited {
   color: #000;
   font-weight: 800;
   background-color: var(--white);
+  padding: 0 10px;
 }
 
 .viewMore:hover {
@@ -539,7 +540,7 @@ a:visited {
 /* List Detail & Top Bar Styling */
 .top-bar {
   display: flex;
-  justify-content: flex-end;
+  justify-content: space-between;
   position: fixed;
   top: 0;
   left: 0;
@@ -549,10 +550,12 @@ a:visited {
   padding-right: 0.75rem;
 }
 
+.top-bar-buttons {
+  margin: 1vh;
+}
+
 #toggle-list-details {
   padding: 0 0.3rem;
-  justify-self: right;
-  margin: 1vh;
   color: var(--darkblue);
   border: 3px solid var(--blue);
   background-color: var(--white);
@@ -563,6 +566,20 @@ a:visited {
   background-color: var(--blue);
   color: var(--white);
   border: 3px solid var(--white);
+  transition: 0.3s;
+  transition-timing-function: ease-in;
+  cursor: pointer;
+}
+
+#top-bar-back-button {
+  color: var(--white);
+  font-size: 1.75rem;
+  margin: 0 2vw;
+  font-weight: bold;
+}
+
+#top-bar-back-button:hover {
+  transform: scale(1.4);
   transition: 0.3s;
   transition-timing-function: ease-in;
   cursor: pointer;
