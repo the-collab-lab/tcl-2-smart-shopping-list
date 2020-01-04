@@ -14,10 +14,13 @@ function Home({ token, setToken }) {
         src={homeIllustration}
         id="homeIllustration"
       ></img>
-      <GetToken token={token} setToken={setToken} />
-      <Link to="/join" className="button-link" id="join-list">
-        Join Existing List
-      </Link>
+      <div id="singlelayer">
+        <GetToken token={token} setToken={setToken} />
+        <h3>OR</h3>
+        <Link to="/join" className="button-link" id="join-list">
+          Join an Existing List
+        </Link>
+      </div>
       <input
         type="checkbox"
         className="button-link"
