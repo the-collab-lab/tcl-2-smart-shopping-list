@@ -111,9 +111,10 @@ a:visited {
 #pseudo-TopBar {
   display: flex;
   justify-content: center;
-  position: fixed;
+  position: absolute;
   top: 0;
   left: 0;
+  margin-top: -10vh;
   width: 100vw;
   height: 12vh;
   background-color: var(--blue);
@@ -271,6 +272,15 @@ a:visited {
   color: #000;
   font-weight: 800;
   background-color: var(--white);
+}
+
+.viewMore:hover {
+  color: var(--white);
+  background-color: var(--blue);
+  border-radius: 1px;
+  transition: 0.3s;
+  transition-timing-function: ease-in;
+  cursor: pointer;
 }
 
 .listItemAndViewMore {
