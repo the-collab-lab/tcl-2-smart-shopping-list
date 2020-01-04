@@ -4,7 +4,8 @@ import { withFirestore, FirestoreCollection } from 'react-firestore';
 import Navbar from './Navbar';
 import dayjs from 'dayjs';
 import ListContents from './ListContents';
-import shoppingCartIcon from '../lib/images/shoppingcart-icon.png';
+import shoppingCartIllustration from '../lib/images/shopping-cart-illustration.svg';
+// import shoppingCartIcon from '../lib/images/shoppingcart-icon.png';
 import TopBar from './TopBar';
 
 const FetchItems = ({ token, setToken, firestore }) => {
@@ -40,14 +41,17 @@ const FetchItems = ({ token, setToken, firestore }) => {
     <React.Fragment className="view">
       <TopBar token={token} setToken={setToken} isOnListView={true} />
       <section className="listFrame">
-        <h1 className="listTitle">
-          <img
+        <img
+          alt="illustration of man next to shopping cart"
+          src={shoppingCartIllustration}
+          id="shopping-cart-illustration"
+        />
+        {/* <img
             src={shoppingCartIcon}
             className="shoppingCart"
             alt="Illustration of a shopping cart"
-          ></img>
-          My Shopping List
-        </h1>
+          ></img> */}
+        <h1 className="listTitle">Shopping List</h1>
         {/* could also use &#128717; which is shopping bags */}
 
         <FirestoreCollection

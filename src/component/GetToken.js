@@ -1,6 +1,5 @@
 import React from 'react';
 import { Redirect } from 'react-router-dom';
-
 import getToken from '../token';
 
 const GetToken = ({ token, setToken }) => {
@@ -18,7 +17,7 @@ const GetToken = ({ token, setToken }) => {
         className="button-link"
         id="tokenButton"
       >
-        Start Your New List!
+        Start New List
       </button>
     </React.Fragment>
   );

@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { withFirestore } from 'react-firestore';
 import '../App.css';
 import Navbar from './Navbar';
-import BackButton from './BackButton';
 import DuplicateMessage from './DuplicateMessage';
 import TopBar from './TopBar';
 
@@ -99,20 +98,23 @@ const AddItem = ({ token, setToken, firestore }) => {
   return (
     <React.Fragment>
       <TopBar token={token} setToken={setToken} />
+
+      <h1>Add New Item</h1>
       <form onSubmit={handleSubmit}>
         <label className="addFormLabel">
-          New item:
+          Item Name:
           <input
             value={name}
             type="text"
             id="name"
+            className="searchField"
             onChange={handleChange}
-            className="inputField"
+            // className="inputField"
           />
         </label>
 
         <div className="daysButtons">
-          <p>How soon are you likely to buy it again?</p>
+          <p>How soon are you likely to buy it?</p>
           <input
             type="radio"
             id="soonButton"

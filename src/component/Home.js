@@ -13,7 +13,7 @@ function Home({ token, setToken }) {
         alt="illustration of shopping list"
         src={homeIllustration}
         id="homeIllustration"
-      ></img>
+      />
       <GetToken token={token} setToken={setToken} />
       <Link to="/join" className="button-link" id="join-list">
         Join Existing List
