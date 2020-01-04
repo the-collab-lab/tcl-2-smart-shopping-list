@@ -272,6 +272,7 @@ a:visited {
   color: #000;
   font-weight: 800;
   background-color: var(--white);
+  padding: 0 10px;
 }
 
 .viewMore:hover {
