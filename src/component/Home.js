@@ -6,18 +6,21 @@ import homeIllustration from '../lib/images/undraw_1.svg';
 function Home({ token, setToken }) {
   return (
     <div className="homeWrap">
-      <div id="pseudo-TopBar"></div>
+      {/* <div id="pseudo-TopBar"></div> */}
       <div id="homeIntro">Welcome to</div>
       <h1 id="homeTitle">Listably!</h1>
       <img
         alt="illustration of shopping list"
         src={homeIllustration}
         id="homeIllustration"
-      />
-      <GetToken token={token} setToken={setToken} />
-      <Link to="/join" className="button-link" id="join-list">
-        Join Existing List
-      </Link>
+      ></img>
+      <div id="singlelayer">
+        <GetToken token={token} setToken={setToken} />
+        <h3>OR</h3>
+        <Link to="/join" className="button-link" id="join-list">
+          Join an Existing List
+        </Link>
+      </div>
       <input
         type="checkbox"
         className="button-link"

@@ -105,10 +105,13 @@ a:visited {
   align-items: center;
   flex-direction: column;
   justify-content: space-around;
-  overflow-x: hidden;
+  overflow: hidden;
+
+  width: 80vw;
+  height: auto;
 }
 
-#pseudo-TopBar {
+/* #pseudo-TopBar {
   display: flex;
   justify-content: center;
   position: absolute;
@@ -121,7 +124,7 @@ a:visited {
   box-shadow: 10px 0 8px var(--black);
   color: var(--white);
   mix-blend-mode: hard-light;
-}
+} */
 
 #homeIntro {
   font-size: 2rem;
@@ -151,6 +154,17 @@ a:visited {
   font-size: 0.8rem;
   max-height: 15vh;
   margin: 1vw;
+}
+
+#singlelayer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#singlelayer > h3 {
+  margin: 1vw;
+  display: inline-block;
 }
 
 #homeGuide {
