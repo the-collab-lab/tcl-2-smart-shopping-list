@@ -2,13 +2,13 @@ import React, { useState } from 'react';
 import { FirestoreCollection, withFirestore } from 'react-firestore';
 import dayjs from 'dayjs';
 import { useParams, Redirect } from 'react-router-dom';
-import BackButton from './BackButton';
 import Navbar from './Navbar';
+import TopBar from './TopBar';
 
 const ItemDetails = ({ token, purchased, firestore }) => {
   const [redirect, setRedirect] = useState(false);
   const [isNewItem, setIsNewItem] = useState(true);
-  const { itemId } = useParams();
+  const { itemId, category } = useParams();
   const concatPath = `/lists/${token}/items`;
 
   const confirmDeleteClick = event => {
@@ -55,27 +55,39 @@ const ItemDetails = ({ token, purchased, firestore }) => {
 
         return (
           <main>
-            <BackButton />
-            <h1>{item.name}</h1>
-            <ul className="itemDetails">
-              <li>
-                Last purchase:{' '}
-                {isNewItem ? 'None' : lastPurchaseDate.toDateString()}
-              </li>
-              <li>
-                Next purchase:{' '}
-                {isNewItem ? 'None' : nextPurchaseDate.toDateString()}
-              </li>
-              <li>Number of purchases: {item.numberOfPurchases}</li>
-            </ul>
-            <button
-              className="button-link"
-              onClick={confirmDeleteClick}
-              value={item.id}
-              id="deleteItemButton"
-            >
-              Delete this Item?
-            </button>
+            <TopBar />
+            <div className="detailsContainer">
+              <h1 className="detailsHeader">Purchase Details</h1>
+              <h2 id="detailsName" className={category + 'details'}>
+                {item.name}
+              </h2>
+              <ul className="itemDetails">
+                <li id="itemDetailsSubTitle">
+                  Last purchase:{' '}
+                  <p id="liItemDetails">
+                    {isNewItem ? 'None' : lastPurchaseDate.toDateString()}
+                  </p>
+                </li>
+                <li id="itemDetailsSubTitle">
+                  Next purchase:{' '}
+                  <p id="liItemDetails">
+                    {isNewItem ? 'None' : nextPurchaseDate.toDateString()}
+                  </p>
+                </li>
+                <li id="itemDetailsSubTitle">
+                  Number of purchases:
+                  <p id="liItemDetails">{item.numberOfPurchases}</p>
+                </li>
+              </ul>
+              <button
+                className="button-link"
+                onClick={confirmDeleteClick}
+                value={item.id}
+                id="deleteItemButton"
+              >
+                Delete this Item?
+              </button>
+            </div>
             <Navbar />
           </main>
         );

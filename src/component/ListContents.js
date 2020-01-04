@@ -68,7 +68,10 @@ const ListContents = ({ listData, firestore, token }) => {
                 {item.name}
               </div>
             </li>
-            <Link className="viewMore" to={'/' + item.id}>
+            <Link
+              className="viewMore"
+              to={'/' + item.id + '/' + listData.className}
+            >
               >>>
             </Link>
           </div>

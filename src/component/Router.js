@@ -23,7 +23,7 @@ function RouterComponent() {
         <Route path="/join">
           <JoinList token={token} setToken={setToken} />
         </Route>
-        <Route path="/:itemId">
+        <Route path="/:itemId/:category">
           <ItemDetails token={token} setToken={setToken} />
         </Route>
         <Route path="">

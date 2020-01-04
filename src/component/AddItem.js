@@ -99,7 +99,6 @@ const AddItem = ({ token, setToken, firestore }) => {
   return (
     <React.Fragment>
       <TopBar token={token} setToken={setToken} />
-      <BackButton />
       <form onSubmit={handleSubmit}>
         <label className="addFormLabel">
           New item:

@@ -362,8 +362,8 @@ a:visited {
 
 .BackButton {
   position: absolute;
-  margin-top: 30px;
-  left: 7vh;
+  margin-top: 10px;
+  left: 5vh;
   background: none;
 }
 
@@ -476,6 +476,52 @@ a:visited {
 /* Item Detail Styling */
 .itemDetails {
   list-style: none;
+  font-size: 30px;
+  margin-bottom: 20px;
+}
+
+.detailsHeader {
+  font-size: 60px;
+  margin: 20px;
+  font-weight: 90;
+}
+
+#detailsName {
+  text-decoration: none;
+  font-size: 55px;
+  padding-left: 15px;
+  margin-top: 0px;
+}
+
+.itemItem {
+  text-decoration: none;
+  font-size: 55px;
+  margin-top: 0px;
+  font-weight: 90;
+}
+
+.soonItemsdetails {
+  color: var(--soonyellow);
+}
+
+.prettySoonItemsdetails {
+  color: var(--prettysoonyellow);
+}
+
+.notSoonItemsdetails {
+  color: var(--notsoonyellow);
+}
+
+#liItemDetails {
+  margin: 0px;
+  padding-left: 10px;
+}
+
+#itemDetailsSubTitle {
+  display: flex;
+  font-weight: 200;
+  margin: 5px;
+  justify-content: center;
 }
 
 /* List Detail & Top Bar Styling */
