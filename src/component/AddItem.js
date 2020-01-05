@@ -4,10 +4,12 @@ import '../App.css';
 import Navbar from './Navbar';
 import DuplicateMessage from './DuplicateMessage';
 import TopBar from './TopBar';
+import { Redirect } from 'react-router-dom';
 
 const AddItem = ({ token, setToken, firestore }) => {
   const [name, setName] = useState('');
   const [duplicate, setDuplicate] = useState(false);
+  const [redirect, setRedirect] = useState(false);
 
   const uniqueToken = localStorage.getItem('uniqueToken');
   const today = new Date();
@@ -93,23 +95,26 @@ const AddItem = ({ token, setToken, firestore }) => {
     } else {
       addItem(normalizedName, numberOfDays);
     }
+
+    if (event.target.id == 'go-to-list') setRedirect(true);
   };
+
+  if (redirect) return <Redirect to="" />;
 
   return (
     <React.Fragment>
       <TopBar token={token} setToken={setToken} />
 
       <h1>Add New Item</h1>
-      <form onSubmit={handleSubmit}>
-        <label className="addFormLabel">
-          Item Name:
+      <form onSubmit={handleSubmit} className="add-item-form">
+        <label>
+          Item name:
           <input
             value={name}
             type="text"
             id="name"
             className="searchField"
             onChange={handleChange}
-            // className="inputField"
           />
         </label>
 
@@ -152,13 +157,21 @@ const AddItem = ({ token, setToken, firestore }) => {
           </label>
         </div>
 
-        <button
-          onClick={handleSubmit}
-          className="button-link"
-          id="addItemButton"
-        >
-          Add Item
-        </button>
+        <div className="submit-buttons">
+          <button
+            onClick={handleSubmit}
+            className={'button-link add-item-button'}
+          >
+            Add Item
+          </button>
+          <button
+            onClick={handleSubmit}
+            className={'button-link add-item-button'}
+            id="go-to-list"
+          >
+            Add &amp; Go To List
+          </button>
+        </div>
       </form>
       <Navbar />
       {duplicate ? <DuplicateMessage /> : null}
