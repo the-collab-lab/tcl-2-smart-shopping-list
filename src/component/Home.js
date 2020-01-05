@@ -6,7 +6,7 @@ import homeIllustration from '../lib/images/undraw_1.svg';
 function Home({ token, setToken }) {
   return (
     <div className="homeWrap">
-      {/* <div id="pseudo-TopBar"></div> */}
+      <div id="pseudo-TopBar"></div>
       <div id="homeIntro">Welcome to</div>
       <h1 id="homeTitle">Listably!</h1>
       <img
