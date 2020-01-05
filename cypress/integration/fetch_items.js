@@ -68,10 +68,7 @@ describe('Show list of items', function() {
       cy.get('.inputField').type('salad2');
       cy.get('#soonButton').click({ force: true });
       cy.get('#addItemButton').click();
-      cy.visit('/list');
-      cy.get('div')
-        .contains('salad2')
-        .click();
+      cy.get('[data-cy=ListNavItem]').click();
       cy.get('.soonItems').contains('salad2');
     });
 
