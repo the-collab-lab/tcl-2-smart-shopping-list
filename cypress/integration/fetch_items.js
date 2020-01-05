@@ -1,6 +1,7 @@
 import calculateNewPurchaseValues from '../../src/calculations';
 
 const testDate = new Date('2019-01-01');
+const today = new Date();
 
 describe('Show list of items', function() {
   describe('Empty List', function() {
@@ -17,7 +18,10 @@ describe('Show list of items', function() {
   describe('List with Items and Filters Items', function() {
     beforeEach(function() {
       window.localStorage.setItem('uniqueToken', 'token1234');
-      cy.addItem('token1234', 'banana', testDate, 2);
+      cy.addItem('token1234', 'banana', today, 2, 7);
+      cy.addItem('token1234', 'toast', today, 1, 14)
+      cy.addItem('token1234', 'coffee', today, 1, 30)
+      cy.addItem('token1234', 'oranges', testDate, 0, 80)
     });
 
     it('User sees list after adding an item', function() {
@@ -32,7 +36,7 @@ describe('Show list of items', function() {
       cy.visit('/add');
       cy.get('.inputField').type('Cream!.Cheese');
       cy.get('#addItemButton').click();
-      cy.contains('List').click();
+      cy.visit('/list');
       expect(cy.contains('Cream!.Cheese'));
     });
 
@@ -48,10 +52,15 @@ describe('Show list of items', function() {
 
     it('Verifies that all four items categories are present on the list view', function() {
       cy.visit('/list');
-      expect(cy.contains('Soon Items'));
-      expect(cy.contains('Pretty Soon Items'));
-      expect(cy.contains('Not Soon Items'));
-      expect(cy.contains('Inactive Items'));
+      // cy.get('#banana-li').should('have.css', 'background-color').and('match', /rgb\(255, 211, 105\)/);
+      // cy.get('#toast-li').should('have.css', 'background-color').and('match', /rgb\(255, 228, 164\)/);
+      // cy.get('#coffee-li').should('have.css', 'background-color').and('match', /rgb\(255, 246, 223\)/);
+      // cy.get('#oranges-li').should('have.css', 'background-color').and('match', /rgb\(255, 255, 255\)/);
+
+      cy.get('.soonItems').contains('banana');
+      cy.get('.prettySoonItems').contains('toast');
+      cy.get('.notSoonItems').contains('coffee');
+      cy.get('.inactiveItems').contains('oranges');
     });
 
     it('Are items being categorized correctly', function() {
@@ -59,12 +68,16 @@ describe('Show list of items', function() {
       cy.get('.inputField').type('salad2');
       cy.get('#soonButton').click({ force: true });
       cy.get('#addItemButton').click();
-      cy.get('.BackButton_List').click();
+      cy.visit('/list')
       cy.get('div')
         .contains('salad2')
         .click();
       cy.get('.soonItems').contains('salad2');
     });
+
+    after(function(){
+      cy.deleteItem('token1234', 'salad2');
+    })
 
     it('View more link goes to item details page', function() {
       cy.visit('/list');
@@ -92,6 +105,11 @@ describe('Show list of items', function() {
 
   afterEach(function() {
     window.localStorage.removeItem('uniqueToken');
+
+    cy.deleteItem('token1234', 'banana')
+    cy.deleteItem('token1234', 'toast')
+    cy.deleteItem('token1234', 'coffee')
+    cy.deleteItem('token1234', 'orange juice')
   });
 
   describe('Update purchase values', function() {
