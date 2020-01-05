@@ -1,9 +1,12 @@
 import React, { useState } from 'react';
 import ListDetails from './ListDetails';
 import { Link } from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
 
 const TopBar = ({ token, setToken, isOnListView }) => {
   const [listDetails, setListDetails] = useState(false);
+
+  if (!token) return <Redirect to="" />;
 
   const toggleListDetails = event => {
     event.preventDefault();
