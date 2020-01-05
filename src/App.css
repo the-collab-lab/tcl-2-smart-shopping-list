@@ -219,8 +219,10 @@ a:visited {
 
 /* Join List View Specific Styling */
 
-.join-list-field {
+.join-list-form {
   display: flex;
+  flex-wrap: nowrap;
+  flex-direction: row;
   justify-content: center;
   margin: 3vh 3vw;
   background-color: var(--white);
@@ -228,8 +230,8 @@ a:visited {
   border: 3px dotted var(--soonyellow);
 }
 
-.join-list-field input {
-  width: 80%;
+.join-list-form input {
+  width: auto;
 }
 
 #start-new-list-button {
@@ -237,10 +239,6 @@ a:visited {
   background-color: var(--blue);
   color: var(--white);
   font-size: 0.9rem;
-}
-
-.join-list-button {
-  width: 15%;
 }
 
 /* List View Specific Styling */

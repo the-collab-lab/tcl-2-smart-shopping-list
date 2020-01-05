@@ -51,7 +51,7 @@ const JoinList = ({ token, setToken, firestore }) => {
       <div id="pseudo-TopBar"></div>
       <h1>Join Existing List</h1>
       <p>Did someone share a code with you to join their list?</p>
-      <form onSubmit={handleSubmit} className="join-list-field">
+      <form onSubmit={handleSubmit} className="join-list-form">
         <input
           // Setting value to token or a blank string deals with a react
           //  warning regarding controlled vs uncontrolled components
