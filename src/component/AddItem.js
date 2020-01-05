@@ -9,7 +9,6 @@ import { Redirect } from 'react-router-dom';
 const AddItem = ({ token, setToken, firestore }) => {
   const [name, setName] = useState('');
   const [duplicate, setDuplicate] = useState(false);
-  const [redirect, setRedirect] = useState(false);
 
   const uniqueToken = localStorage.getItem('uniqueToken');
   const today = new Date();
@@ -95,11 +94,7 @@ const AddItem = ({ token, setToken, firestore }) => {
     } else {
       addItem(normalizedName, numberOfDays);
     }
-
-    if (event.target.id === 'go-to-list') setRedirect(true);
   };
-
-  if (redirect) return <Redirect to="/list" />;
 
   return (
     <React.Fragment>
@@ -164,13 +159,6 @@ const AddItem = ({ token, setToken, firestore }) => {
             id="addItemButton"
           >
             Add Item
-          </button>
-          <button
-            onClick={handleSubmit}
-            className={'button-link add-item-button'}
-            id="go-to-list"
-          >
-            Add &amp; Go To List
           </button>
         </div>
       </form>

@@ -1,16 +1,16 @@
 // the function to create a random input
-function randomInput() {
-  var text = '';
-  var letterSelection =
-    'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyzáéíóúñ.,;:!?"';
+// function randomInput() {
+//   var text = '';
+//   var letterSelection =
+//     'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyzáéíóúñ.,;:!?"';
 
-  for (var i = 0; i < 10; i++)
-    text += letterSelection.charAt(
-      Math.floor(Math.random() * letterSelection.length),
-    );
+//   for (var i = 0; i < 10; i++)
+//     text += letterSelection.charAt(
+//       Math.floor(Math.random() * letterSelection.length),
+//     );
 
-  return text;
-}
+//   return text;
+// }
 
 describe('Add Item To List', function() {
   beforeEach(function() {
@@ -30,14 +30,14 @@ describe('Add Item To List', function() {
       .should('have.value', 'watermelon');
   });
 
-  it('Resets input field after addItem button click', function() {
-    cy.visit('/add');
-    cy.get('.inputField').type(randomInput());
+  // it('Resets input field after addItem button click', function() {
+  //   cy.visit('/add');
+  //   cy.get('.inputField').type(randomInput());
 
-    cy.get('#addItemButton').click();
+  //   cy.get('#addItemButton').click();
 
-    cy.get('.inputField').should('have.value', '');
-  });
+  //   cy.get('.inputField').should('have.value', '');
+  // });
 
   it('Selects correct frequency button', function() {
     cy.visit('/add');
