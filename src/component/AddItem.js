@@ -99,7 +99,7 @@ const AddItem = ({ token, setToken, firestore }) => {
     if (event.target.id == 'go-to-list') setRedirect(true);
   };
 
-  if (redirect) return <Redirect to="" />;
+  if (redirect) return <Redirect to="/list" />;
 
   return (
     <React.Fragment>
