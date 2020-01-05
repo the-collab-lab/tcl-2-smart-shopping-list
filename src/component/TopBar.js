@@ -15,7 +15,12 @@ const TopBar = ({ token, setToken, isOnListView }) => {
       return <span></span>;
     } else {
       return (
-        <Link to="/list" className="top-bar-buttons" id="top-bar-back-button">
+        <Link
+          to="/list"
+          className="top-bar-buttons"
+          id="top-bar-back-button"
+          data-cy="Back"
+        >
           &lt;
         </Link>
       );

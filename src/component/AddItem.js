@@ -113,7 +113,7 @@ const AddItem = ({ token, setToken, firestore }) => {
             value={name}
             type="text"
             id="name"
-            className="searchField"
+            className="inputField"
             onChange={handleChange}
           />
         </label>
@@ -161,6 +161,7 @@ const AddItem = ({ token, setToken, firestore }) => {
           <button
             onClick={handleSubmit}
             className={'button-link add-item-button'}
+            id="addItemButton"
           >
             Add Item
           </button>

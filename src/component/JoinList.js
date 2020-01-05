@@ -60,7 +60,7 @@ const JoinList = ({ token, setToken, firestore }) => {
           placeholder="Enter share code"
           id="uniqueToken"
           onChange={handleChange}
-          className="searchField"
+          className="inputField"
         />
         <button
           onClick={handleSubmit}
