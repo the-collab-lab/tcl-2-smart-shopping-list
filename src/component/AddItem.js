@@ -96,7 +96,7 @@ const AddItem = ({ token, setToken, firestore }) => {
       addItem(normalizedName, numberOfDays);
     }
 
-    if (event.target.id == 'go-to-list') setRedirect(true);
+    if (event.target.id === 'go-to-list') setRedirect(true);
   };
 
   if (redirect) return <Redirect to="/list" />;

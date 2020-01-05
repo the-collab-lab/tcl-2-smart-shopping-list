@@ -4,7 +4,7 @@ import { withFirestore, FirestoreCollection } from 'react-firestore';
 import Navbar from './Navbar';
 import dayjs from 'dayjs';
 import ListContents from './ListContents';
-import shoppingCartIllustration from '../lib/images/shopping-cart-illustration.svg';
+import shoppingCartIllustration from '../lib/images/shopping-cart-illustration2.svg';
 // import shoppingCartIcon from '../lib/images/shoppingcart-icon.png';
 import TopBar from './TopBar';
 

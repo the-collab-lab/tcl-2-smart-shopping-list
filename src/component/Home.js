@@ -1,14 +1,17 @@
 import React from 'react';
 import GetToken from './GetToken';
 import { Link } from 'react-router-dom';
-import homeIllustration from '../lib/images/undraw_1.svg';
+import ProjectInfo from './ProjectInfo';
+import homeIllustration from '../lib/images/list_illustration_2.svg';
 
 function Home({ token, setToken }) {
   return (
     <div className="homeWrap">
-      <div id="pseudo-TopBar"></div>
+      <div id="homeTopBar">
+        <ProjectInfo />
+      </div>
       <div id="homeIntro">Welcome to</div>
-      <h1 id="homeTitle">Listably!</h1>
+      <div id="homeTitle">Listably!</div>
       <img
         alt="illustration of shopping list"
         src={homeIllustration}
@@ -17,8 +20,8 @@ function Home({ token, setToken }) {
       <div id="singlelayer">
         <GetToken token={token} setToken={setToken} />
         <h3>OR</h3>
-        <Link to="/join" className="button-link" id="join-list">
-          Join an Existing List
+        <Link to="/join" className="button-link" id="joinList">
+          Join a List
         </Link>
       </div>
       <input
@@ -26,7 +29,7 @@ function Home({ token, setToken }) {
         className="button-link"
         id="homeGuideClick"
       ></input>
-      <label for="homeGuideClick" id="homeGuide">
+      <label htmlFor="homeGuideClick" id="homeGuide">
         How does it work?
       </label>
       <div id="hiddenGuide">
