@@ -49,18 +49,30 @@ describe('Show list of items', function() {
 
     it('Verifies that all four items categories are present on the list view', function() {
       cy.visit('/list');
-      cy.addItem('token1234', 'toast', today, 1, 14)
-      cy.addItem('token1234', 'coffee', today, 1, 30)
-      cy.addItem('token1234', 'oranges', testDate, 0, 80)
+      cy.addItem('token1234', 'toast', today, 1, 14);
+      cy.addItem('token1234', 'coffee', today, 1, 30);
+      cy.addItem('token1234', 'oranges', testDate, 0, 80);
 
-      cy.get('#banana-li').parent('div').parent('ul').should('have.class', 'soonItems')
-      cy.get('#toast-li').parent('div').parent('ul').should('have.class', 'prettySoonItems')
-      cy.get('#coffee-li').parent('div').parent('ul').should('have.class', 'notSoonItems')
-      cy.get('#oranges-li').parent('div').parent('ul').should('have.class', 'inactiveItems')
+      cy.get('#banana-li')
+        .parent('div')
+        .parent('ul')
+        .should('have.class', 'soonItems');
+      cy.get('#toast-li')
+        .parent('div')
+        .parent('ul')
+        .should('have.class', 'prettySoonItems');
+      cy.get('#coffee-li')
+        .parent('div')
+        .parent('ul')
+        .should('have.class', 'notSoonItems');
+      cy.get('#oranges-li')
+        .parent('div')
+        .parent('ul')
+        .should('have.class', 'inactiveItems');
 
-      cy.deleteItem('token1234', 'toast')
-      cy.deleteItem('token1234', 'coffee')
-      cy.deleteItem('token1234', 'orange juice')
+      cy.deleteItem('token1234', 'toast');
+      cy.deleteItem('token1234', 'coffee');
+      cy.deleteItem('token1234', 'orange juice');
     });
 
     it('Are items being categorized correctly', function() {
@@ -87,7 +99,7 @@ describe('Show list of items', function() {
       cy.get('.filterField').type('cr');
       cy.get('li')
         .first()
-        .contains('Cream!.Cheese');
+        .contains('Cream Cheese');
     });
   });
 
