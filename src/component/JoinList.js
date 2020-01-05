@@ -48,7 +48,7 @@ const JoinList = ({ token, setToken, firestore }) => {
     <Redirect to="/list" />
   ) : (
     <main>
-      <div id="pseudo-TopBar"></div>
+      <div id="homeTopBar" />
       <h1>Join Existing List</h1>
       <p>Did someone share a code with you to join their list?</p>
       <form onSubmit={handleSubmit} className="join-list-form">
