@@ -19,9 +19,6 @@ describe('Show list of items', function() {
     beforeEach(function() {
       window.localStorage.setItem('uniqueToken', 'token1234');
       cy.addItem('token1234', 'banana', today, 2, 7);
-      cy.addItem('token1234', 'toast', today, 1, 14);
-      cy.addItem('token1234', 'coffee', today, 1, 30);
-      cy.addItem('token1234', 'oranges', testDate, 0, 80);
     });
 
     it('User sees list after adding an item', function() {
@@ -52,15 +49,18 @@ describe('Show list of items', function() {
 
     it('Verifies that all four items categories are present on the list view', function() {
       cy.visit('/list');
-      // cy.get('#banana-li').should('have.css', 'background-color').and('match', /rgb\(255, 211, 105\)/);
-      // cy.get('#toast-li').should('have.css', 'background-color').and('match', /rgb\(255, 228, 164\)/);
-      // cy.get('#coffee-li').should('have.css', 'background-color').and('match', /rgb\(255, 246, 223\)/);
-      // cy.get('#oranges-li').should('have.css', 'background-color').and('match', /rgb\(255, 255, 255\)/);
+      cy.addItem('token1234', 'toast', today, 1, 14)
+      cy.addItem('token1234', 'coffee', today, 1, 30)
+      cy.addItem('token1234', 'oranges', testDate, 0, 80)
 
-      cy.get('.soonItems').contains('banana');
-      cy.get('.prettySoonItems').contains('toast');
-      cy.get('.notSoonItems').contains('coffee');
-      cy.get('.inactiveItems').contains('oranges');
+      cy.get('#banana-li').parent('div').parent('ul').should('have.class', 'soonItems')
+      cy.get('#toast-li').parent('div').parent('ul').should('have.class', 'prettySoonItems')
+      cy.get('#coffee-li').parent('div').parent('ul').should('have.class', 'notSoonItems')
+      cy.get('#oranges-li').parent('div').parent('ul').should('have.class', 'inactiveItems')
+
+      cy.deleteItem('token1234', 'toast')
+      cy.deleteItem('token1234', 'coffee')
+      cy.deleteItem('token1234', 'orange juice')
     });
 
     it('Are items being categorized correctly', function() {
@@ -95,9 +95,6 @@ describe('Show list of items', function() {
     window.localStorage.removeItem('uniqueToken');
 
     cy.deleteItem('token1234', 'banana');
-    cy.deleteItem('token1234', 'toast');
-    cy.deleteItem('token1234', 'coffee');
-    cy.deleteItem('token1234', 'orange juice');
   });
 
   describe('Update purchase values', function() {

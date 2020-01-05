@@ -54,35 +54,33 @@ const ListContents = ({ listData, firestore, token }) => {
   };
 
   return (
-    <div className={listData.className}>
-      <ul>
-        {items.map(item => (
-          <div className="listItemAndViewMore">
-            <li id={item.id + '-li'} key={item.id} className="listItem">
-              <div
-                className={calculateIfPurchased(item)}
-                onClick={handlePurchase}
-                aria-required="true"
-                id={item.id}
-              >
-                {item.name}
-              </div>
-            </li>
-            <Link
-              listData={listData}
-              id={item.id + '-viewMore'}
-              className="viewMore"
-              to={{
-                pathname: '/' + item.id,
-                state: { buyNext: listData.className },
-              }}
+    <ul className={listData.className}>
+      {items.map(item => (
+        <div className="listItemAndViewMore">
+          <li id={item.id + '-li'} key={item.id} className="listItem">
+            <div
+              className={calculateIfPurchased(item)}
+              onClick={handlePurchase}
+              aria-required="true"
+              id={item.id}
             >
-              >>>
-            </Link>
-          </div>
-        ))}
-      </ul>
-    </div>
+              {item.name}
+            </div>
+          </li>
+          <Link
+            listData={listData}
+            id={item.id + '-viewMore'}
+            className="viewMore"
+            to={{
+              pathname: '/' + item.id,
+              state: { buyNext: listData.className },
+            }}
+          >
+            >>>
+          </Link>
+        </div>
+      ))}
+    </ul>
   );
 };
 
