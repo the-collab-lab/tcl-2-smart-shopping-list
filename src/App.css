@@ -630,7 +630,25 @@ aside {
   border: 2px solid var(--blue);
   overflow-y: scroll;
   overflow-x: hidden;
-  padding: 1vw;
+  padding: 2vw;
+}
+
+aside li,
+aside p {
+  font-size: 0.9rem;
+}
+
+aside h1 {
+  font-size: 1.5rem;
+  margin: 0.5rem;
+}
+
+aside h2 {
+  font-size: 1.1rem;
+}
+
+aside h3 {
+  font-size: 1rem;
 }
 
 #listLegend {

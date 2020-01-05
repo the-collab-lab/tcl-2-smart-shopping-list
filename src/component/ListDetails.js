@@ -4,7 +4,7 @@ import DeleteToken from './DeleteToken';
 const ListDetails = ({ token, setToken }) => {
   return (
     <aside>
-      <h1>About</h1>
+      <h1>About Listably</h1>
       <h2>Legend</h2>
       <ul id="listLegend">
         <li>
