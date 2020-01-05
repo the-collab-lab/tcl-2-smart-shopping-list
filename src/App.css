@@ -219,6 +219,30 @@ a:visited {
 
 /* Join List View Specific Styling */
 
+.join-list-field {
+  display: flex;
+  justify-content: center;
+  margin: 3vh 3vw;
+  background-color: var(--white);
+  padding: 3vh;
+  border: 3px dotted var(--soonyellow);
+}
+
+.join-list-field input {
+  width: 80%;
+}
+
+#start-new-list-button {
+  margin: 7vh;
+  background-color: var(--blue);
+  color: var(--white);
+  font-size: 0.9rem;
+}
+
+.join-list-button {
+  width: 15%;
+}
+
 /* List View Specific Styling */
 
 #shopping-cart-illustration {

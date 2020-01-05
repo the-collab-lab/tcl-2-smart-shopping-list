@@ -47,33 +47,33 @@ const JoinList = ({ token, setToken, firestore }) => {
   return redirect ? (
     <Redirect to="/list" />
   ) : (
-    <React.Fragment>
-      <form onSubmit={handleSubmit}>
-        <label>
-          Type in list token:
-          <input
-            // Setting value to token or a blank string deals with a react
-            //  warning regarding controlled vs uncontrolled components
-            value={token || ''}
-            type="text"
-            id="uniqueToken"
-            onChange={handleChange}
-            className="inputField"
-          />
-        </label>
+    <main>
+      <div id="pseudo-TopBar"></div>
+      <h1>Join Existing List</h1>
+      <p>Did someone share a code with you to join their list?</p>
+      <form onSubmit={handleSubmit} className="join-list-field">
+        <input
+          // Setting value to token or a blank string deals with a react
+          //  warning regarding controlled vs uncontrolled components
+          value={token || ''}
+          type="text"
+          placeholder="Enter share code"
+          id="uniqueToken"
+          onChange={handleChange}
+          className="searchField"
+        />
         <button
           onClick={handleSubmit}
           className="button-link"
-          id="joinListButton"
+          id="join-list-button"
         >
           Join List
         </button>
       </form>
-      <span> - OR - </span>
-      <Link to="/" className="button-link" id="newListButton">
-        Start a New List
+      <Link to="/" className="button-link" id="start-new-list-button">
+        Nevermind, start a new list instead
       </Link>
-    </React.Fragment>
+    </main>
   );
 };
 
