@@ -38,7 +38,7 @@ const FetchItems = ({ token, setToken, firestore }) => {
   }
 
   return (
-    <React.Fragment className="view">
+    <React.Fragment>
       <TopBar token={token} setToken={setToken} isOnListView={true} />
       <section className="listFrame">
         <img

@@ -48,10 +48,10 @@ describe('Show list of items', function() {
 
     it('Verifies that all four items categories are present on the list view', function() {
       cy.visit('/list');
-      expect(cy.contains('Soon Items'));
-      expect(cy.contains('Pretty Soon Items'));
-      expect(cy.contains('Not Soon Items'));
-      expect(cy.contains('Inactive Items'));
+      expect(cy.get('.soonItems'));
+      expect(cy.get('.prettySoonItems'));
+      expect(cy.get('.notSoonItems'));
+      expect(cy.get('.inactiveItems'));
     });
 
     it('Are items being categorized correctly', function() {
@@ -59,7 +59,7 @@ describe('Show list of items', function() {
       cy.get('.inputField').type('salad2');
       cy.get('#soonButton').click({ force: true });
       cy.get('#addItemButton').click();
-      cy.get('.BackButton_List').click();
+      cy.get('[data-cy=ListNavItem]').click();
       cy.get('div')
         .contains('salad2')
         .click();
@@ -68,17 +68,8 @@ describe('Show list of items', function() {
 
     it('View more link goes to item details page', function() {
       cy.visit('/list');
-      cy.get('#banana-li > .viewMore')
-        .invoke('show')
-        .click();
+      cy.get('#banana-viewMore').click();
       cy.url().should('eq', Cypress.config().baseUrl + '/banana');
-    });
-
-    it('Clears input field search', function() {
-      cy.visit('/list');
-      cy.get('.filterField').type('Cream Cheese');
-      cy.get('.clearFilter').click();
-      cy.get('.filterField').should('be.empty');
     });
 
     it('filters items based on user input', function() {
@@ -86,7 +77,7 @@ describe('Show list of items', function() {
       cy.get('.filterField').type('cr');
       cy.get('li')
         .first()
-        .contains('Cream Cheese');
+        .contains('Cream!.Cheese');
     });
   });
 

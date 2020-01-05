@@ -1,15 +1,20 @@
 import React, { useState } from 'react';
 import { FirestoreCollection, withFirestore } from 'react-firestore';
 import dayjs from 'dayjs';
-import { useParams, Redirect } from 'react-router-dom';
+import { useParams, Redirect, useLocation } from 'react-router-dom';
 import Navbar from './Navbar';
 import TopBar from './TopBar';
 
 const ItemDetails = ({ token, setToken, purchased, firestore }) => {
   const [redirect, setRedirect] = useState(false);
   const [isNewItem, setIsNewItem] = useState(true);
-  const { itemId, category } = useParams();
+  const { itemId } = useParams();
   const concatPath = `/lists/${token}/items`;
+
+  // useLocation() allows us to pass props through react-router Link
+  // category holds soon, notSoon... data to modify the styling of <h2> below
+  const location = useLocation();
+  const category = location.state.buyNext;
 
   if (!token) return <Redirect to="" />;
 
