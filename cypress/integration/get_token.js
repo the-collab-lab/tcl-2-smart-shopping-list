@@ -7,7 +7,7 @@ describe("Get token functionality", function() {
 
   it("Shows the user the generate token page if they don't have a token stored", function() {
     window.localStorage.removeItem("uniqueToken")
-    if (cy.visit("").contains("Get Token")) {
+    if (cy.visit("").contains("Start a New List")) {
       expect(localStorage.getItem("uniqueToken")).to.eq(null);
     }
   });
