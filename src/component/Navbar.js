@@ -9,10 +9,10 @@ import addIcon from '../lib/images/add-icon.png';
 function Navbar() {
   return (
     <div className="Navbar">
-      <Link className="NavItem" to="/list" data-cy="ListNavItem">
+      <Link className="NavItem" to="/list" data-cy="listNavItem">
         <img src={listIcon} alt="view list" className="listIcon" />
       </Link>
-      <Link className="NavItem" to="/add">
+      <Link className="NavItem" to="/add" data-cy="addNavItem">
         <img src={addIcon} alt="go to add item" className="addIcon"></img>
       </Link>
     </div>
