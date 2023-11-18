@@ -4,13 +4,12 @@ import firebase from 'firebase/app';
 import 'firebase/firestore';
 // Initalize Firebase.
 const firebaseConfig = {
-  apiKey: 'AIzaSyAmNT8nRQb3trnjngkynqnQ1H6VCALX5qs',
-  authDomain: 'tcl-2-smart-shopping-list.firebaseapp.com',
-  databaseURL: 'https://tcl-2-smart-shopping-list.firebaseio.com',
-  projectId: 'tcl-2-smart-shopping-list',
-  storageBucket: 'tcl-2-smart-shopping-list.appspot.com',
-  messagingSenderId: '538706887514',
-  appId: '1:538706887514:web:30b4235c1e8aa5fa19a963',
+  apiKey: 'AIzaSyCnjvTlV9erWXzZY1mTSzjrKvF7iAqVVxw',
+  authDomain: 'tcl2project.firebaseapp.com',
+  projectId: 'tcl2project',
+  storageBucket: 'tcl2project.appspot.com',
+  messagingSenderId: '683364107172',
+  appId: '1:683364107172:web:182e3ff6a6fbf515ebf731',
   timestampsinSnapshots: true,
 };
 
