@@ -4,7 +4,6 @@ import '../App.css';
 import Navbar from './Navbar';
 import DuplicateMessage from './DuplicateMessage';
 import TopBar from './TopBar';
-import { Redirect } from 'react-router-dom';
 
 const AddItem = ({ token, setToken, firestore }) => {
   const [name, setName] = useState('');
