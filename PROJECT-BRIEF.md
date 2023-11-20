@@ -10,11 +10,11 @@ This project is based on [iNeedToBuy.xyz](https://app.ineedtobuy.xyz/), a mobile
 
 ### Locations for things
 
-* Site: https://tcl-2-smart-shopping-list.netlify.com/
-* Repo: https://github.com/the-collab-lab/tcl-2-smart-shopping-list
-* Clone URL: `git@github.com:the-collab-lab/tcl-2-smart-shopping-list.git`
-* Project board: https://github.com/orgs/the-collab-lab/projects/2
-* Database: https://console.firebase.google.com/project/tcl-2-smart-shopping-list/database/firestore/data~2F
+- Site: [https://tcl-2-smart-shopping-list.firebaseapp.com/](https://tcl2project.web.app/)
+- Repo: https://github.com/the-collab-lab/tcl-2-smart-shopping-list
+- Clone URL: `git@github.com:the-collab-lab/tcl-2-smart-shopping-list.git`
+- Project board: https://github.com/orgs/the-collab-lab/projects/2
+- Database: https://console.firebase.google.com/u/1/project/tcl2project/firestore/data/~2Flists~2Furbane%20hebe%20fuel
 
 ### Project cadence & duration
 
@@ -84,11 +84,11 @@ The project is organized in GitHub as a set of [user stories](https://www.mounta
 
 A task or story is “done” when the following are all true:
 
-* The AC have been met
-* Tests have been written to validate the “[happy path](https://en.wikipedia.org/wiki/Happy_path)”
-* In the case of a UI feature, it has been reviewed for [accessibility](https://accessibilityinsights.io/)
-* The code to complete the task or implement the feature has been reviewed and approved by the other pair of developers
-* The [Product Owner](https://www.agilealliance.org/glossary/product-owner/) (i.e. Andrew or 1 of the mentors) has accepted the work as satisfactorily meeting the requirements
+- The AC have been met
+- Tests have been written to validate the “[happy path](https://en.wikipedia.org/wiki/Happy_path)”
+- In the case of a UI feature, it has been reviewed for [accessibility](https://accessibilityinsights.io/)
+- The code to complete the task or implement the feature has been reviewed and approved by the other pair of developers
+- The [Product Owner](https://www.agilealliance.org/glossary/product-owner/) (i.e. Andrew or 1 of the mentors) has accepted the work as satisfactorily meeting the requirements
 
 The “backlog” (the collection of stories) represents the work needed to complete the project. At the point when all of the stories are done, we should have a working app!
 
@@ -100,18 +100,18 @@ At the start of each week, each pair will create a page on [the project wiki](ht
 
 Work will be done on feature branches in git. Branches should be named in the following way:
 
-	<initials of person 1>-<initials of person 2>-<short description>
+    <initials of person 1>-<initials of person 2>-<short description>
 
 For example:
 
-	stc-an-connect-to-firestore
+    stc-an-connect-to-firestore
 
 The hypothetical example above has Stacie Taylor-Cima and Alejandro Ñáñez working together on connecting the app to Firestore. Each of them will be able to work on the feature branch independently, but only one of them will submit the merge request when the work is ready (described in more detail below).
 
 When you’re ready to start work on a feature, one person in your pair should create a local branch following the naming convention above, then push the branch to GitHub so your pair buddy can pull it down to their local environment. The following steps should work to do just this:
 
-	git checkout -b an-example-feature-branch
-	git push -u origin an-example-feature-branch
+    git checkout -b an-example-feature-branch
+    git push -u origin an-example-feature-branch
 
 When you and your pair partner have working code that you believe is ready to be merged to `master` and deployed, you will follow the following steps:
 
