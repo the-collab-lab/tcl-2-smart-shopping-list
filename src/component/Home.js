@@ -2,7 +2,7 @@ import React from 'react';
 import GetToken from './GetToken';
 import { Link } from 'react-router-dom';
 import ProjectInfo from './ProjectInfo';
-import homeIllustration from '../lib/images/list_illustration_2.svg';
+import homeIllustration from '../lib/images/list_illustration_1.svg';
 
 function Home({ token, setToken }) {
   return (

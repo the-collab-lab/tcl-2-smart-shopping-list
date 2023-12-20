@@ -7,6 +7,7 @@ import AddItem from './AddItem';
 import JoinList from './JoinList';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import ItemDetails from './ItemDetails';
+import { ArchivalNoticeModal } from '@the-collab-lab/shopping-list-utils';
 
 function RouterComponent() {
   const [token, setToken] = useState(localStorage.getItem('uniqueToken'));
@@ -28,7 +29,10 @@ function RouterComponent() {
         </Route>
         <Route path="">
           {token === null ? (
-            <Home token={token} setToken={setToken} />
+            <>
+              <ArchivalNoticeModal />
+              <Home token={token} setToken={setToken} />
+            </>
           ) : (
             <FetchItems token={token} setToken={setToken} />
           )}
